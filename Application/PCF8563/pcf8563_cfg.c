@@ -1,0 +1,320 @@
+#include "pcf8563_cfg.h"
+
+//===变量的定义
+#ifdef PCF8563_HandlerType_Device0
+	//---全局变量定义
+	PCF8563_HandlerType g_PCF8563Device0;
+	//---全局指针变量
+	pPCF8563_HandlerType pPCF8563Device0 = &g_PCF8563Device0;
+#endif
+
+
+///////////////////////////////////////////////////////////////////////////////
+//////函	   数：
+//////功	   能：
+//////输入参数:
+//////输出参数:
+//////说	   明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_Init(PCF8563_HandlerType *PCF8563HandlerType, void(*msgDelay)(UINT32_T delay))
+{
+	#ifdef PCF8563_HandlerType_Device0
+		if ((PCF8563HandlerType != NULL) && (PCF8563HandlerType == pPCF8563Device0))
+		{
+			PCF8563_Device0_Init(PCF8563HandlerType);
+		}
+	#endif
+	return I2CTask_MSW_Init(&(PCF8563HandlerType->msgI2C), msgDelay);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_Device0_Init(PCF8563_HandlerType *PCF8563HandlerType)
+{
+	PCF8563HandlerType->msgI2C.msgI2Cx = NULL;
+	PCF8563HandlerType->msgI2C.msgSclPort = GPIOB;
+	PCF8563HandlerType->msgI2C.msgSdaPort = GPIOB;
+	PCF8563HandlerType->msgI2C.msgSclBit = LL_GPIO_PIN_8;
+	PCF8563HandlerType->msgI2C.msgSdaBit = LL_GPIO_PIN_9;
+	PCF8563HandlerType->msgI2C.msgModelIsHW = 0;
+	PCF8563HandlerType->msgI2C.msgPluseWidth = 0;
+	PCF8563HandlerType->msgI2C.msgDelay = NULL;
+	PCF8563HandlerType->msgI2C.msgAddr = 0xA2;//PCF8563_WRITE_ADDR;
+	PCF8563HandlerType->msgI2C.msgClockSpeed = 0;
+	PCF8563HandlerType->msgI2C.msgTask = NULL;
+	return OK_0;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_Device1_Init(PCF8563_HandlerType *PCF8563HandlerType)
+{
+	return OK_0;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_DeInit(PCF8563_HandlerType *PCF8563HandlerType)
+{
+	return I2CTask_MSW_DeInit(&(PCF8563HandlerType->msgI2C));
+}
+///////////////////////////////////////////////////////////////////////////////
+//////函	   数：
+//////功	   能：写寄存器
+//////输入参数:
+//////输出参数:
+//////说	   明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_WriteReg(PCF8563_HandlerType *PCF8563HandlerType, UINT8_T reg, UINT8_T val)
+{
+	UINT8_T _return = OK_0;
+	//---启动并发送地址
+	_return = I2CTask_MSW_START(&(PCF8563HandlerType->msgI2C), 1);
+	if (_return != OK_0)
+	{
+		//---启动写数据失败
+		_return = ERROR_2;
+		goto GoToExit;
+	}
+	//---发送寄存器地址
+	I2CTask_MSW_SendByte(&(PCF8563HandlerType->msgI2C), reg);
+	//---读取ACK
+	_return = I2CTask_MSW_ReadACK(&(PCF8563HandlerType->msgI2C));
+	if (_return != OK_0)
+	{
+		//---发送数据失败
+		_return = ERROR_3;
+		goto GoToExit;
+	}
+	//---发送寄存器地址
+	I2CTask_MSW_SendByte(&(PCF8563HandlerType->msgI2C), val);
+	//---读取ACK
+	_return = I2CTask_MSW_ReadACK(&(PCF8563HandlerType->msgI2C));
+GoToExit:
+	//---发送停止信号
+	I2CTask_MSW_STOP(&(PCF8563HandlerType->msgI2C));
+	return _return;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函	   数：
+//////功	   能：读取寄存器
+//////输入参数:
+//////输出参数:
+//////说	   明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_ReadReg(PCF8563_HandlerType *PCF8563HandlerType, UINT8_T reg, UINT8_T *pVal, UINT8_T length)
+{
+	UINT8_T _return = OK_0, i = 0;
+	//---启动写数据
+	_return = I2CTask_MSW_START(&(PCF8563HandlerType->msgI2C), 1);
+	if (_return != OK_0)
+	{
+		//---启动写数据失败
+		_return = ERROR_2;
+		goto GoToExit;
+	}
+	//---发送寄存器地址
+	I2CTask_MSW_SendByte(&(PCF8563HandlerType->msgI2C), reg);
+	//---读取ACK
+	_return = I2CTask_MSW_ReadACK(&(PCF8563HandlerType->msgI2C));
+	if (_return != OK_0)
+	{
+		//---发送数据失败
+		_return = ERROR_3;
+		goto GoToExit;
+	}
+	//---发送停止信号
+	I2CTask_MSW_STOP(&(PCF8563HandlerType->msgI2C));
+	//---启动读取数据
+	_return = I2CTask_MSW_START(&(PCF8563HandlerType->msgI2C), 0);
+	if (_return != OK_0)
+	{
+		//---启动读数据失败
+		_return = ERROR_4;
+		goto GoToExit;
+	}
+	for (i = 0; i < length; i++)
+	{
+		//---读取数据
+		pVal[i] = I2CTask_MSW_ReadByte(&(PCF8563HandlerType->msgI2C));
+		if (i == (length - 1))
+		{
+			_return = 1;
+		}
+		//---发送应答信号
+		I2CTask_MSW_SendACK(&(PCF8563HandlerType->msgI2C), _return);
+	}
+	_return = OK_0;
+GoToExit:
+	//---发送停止信号
+	I2CTask_MSW_STOP(&(PCF8563HandlerType->msgI2C));
+	return _return;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函	   数： UINT8_T PCF8563_HandlerType_ClockOut(UINT8_T preVal)
+//////功	   能： PCF8563输出时钟，输出分频
+//////输入参数:
+//////输出参数:
+//////说	   明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_ClockOut(PCF8563_HandlerType *PCF8563HandlerType, UINT8_T preVal)
+{
+	UINT8_T _return = OK_0;
+	UINT8_T temp = 0;
+	//---写寄存器
+	_return = PCF8563_WriteReg(PCF8563HandlerType, PCF8563_REG_CLKOUT, (preVal | 0x80));
+	if (_return != OK_0)
+	{
+		_return = ERROR_2;
+		goto GoToExit;
+	}
+	//---读取寄存器
+	_return = PCF8563_ReadReg(PCF8563HandlerType, PCF8563_REG_CLKOUT, &temp, 1);
+	if (_return != OK_0)
+	{
+		_return = ERROR_3;
+		goto GoToExit;
+	}
+	//---数据的校验
+	if ((temp & 0x7F) != preVal)
+	{
+		_return = ERROR_1;
+	}
+GoToExit:
+	return _return;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函	   数：
+//////功	   能：
+//////输入参数:
+//////输出参数:
+//////说	   明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_ReadRTC(PCF8563_HandlerType *PCF8563HandlerType)
+{
+	UINT8_T _return = OK_0;
+	UINT8_T temp[7];
+	//---读取时钟
+	_return = PCF8563_ReadReg(PCF8563HandlerType, PCF8563_REG_SECOND, temp, 7);
+	//---解析数据
+	if (_return == OK_0)
+	{
+		//---将获取的数据填充到缓存区
+		PCF8563HandlerType->msgRTC.second = (temp[0] & 0x7F);
+		PCF8563HandlerType->msgRTC.minute = (temp[1] & 0x7F);
+		PCF8563HandlerType->msgRTC.hour = (temp[2] & 0x3F);
+		PCF8563HandlerType->msgRTC.day = (temp[3] & 0x3F);
+		PCF8563HandlerType->msgRTC.week = (temp[4] & 0x07);
+		PCF8563HandlerType->msgRTC.month = (temp[5] & 0x1F);
+		//---年份
+		PCF8563HandlerType->msgRTC.year = temp[6];
+		//---世纪
+		if (temp[5] & 0x80)
+		{
+			PCF8563HandlerType->msgRTC.century = 0x19;
+		}
+		else
+		{
+			PCF8563HandlerType->msgRTC.century = 0x20;
+		}
+	}
+	return _return;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T PCF8563_WriteRTC(PCF8563_HandlerType *PCF8563HandlerType, RTC_HandlerType rtc)
+{
+	UINT8_T _return = OK_0;
+	//---判断数据类型是不是BCD码
+	if ((rtc.century != 0x19) || (rtc.century != 0x20))
+	{
+		//===处理数据位BCD格式
+		rtc.second = DecToBcd(rtc.second);
+		rtc.minute = DecToBcd(rtc.minute);
+		rtc.hour = DecToBcd(rtc.hour);
+		rtc.day = DecToBcd(rtc.day);
+		rtc.week = DecToBcd(rtc.week);
+		rtc.month = DecToBcd(rtc.month);
+		rtc.year = DecToBcd(rtc.year);
+		rtc.century = DecToBcd(rtc.century);
+	}
+	//---世纪参数的处理
+	if (rtc.century == 0x20)
+	{
+		rtc.month &= 0x3F;
+	}
+	else
+	{
+		rtc.month |= 0x80;
+	}
+	//---写秒
+	_return = PCF8563_WriteReg(PCF8563HandlerType, PCF8563_REG_SECOND, rtc.second);
+	if (_return != OK_0)
+	{
+		_return = ERROR_2;
+		goto GoToExit;
+	}
+	//---写分
+	_return = PCF8563_WriteReg(PCF8563HandlerType, PCF8563_REG_MINUTE, rtc.minute);
+	if (_return != OK_0)
+	{
+		_return = ERROR_3;
+		goto GoToExit;
+	}
+	//---写时
+	_return = PCF8563_WriteReg(PCF8563HandlerType, PCF8563_REG_HOURS, rtc.hour);
+	if (_return != OK_0)
+	{
+		_return = ERROR_4;
+		goto GoToExit;
+	}
+	//---写天
+	_return = PCF8563_WriteReg(PCF8563HandlerType, PCF8563_REG_DAY, rtc.day);
+	if (_return != OK_0)
+	{
+		_return = ERROR_5;
+		goto GoToExit;
+	}
+	//---写星期
+	_return = PCF8563_WriteReg(PCF8563HandlerType, PCF8563_REG_WEEK, rtc.week);
+	if (_return != OK_0)
+	{
+		_return = ERROR_6;
+		goto GoToExit;
+	}
+	//---写月
+	_return = PCF8563_WriteReg(PCF8563HandlerType, PCF8563_REG_MONTH, rtc.month);
+	if (_return != OK_0)
+	{
+		_return = ERROR_7;
+		goto GoToExit;
+	}
+	//---写年
+	_return = PCF8563_WriteReg(PCF8563HandlerType, PCF8563_REG_YEAR, rtc.year);
+GoToExit:
+	return _return;
+}

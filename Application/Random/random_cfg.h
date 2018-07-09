@@ -1,0 +1,11 @@
+#ifndef RANDOM_CFG_H_
+#define RANDOM_CFG_H_
+//////////////////////////////////////////////////////////////////////////////////////
+#include "complier_lib.h"
+//===º¯Êý¶¨Òå
+void Random_Init( void );
+void Random_DeInit( void );
+UINT32_T Random_GetVal( void );
+UINT32_T Random_GetRand( UINT32_T minVal , UINT32_T maxVal );
+//////////////////////////////////////////////////////////////////////////////////////
+#endif /*__random_cfg_H */
