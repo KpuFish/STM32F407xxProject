@@ -5,6 +5,8 @@
 #include "gpio_task.h"
 #include "systick_task.h"
 #include "random_task.h"
+#include "delay_task.h"
+#include "dht11_cfg.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 #endif /* MAIN_H_ */

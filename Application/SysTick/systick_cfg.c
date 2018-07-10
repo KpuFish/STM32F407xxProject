@@ -220,6 +220,7 @@ UINT8_T SysTick_WaitTick(UINT32_T usTimer)
 	#ifdef USE_MCU_STM32
 		UINT32_T load = SysTick->LOAD;
 		UINT32_T ctrl = SysTick->CTRL;
+		UINT32_T val  = SysTick->VAL;
 		//---关闭定时器，时钟选择为系统时钟，不进行8分频
 		SysTick->CTRL = 0x00000004;
 		//---计算装载值
@@ -237,8 +238,8 @@ UINT8_T SysTick_WaitTick(UINT32_T usTimer)
 		SysTick->CTRL = 0x00000004;
 		//---恢复装载值
 		SysTick->LOAD = load;
-		//---清零计数器
-		SysTick->VAL = 0x00;
+		//---计数器继续计数
+		SysTick->VAL = val;
 		//---恢复计数器配置
 		SysTick->CTRL = ctrl;
 	#endif

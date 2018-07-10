@@ -311,7 +311,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -322,9 +322,9 @@
             <Rwpi>0</Rwpi>
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
-            <uSurpInc>1</uSurpInc>
-            <uC99>1</uC99>
-            <uGnu>1</uGnu>
+            <uSurpInc>0</uSurpInc>
+            <uC99>0</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -382,39 +382,84 @@
           <GroupName>Drivers/STM32F4xx_HAL_Driver</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_ll_gpio.c</FileName>
+              <FileName>stm32f4xx_hal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_gpio.c</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_exti.c</FileName>
+              <FileName>stm32f4xx_hal_cortex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_exti.c</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_adc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_ll_crc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_crc.c</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_crc.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_rng.c</FileName>
+              <FileName>stm32f4xx_ll_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_rng.c</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_exti.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_rtc.c</FileName>
+              <FileName>stm32f4xx_ll_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_rtc.c</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_ll_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_rcc.c</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_rng.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rng.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usart.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_ll_utils.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_utils.c</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_utils.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal.h</FileName>
@@ -422,29 +467,19 @@
               <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_gpio.h</FileName>
+              <FileName>stm32f4xx_hal_cortex.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_gpio.h</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_exti.h</FileName>
+              <FileName>stm32f4xx_hal_crc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_exti.h</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_crc.h</FileName>
+              <FileName>stm32f4xx_hal_gpio.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_crc.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_ll_cortex.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_cortex.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_ll_bus.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_bus.h</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_ll_adc.h</FileName>
@@ -452,14 +487,34 @@
               <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_adc.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_iwdg.h</FileName>
+              <FileName>stm32f4xx_ll_bus.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_iwdg.h</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_bus.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_ll_pwr.h</FileName>
+              <FileName>stm32f4xx_ll_cortex.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_pwr.h</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_cortex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_crc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_crc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_dac.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dac.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_exti.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_exti.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_gpio.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_ll_rcc.h</FileName>
@@ -487,6 +542,11 @@
               <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_system.h</FilePath>
             </File>
             <File>
+              <FileName>stm32f4xx_ll_tim.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_tim.h</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_ll_usart.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usart.h</FilePath>
@@ -497,34 +557,9 @@
               <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_utils.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_cortex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_cortex.h</FileName>
+              <FileName>stm32f4xx_ll_iwdg.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h</FilePath>
+              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_iwdg.h</FilePath>
             </File>
           </Files>
         </Group>

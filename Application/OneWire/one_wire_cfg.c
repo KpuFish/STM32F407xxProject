@@ -55,6 +55,10 @@ UINT8_T OneWire_Init(OneWire_HandlerType *OneWirex, void(*Delayus)(UINT32_T dela
 	{
 		OneWirex->msgDelayus = Delayus;
 	}
+	else
+	{
+		OneWirex->msgDelayus = DelayTask_us;
+	}
 	return OK_0;
 }
 

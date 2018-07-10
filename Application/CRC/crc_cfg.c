@@ -38,9 +38,10 @@ const UINT32_T  crc32Tab[256] =
 };
 
 //---CRC16表
+
 const UINT16_T  crc16Tab[256] =
 {
-	
+        0
 };
 
 //---全局变量定义

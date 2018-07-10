@@ -31,6 +31,13 @@ stm32f407xxproject\one_wire_task.o: ..\Application\GPIO\gpio_cfg.h
 stm32f407xxproject\one_wire_task.o: ..\Application\SysTick\systick_task.h
 stm32f407xxproject\one_wire_task.o: ..\Application\SysTick\systick_lib.h
 stm32f407xxproject\one_wire_task.o: ..\Application\SysTick\systick_cfg.h
+stm32f407xxproject\one_wire_task.o: ..\Application\Random\random_task.h
+stm32f407xxproject\one_wire_task.o: ..\Application\Random\random_lib.h
+stm32f407xxproject\one_wire_task.o: ..\Application\Random\random_cfg.h
+stm32f407xxproject\one_wire_task.o: ..\Application\Delay\delay_task.h
+stm32f407xxproject\one_wire_task.o: ..\Application\Delay\delay_lib.h
+stm32f407xxproject\one_wire_task.o: ..\Application\Delay\delay_cfg.h
+stm32f407xxproject\one_wire_task.o: ..\Application\DHT11\dht11_cfg.h
 stm32f407xxproject\one_wire_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
 stm32f407xxproject\one_wire_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 stm32f407xxproject\one_wire_task.o: ..\STM32F4xx\stm32f4xx.h
@@ -68,6 +75,3 @@ stm32f407xxproject\one_wire_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4x
 stm32f407xxproject\one_wire_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_utils.h
 stm32f407xxproject\one_wire_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_wwdg.h
 stm32f407xxproject\one_wire_task.o: ..\Application\IWDG\iwdg_cfg.h
-stm32f407xxproject\one_wire_task.o: ..\Application\Delay\delay_task.h
-stm32f407xxproject\one_wire_task.o: ..\Application\Delay\delay_lib.h
-stm32f407xxproject\one_wire_task.o: ..\Application\Delay\delay_cfg.h

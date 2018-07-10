@@ -66,3 +66,10 @@ stm32f407xxproject\main.o: ..\Application\GPIO\gpio_cfg.h
 stm32f407xxproject\main.o: ..\Application\SysTick\systick_task.h
 stm32f407xxproject\main.o: ..\Application\SysTick\systick_lib.h
 stm32f407xxproject\main.o: ..\Application\SysTick\systick_cfg.h
+stm32f407xxproject\main.o: ..\Application\Random\random_task.h
+stm32f407xxproject\main.o: ..\Application\Random\random_lib.h
+stm32f407xxproject\main.o: ..\Application\Random\random_cfg.h
+stm32f407xxproject\main.o: ..\Application\Delay\delay_task.h
+stm32f407xxproject\main.o: ..\Application\Delay\delay_lib.h
+stm32f407xxproject\main.o: ..\Application\Delay\delay_cfg.h
+stm32f407xxproject\main.o: ..\Application\DHT11\dht11_cfg.h

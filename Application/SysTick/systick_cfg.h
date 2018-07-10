@@ -12,11 +12,11 @@ typedef struct _SysTick_HandlerType			*pSysTick_HandlerType;
 //---滴答定时器的结构体
 struct _SysTick_HandlerType
 {
-	VLTUINT32_T				msgInc;																					//---定时器递加计数器
-	VLTUINT32_T				msgDec;																					//---定时器递减计数器
-	VLTUINT32_T				msgOVF;																					//---定时计数器溢出
-	VLTUINT32_T				msgTaskInc;																				//---任务计数器
-	VLTUINT32_T				msgTaskMax;																				//---任务计数上限
+	UINT32_T				msgInc;																					//---定时器递加计数器
+	UINT32_T				msgDec;																					//---定时器递减计数器
+	UINT32_T				msgOVF;																					//---定时计数器溢出
+	UINT32_T				msgTaskInc;																				//---任务计数器
+	UINT32_T				msgTaskMax;																				//---任务计数上限
 	void(*msgTaskHal)(void);																						//---hal库的计数方式
 	void(*msgTaskFunc)(void);																						//---注册任务函数
 };

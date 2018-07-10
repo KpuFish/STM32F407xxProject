@@ -37,9 +37,14 @@ UINT8_T DS18B20_Init(DS18B20_HandlerType *DS18B20x, void(*Delayus)(UINT32_T dela
 			DS18B20_Device0_Init(DS18B20x);
 		}
 	#endif
+	//---×¢²áÑÓÊ±º¯Êý
 	if (Delayms != NULL)
 	{
 		DS18B20x->msgDelayms = Delayms;
+	}
+	else
+	{
+		DS18B20x->msgDelayms = DelayTask_ms;
 	}
 	return OneWireTask_Init(&(DS18B20x->msgOneWire), Delayus);
 }
