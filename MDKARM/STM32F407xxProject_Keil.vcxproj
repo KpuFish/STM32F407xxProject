@@ -39,7 +39,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>USE_FULL_LL_DRIVER;STM32F407xx;HSE_VALUE=8000000;USE_HAL_DRIVER;_IAR_;__ICCARM__;__CC_ARM;_Pragma(x)=;__interrupt=;__packed=;__weak=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Drivers\STM32F4xx_HAL_Driver\Inc;..\Drivers\STM32F4xx_HAL_Driver\Src;..\Drivers\CMSIS\Include;..\Complier;..\STM32F4xx;..\STARTUP\MDKARM;..\Doc;..\Application\IWDG;..\Application\APP;..\Application\AD5593;..\Application\AT24Cxx;..\Application\CRC;..\Application\Delay;..\Application\DHT11;..\Application\DS18B20;..\Application\GPIO;..\Application\I2C;..\Application\OneWire;..\Application\PCF8563;..\Application\Random;..\Application\SysTick;..\Application\USART;..\Application\WM8510;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Complier;..\Doc;..\STM32F4xx;..\STARTUP\MDKARM;..\Drivers\CMSIS\Include;..\Drivers\STM32F4xx_HAL_Driver\Inc;..\Drivers\STM32F4xx_HAL_Driver\Src;..\APP;..\Application\IWDG;..\Application\AD5593;..\Application\AT24Cxx;..\Application\CRC;..\Application\Delay;..\Application\DHT11;..\Application\DS18B20;..\Application\GPIO;..\Application\I2C;..\Application\OneWire;..\Application\PCF8563;..\Application\Random;..\Application\SysTick;..\Application\USART;..\Application\WM8510;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
@@ -50,16 +50,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Application\AD5593\ad5593_cfg.h" />
-    <ClInclude Include="..\Application\AD5593\ad5593_lib.h" />
-    <ClInclude Include="..\Application\AD5593\ad5593_task.h" />
     <ClInclude Include="..\Application\APP\main.h" />
-    <ClInclude Include="..\Application\AT24Cxx\at24cxx_cfg.h" />
-    <ClInclude Include="..\Application\AT24Cxx\at24cxx_lib.h" />
-    <ClInclude Include="..\Application\AT24Cxx\at24cxx_task.h" />
-    <ClInclude Include="..\Application\CRC\crc_cfg.h" />
-    <ClInclude Include="..\Application\CRC\crc_lib.h" />
-    <ClInclude Include="..\Application\CRC\crc_task.h" />
     <ClInclude Include="..\Application\DHT11\dht11_cfg.h" />
     <ClInclude Include="..\Application\DHT11\dht11_lib.h" />
     <ClInclude Include="..\Application\DHT11\dht11_task.h" />
@@ -100,20 +91,22 @@
     <ClInclude Include="..\Complier\complier_lib.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h" />
-    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h" />
+    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h" />
+    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_adc.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_bus.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_cortex.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_crc.h" />
+    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dac.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_exti.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_gpio.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_iwdg.h" />
-    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_pwr.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rcc.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rng.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rtc.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_spi.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_system.h" />
+    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_tim.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usart.h" />
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_utils.h" />
     <ClInclude Include="..\STM32F4xx\stm32_assert.h" />
@@ -126,16 +119,7 @@
     <ClInclude Include="..\STM32F4xx\system_stm32f4xx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Application\AD5593\ad5593_cfg.c" />
-    <ClCompile Include="..\Application\AD5593\ad5593_lib.c" />
-    <ClCompile Include="..\Application\AD5593\ad5593_task.c" />
     <ClCompile Include="..\Application\APP\main.c" />
-    <ClCompile Include="..\Application\AT24Cxx\at24cxx_cfg.c" />
-    <ClCompile Include="..\Application\AT24Cxx\at24cxx_lib.c" />
-    <ClCompile Include="..\Application\AT24Cxx\at24cxx_task.c" />
-    <ClCompile Include="..\Application\CRC\crc_cfg.c" />
-    <ClCompile Include="..\Application\CRC\crc_lib.c" />
-    <ClCompile Include="..\Application\CRC\crc_task.c" />
     <ClCompile Include="..\Application\DHT11\dht11_cfg.c" />
     <ClCompile Include="..\Application\DHT11\dht11_lib.c" />
     <ClCompile Include="..\Application\DHT11\dht11_task.c" />
@@ -176,19 +160,27 @@
     <ClCompile Include="..\Complier\complier_lib.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c" />
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c" />
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_adc.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_crc.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_exti.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_gpio.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rcc.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rng.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rtc.c" />
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_spi.c" />
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_tim.c" />
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usart.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_utils.c" />
     <ClCompile Include="..\STARTUP\MDKARM\startup_stm32f407xx.s" />
     <ClCompile Include="..\STM32F4xx\stm32_cfg.c" />
     <ClCompile Include="..\STM32F4xx\stm32f4xx_it.c" />
     <ClCompile Include="..\STM32F4xx\system_stm32f4xx.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Doc\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

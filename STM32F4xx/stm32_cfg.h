@@ -35,25 +35,9 @@
 
 //===使用的库文件
 #if defined(USE_HAL_DRIVER)||defined(USE_FULL_LL_DRIVER)
-	//---Hal库
-	#if defined (USE_HAL_DRIVER)
-		#ifdef USE_MCU_STM32F0
-			#include "stm32f0xx_hal.h"
-		#elif defined(USE_MCU_STM32F1)
-			#include "stm32f1xx_hal.h"
-		#elif defined(USE_MCU_STM32F2)
-			#include "stm32f2xx_hal.h"
-		#elif defined(USE_MCU_STM32F3)
-			#include "stm32f3xx_hal.h"
-		#elif defined(USE_MCU_STM32F4)
-			#include "stm32f4xx_hal.h"
-		#else
-			#error "STM32的Hal库导入错误!"
-		#endif
-	#endif
 	//---LL库
 	#if defined (USE_FULL_LL_DRIVER )
-	//---定义NVIC使用的分组
+		//---定义NVIC使用的分组
 		#ifndef NVIC_PRIORITYGROUP_4
 			#define NVIC_PRIORITYGROUP_0         0x00000007U
 			#define NVIC_PRIORITYGROUP_1         0x00000006U
@@ -78,6 +62,22 @@
 			#include "stm32f4xx_ll.h"
 		#else
 			#error "STM32的LL库导入错误!"
+		#endif
+	#endif
+    //---Hal库
+	#if defined (USE_HAL_DRIVER)
+		#ifdef USE_MCU_STM32F0
+			#include "stm32f0xx_hal.h"
+		#elif defined(USE_MCU_STM32F1)
+			#include "stm32f1xx_hal.h"
+		#elif defined(USE_MCU_STM32F2)
+			#include "stm32f2xx_hal.h"
+		#elif defined(USE_MCU_STM32F3)
+			#include "stm32f3xx_hal.h"
+		#elif defined(USE_MCU_STM32F4)
+			#include "stm32f4xx_hal.h"
+		#else
+			#error "STM32的Hal库导入错误!"
 		#endif
 	#endif
 #else

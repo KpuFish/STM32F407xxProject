@@ -55,14 +55,14 @@
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>./STM32F407xxProject/\</ListingPath>
+          <ListingPath>C:\Users\Harry\Documents\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
           <BeforeCompile>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
+            <UserProg1Name>I:\STM32_MCU\STM32F407\STM32F407xxProject\MDKARM\keilkilll.bat</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -141,7 +141,7 @@
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
+          <pFcarmGrp>Complier</pFcarmGrp>
           <pFcArmRoot></pFcArmRoot>
           <FcArmLst>0</FcArmLst>
         </Utilities>
@@ -311,7 +311,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>0</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -320,7 +320,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
@@ -337,7 +337,7 @@
               <MiscControls>--gnu --diag_suppress=1</MiscControls>
               <Define>USE_FULL_LL_DRIVER,STM32F407xx,HSE_VALUE=8000000,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Drivers/STM32F4xx_HAL_Driver/Inc;..\Drivers\STM32F4xx_HAL_Driver\Src;../Drivers/CMSIS/Include;..\Complier;..\STM32F4xx;..\STARTUP\MDKARM;..\Doc;..\Application\IWDG;..\Application\APP;..\Application\AD5593;..\Application\AT24Cxx;..\Application\CRC;..\Application\Delay;..\Application\DHT11;..\Application\DS18B20;..\Application\GPIO;..\Application\I2C;..\Application\OneWire;..\Application\PCF8563;..\Application\Random;..\Application\SysTick;..\Application\USART;..\Application\WM8510</IncludePath>
+              <IncludePath>..\Complier;..\Doc;..\STM32F4xx;..\STARTUP\MDKARM;../Drivers/CMSIS/Include;../Drivers/STM32F4xx_HAL_Driver/Inc;..\Drivers\STM32F4xx_HAL_Driver\Src;..\APP;..\Application\IWDG;..\Application\AD5593;..\Application\AT24Cxx;..\Application\CRC;..\Application\Delay;..\Application\DHT11;..\Application\DS18B20;..\Application\GPIO;..\Application\I2C;..\Application\OneWire;..\Application\PCF8563;..\Application\Random;..\Application\SysTick;..\Application\USART;..\Application\WM8510</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -352,7 +352,7 @@
             <useXO>0</useXO>
             <uClangAs>0</uClangAs>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--cpreproc</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
               <IncludePath></IncludePath>
@@ -378,6 +378,106 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
+        <Group>
+          <GroupName>Complier</GroupName>
+          <Files>
+            <File>
+              <FileName>complier_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Complier\complier_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>complier_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Complier\complier_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>complier_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Complier\complier_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>complier_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Complier\complier_lib.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Doc</GroupName>
+          <Files>
+            <File>
+              <FileName>ReadMe.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Doc\ReadMe.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STM32F4xx</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32_assert.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32F4xx\stm32_assert.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F4xx\stm32_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32F4xx\stm32_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32F4xx\stm32f4xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32F4xx\stm32f4xx_hal_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F4xx\stm32f4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32F4xx\stm32f4xx_it.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f407xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32F4xx\stm32f407xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32F4xx\stm32f4xx_ll.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/CMSIS</GroupName>
+          <Files>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F4xx\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32F4xx\system_stm32f4xx.h</FilePath>
+            </File>
+          </Files>
+        </Group>
         <Group>
           <GroupName>Drivers/STM32F4xx_HAL_Driver</GroupName>
           <Files>
@@ -564,117 +664,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STM32F4xx\system_stm32f4xx.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32F4xx\system_stm32f4xx.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>STARTUP/MDKARM</GroupName>
           <Files>
             <File>
               <FileName>startup_stm32f407xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\STARTUP\MDKARM\startup_stm32f407xx.s</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STM32F4xx</GroupName>
-          <Files>
-            <File>
-              <FileName>stm32_assert.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32F4xx\stm32_assert.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32_cfg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STM32F4xx\stm32_cfg.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32F4xx\stm32_cfg.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32F4xx\stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32F4xx\stm32f4xx_hal_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STM32F4xx\stm32f4xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32F4xx\stm32f4xx_it.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f407xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32F4xx\stm32f407xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_ll.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32F4xx\stm32f4xx_ll.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Complier</GroupName>
-          <Files>
-            <File>
-              <FileName>complier_cfg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Complier\complier_cfg.c</FilePath>
-            </File>
-            <File>
-              <FileName>complier_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Complier\complier_cfg.h</FilePath>
-            </File>
-            <File>
-              <FileName>complier_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Complier\complier_lib.c</FilePath>
-            </File>
-            <File>
-              <FileName>complier_lib.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Complier\complier_lib.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Application/APP</GroupName>
-          <Files>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\APP\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>main.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\APP\main.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -714,37 +709,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Application/AT24Cxx</GroupName>
+          <GroupName>Application/APP</GroupName>
           <Files>
             <File>
-              <FileName>at24cxx_cfg.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Application\AT24Cxx\at24cxx_cfg.c</FilePath>
+              <FilePath>..\Application\APP\main.c</FilePath>
             </File>
             <File>
-              <FileName>at24cxx_cfg.h</FileName>
+              <FileName>main.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Application\AT24Cxx\at24cxx_cfg.h</FilePath>
-            </File>
-            <File>
-              <FileName>at24cxx_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\AT24Cxx\at24cxx_lib.c</FilePath>
-            </File>
-            <File>
-              <FileName>at24cxx_lib.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\AT24Cxx\at24cxx_lib.h</FilePath>
-            </File>
-            <File>
-              <FileName>at24cxx_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\AT24Cxx\at24cxx_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>at24cxx_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\AT24Cxx\at24cxx_task.h</FilePath>
+              <FilePath>..\Application\APP\main.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -994,6 +969,76 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Application/OneWire</GroupName>
+          <Files>
+            <File>
+              <FileName>one_wire_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\OneWire\one_wire_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>one_wire_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\OneWire\one_wire_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>one_wire_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\OneWire\one_wire_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>one_wire_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\OneWire\one_wire_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>one_wire_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\OneWire\one_wire_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>one_wire_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\OneWire\one_wire_task.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/PCF8563</GroupName>
+          <Files>
+            <File>
+              <FileName>pcf8563_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\PCF8563\pcf8563_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>pcf8563_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\PCF8563\pcf8563_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>pcf8563_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\PCF8563\pcf8563_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>pcf8563_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\PCF8563\pcf8563_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>pcf8563_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\PCF8563\pcf8563_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>pcf8563_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\PCF8563\pcf8563_task.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Application/Random</GroupName>
           <Files>
             <File>
@@ -1134,76 +1179,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Application/OneWire</GroupName>
-          <Files>
-            <File>
-              <FileName>one_wire_cfg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\OneWire\one_wire_cfg.c</FilePath>
-            </File>
-            <File>
-              <FileName>one_wire_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\OneWire\one_wire_cfg.h</FilePath>
-            </File>
-            <File>
-              <FileName>one_wire_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\OneWire\one_wire_lib.c</FilePath>
-            </File>
-            <File>
-              <FileName>one_wire_lib.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\OneWire\one_wire_lib.h</FilePath>
-            </File>
-            <File>
-              <FileName>one_wire_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\OneWire\one_wire_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>one_wire_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\OneWire\one_wire_task.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Application/PCF8563</GroupName>
-          <Files>
-            <File>
-              <FileName>pcf8563_cfg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\PCF8563\pcf8563_cfg.c</FilePath>
-            </File>
-            <File>
-              <FileName>pcf8563_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\PCF8563\pcf8563_cfg.h</FilePath>
-            </File>
-            <File>
-              <FileName>pcf8563_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\PCF8563\pcf8563_lib.c</FilePath>
-            </File>
-            <File>
-              <FileName>pcf8563_lib.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\PCF8563\pcf8563_lib.h</FilePath>
-            </File>
-            <File>
-              <FileName>pcf8563_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\PCF8563\pcf8563_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>pcf8563_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\PCF8563\pcf8563_task.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1213,8 +1188,8 @@
   <RTE>
     <apis/>
     <components>
-      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="4.3.0" condition="CMSIS Core">
-        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="4.5.0"/>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.1.1" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.3.0"/>
         <targetInfos>
           <targetInfo name="STM32F407xxProject"/>
         </targetInfos>

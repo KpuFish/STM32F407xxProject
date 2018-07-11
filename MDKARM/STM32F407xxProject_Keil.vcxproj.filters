@@ -4,17 +4,8 @@
     <Filter Include="Application">
       <UniqueIdentifier>{D9DE78AF-4594-F1A4-CE88-EB7B3A3DE8A8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\AD5593">
-      <UniqueIdentifier>{63845DB1-4F68-1E07-B8C8-185AA4CB0889}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Application\APP">
       <UniqueIdentifier>{4988296C-B513-9730-BE24-1A252A2FF330}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\AT24Cxx">
-      <UniqueIdentifier>{D6F82902-425A-0710-CBC7-4DC237283ECF}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\CRC">
-      <UniqueIdentifier>{0091296C-6C1C-9730-752D-1A25E137F330}</UniqueIdentifier>
     </Filter>
     <Filter Include="Application\DHT11">
       <UniqueIdentifier>{8ABCDE1C-F6D2-DCB2-3F4A-68D4AB9FAD3A}</UniqueIdentifier>
@@ -55,6 +46,9 @@
     <Filter Include="Complier">
       <UniqueIdentifier>{A062D8B7-8C2F-33C3-B548-216BA1746851}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Doc">
+      <UniqueIdentifier>{DBE2870B-47EC-877C-D067-9E7C3C70937C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Drivers">
       <UniqueIdentifier>{C456D287-3036-5123-394E-DCF9A5ACB784}</UniqueIdentifier>
     </Filter>
@@ -72,35 +66,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Application\AD5593\ad5593_cfg.h">
-      <Filter>Application\AD5593</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\AD5593\ad5593_lib.h">
-      <Filter>Application\AD5593</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\AD5593\ad5593_task.h">
-      <Filter>Application\AD5593</Filter>
-    </ClInclude>
     <ClInclude Include="..\Application\APP\main.h">
       <Filter>Application\APP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\AT24Cxx\at24cxx_cfg.h">
-      <Filter>Application\AT24Cxx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\AT24Cxx\at24cxx_lib.h">
-      <Filter>Application\AT24Cxx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\AT24Cxx\at24cxx_task.h">
-      <Filter>Application\AT24Cxx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\CRC\crc_cfg.h">
-      <Filter>Application\CRC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\CRC\crc_lib.h">
-      <Filter>Application\CRC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\CRC\crc_task.h">
-      <Filter>Application\CRC</Filter>
     </ClInclude>
     <ClInclude Include="..\Application\DHT11\dht11_cfg.h">
       <Filter>Application\DHT11</Filter>
@@ -222,7 +189,10 @@
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
-    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h">
+    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h">
+      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_adc.h">
@@ -237,6 +207,9 @@
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_crc.h">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
+    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dac.h">
+      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_exti.h">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
@@ -244,9 +217,6 @@
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_iwdg.h">
-      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_pwr.h">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rcc.h">
@@ -262,6 +232,9 @@
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_system.h">
+      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_tim.h">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
     <ClInclude Include="..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usart.h">
@@ -296,35 +269,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Application\AD5593\ad5593_cfg.c">
-      <Filter>Application\AD5593</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Application\AD5593\ad5593_lib.c">
-      <Filter>Application\AD5593</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Application\AD5593\ad5593_task.c">
-      <Filter>Application\AD5593</Filter>
-    </ClCompile>
     <ClCompile Include="..\Application\APP\main.c">
       <Filter>Application\APP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Application\AT24Cxx\at24cxx_cfg.c">
-      <Filter>Application\AT24Cxx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Application\AT24Cxx\at24cxx_lib.c">
-      <Filter>Application\AT24Cxx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Application\AT24Cxx\at24cxx_task.c">
-      <Filter>Application\AT24Cxx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Application\CRC\crc_cfg.c">
-      <Filter>Application\CRC</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Application\CRC\crc_lib.c">
-      <Filter>Application\CRC</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Application\CRC\crc_task.c">
-      <Filter>Application\CRC</Filter>
     </ClCompile>
     <ClCompile Include="..\Application\DHT11\dht11_cfg.c">
       <Filter>Application\DHT11</Filter>
@@ -446,10 +392,16 @@
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClCompile>
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c">
+      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClCompile>
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
+      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_adc.c">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClCompile>
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_crc.c">
@@ -470,6 +422,15 @@
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rtc.c">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClCompile>
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_spi.c">
+      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_tim.c">
+      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usart.c">
+      <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_utils.c">
       <Filter>Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClCompile>
@@ -485,5 +446,10 @@
     <ClCompile Include="..\STM32F4xx\system_stm32f4xx.c">
       <Filter>Drivers\CMSIS</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Doc\ReadMe.txt">
+      <Filter>Doc</Filter>
+    </None>
   </ItemGroup>
 </Project>

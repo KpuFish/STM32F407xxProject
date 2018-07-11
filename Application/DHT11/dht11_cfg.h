@@ -10,23 +10,26 @@
 	#include "delay_task.h"
 #endif
 
-//---定义结构体
+//===定义结构体
 typedef struct _DHT11_HandlerType		DHT11_HandlerType;
-//---定义指针结构体
+//===定义指针结构体
 typedef struct _DHT11_HandlerType		*pDHT11_HandlerType;
 
-//---定义
+//===结构体定义
 struct _DHT11_HandlerType
 {
-	UINT32_T		msgWenDuX1000;				//---温度
-	UINT32_T		msgShiDuX1000;				//---湿度
-	UINT32_T		msgBit;						//---端口序号
-	GPIO_TypeDef	*msgPort;					//---端口号
-	void(*msgDelayus)(UINT32_T delay);			//---us延时函数
-	void(*msgDelayms)(UINT32_T delay);			//---ms延时函数
+	UINT32_T		msgWenDuX1000;							//---温度
+	UINT32_T		msgShiDuX1000;							//---湿度
+	UINT32_T		msgBit;									//---端口序号
+	GPIO_TypeDef	*msgPort;								//---端口号
+	void(*msgDelayus)(UINT32_T delay);						//---us延时函数
+	void(*msgDelayms)(UINT32_T delay);						//---ms延时函数
 };
 
-//---选择使用的任务
+#include "dht11_lib.h"
+#include "dht11_task.h"
+
+//===选择使用的任务
 #define DHT11_HandlerType_Device0
 //---外部调用接口
 #ifdef DHT11_HandlerType_Device0
@@ -34,7 +37,7 @@ struct _DHT11_HandlerType
 	extern pDHT11_HandlerType	pDHT11Device0;
 #endif
 
-//---函数定义
+//===函数定义
 UINT8_T DHT11_Init(DHT11_HandlerType *DHT11x, void(*Delayus)(UINT32_T delay), void(*Delayms)(UINT32_T delay));
 UINT8_T DHT11_Device0_Init(DHT11_HandlerType *DHT11x);
 UINT8_T DHT11_DeInit(DHT11_HandlerType *DHT11x);

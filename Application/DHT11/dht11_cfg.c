@@ -6,6 +6,7 @@
 	pDHT11_HandlerType	pDHT11Device0 = &g_DHT11Device0;
 #endif
 
+
 ///////////////////////////////////////////////////////////////////////////////
 //////函		数：
 //////功		能：
@@ -43,7 +44,7 @@ UINT8_T DHT11_GPIO_Init(DHT11_HandlerType *DHT11x)
 		//---GPIO的初始化
 		GPIO_InitStruct.Pin = DHT11x->msgBit;						//---对应的GPIO的引脚
 		GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;					//---配置状态为输出模式
-		GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;		//---GPIO的速度
+		GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;			//---GPIO的速度
 		GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_OPENDRAIN;		//---输出模式---开漏输出
 		GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;						//---上拉使能
 		#ifndef USE_MCU_STM32F1
@@ -329,7 +330,6 @@ UINT8_T DHT11_Read(DHT11_HandlerType *DHT11x)
 {
 	UINT8_T temp[5] = { 0 };
 	UINT8_T i = 0;
-
 	//---启动数据的读取并检查设备是否存在
 	if (DHT11_START(DHT11x) != OK_0)
 	{

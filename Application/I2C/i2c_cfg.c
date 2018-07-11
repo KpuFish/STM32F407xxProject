@@ -7,15 +7,12 @@
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_HandlerType_Init(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_StructInit(I2C_HandlerType *I2Cx)
 {
-	/*
-	I2CxHandlerType->msgPluseWidth = 0;
-	I2CxHandlerType->msgDelay = NULL;
-	I2CxHandlerType->msgAddr = 0;
-	I2CxHandlerType->msgClockSpeed = 0;
-	I2CxHandlerType->msgTask = NULL;
-	*/
+	I2Cx->msgPluseWidth = 0;
+	I2Cx->msgDelay = NULL;
+	I2Cx->msgAddr = 0;
+	I2Cx->msgClockSpeed = 0;
 	return OK_0;
 }
 
@@ -26,40 +23,45 @@ UINT8_T I2C_HandlerType_Init(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_Init(I2C_HandlerType *I2CxHandlerType, void(*msgDelay)(UINT32_T delay))
+UINT8_T I2C_MSW_Init(I2C_HandlerType *I2Cx, void(*msgDelay)(UINT32_T delay))
 {
+	//---结构的初始化
+	I2C_StructInit(I2Cx);
 	#ifdef USE_MCU_STM32
+		//---使能GPIO的时钟
+		GPIOTask_Clock(I2Cx->msgSclPort, 1);
+		GPIOTask_Clock(I2Cx->msgSdaPort, 1);
+	#else
+		GPIO_SET_WRITE(I2Cx->msgSclPort, I2Cx->msgSclBit);
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
+		//---SCL和SDA端口输出高电平
+		GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+		GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 
-	//---使能GPIO的时钟
-	GPIOTask_Clock(I2CxHandlerType->msgSclPort, 1);
-	GPIOTask_Clock(I2CxHandlerType->msgSdaPort, 1);
-
-	//---SCL和SDA端口输出高电平
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-
-	//---GPIO的结构体
-	LL_GPIO_InitTypeDef GPIO_InitStruct;
-
-	//---GPIO的初始化
-	GPIO_InitStruct.Pin = I2CxHandlerType->msgSclBit;				//---对应的GPIO的引脚
-	GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;						//---配置状态为输出模式
-	GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;				//---GPIO的速度
-	GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_OPENDRAIN;					//---输出模式---开漏输出
-	GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;							//---上拉
-
-	//---SCL的初始化
-	LL_GPIO_Init(I2CxHandlerType->msgSclPort, &GPIO_InitStruct);
-
-	//---SDA的初始化
-	GPIO_InitStruct.Pin = I2CxHandlerType->msgSdaBit;
-	LL_GPIO_Init(I2CxHandlerType->msgSdaPort, &GPIO_InitStruct);
+	#ifdef USE_MCU_STM32
+		//---GPIO的结构体
+		LL_GPIO_InitTypeDef GPIO_InitStruct;
+		//---GPIO的初始化
+		GPIO_InitStruct.Pin = I2Cx->msgSclBit;							//---对应的GPIO的引脚
+		GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;						//---配置状态为输出模式
+		GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;				//---GPIO的速度
+		GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_OPENDRAIN;			//---输出模式---开漏输出
+		GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;							//---上拉
+		#ifndef USE_MCU_STM32F1
+			GPIO_InitStruct.Alternate = LL_GPIO_AF_0;					//---端口复用模式
+		#endif
+		//---SCL的初始化
+		LL_GPIO_Init(I2Cx->msgSclPort, &GPIO_InitStruct);
+		//---SDA的初始化
+		GPIO_InitStruct.Pin = I2Cx->msgSdaBit;
+		LL_GPIO_Init(I2Cx->msgSdaPort, &GPIO_InitStruct);
 	#endif
 
-	//---设置使用的延时函数
+	//---注册延时函数
 	if (msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay = msgDelay;
+		I2Cx->msgDelay = msgDelay;
 	}
 	return OK_0;
 }
@@ -71,21 +73,19 @@ UINT8_T I2C_MSW_Init(I2C_HandlerType *I2CxHandlerType, void(*msgDelay)(UINT32_T 
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_DeInit(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_DeInit(I2C_HandlerType *I2Cx)
 {
-	//---端口设置为输入模式
-	I2C_SCL_READ(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	I2C_SDA_READ(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-
+	#ifdef USE_MCU_STM32
+		LL_GPIO_DeInit(I2Cx->msgSclPort);
+		LL_GPIO_DeInit(I2Cx->msgSdaPort);
+	#else
+		//---端口设置为输入模式
+		GPIO_SET_READ(I2Cx->msgSclPort, I2Cx->msgSclBit);
+		GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---SCL和SDA端口输出高电平
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-
-	//---注销任务函数
-	if (I2CxHandlerType->msgTask != NULL)
-	{
-		I2CxHandlerType->msgTask = NULL;
-	}
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	return OK_0;
 }
 
@@ -96,28 +96,37 @@ UINT8_T I2C_MSW_DeInit(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_START(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_START(I2C_HandlerType *I2Cx)
 {
+	#ifndef USE_MCU_STM32
+		GPIO_SET_WRITE(I2Cx->msgSclPort, I2Cx->msgSclBit);
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---发送起始条件的数据信号
-	I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
 
 	//---发送起始信号;
-	I2C_SDA_OUT_0(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	GPIO_OUT_0(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
-
 	//---钳住I2C总线，准备发送或接收数据
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	#ifndef USE_MCU_STM32
+		GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+		if (I2Cx->msgDelay != NULL)
+		{
+			I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		}
+	#endif
 	//---判断I2C启动信号是否成功，读取SDA的状态信号，成功SDA---0；失败SDA---1
-	if (I2C_SDA_STATE(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit) != OK_0)
+	if (GPIO_GET_STATE(I2Cx->msgSdaPort, I2Cx->msgSdaBit) != OK_0)
 	{
 		return ERROR_1;
 	}
@@ -131,29 +140,32 @@ UINT8_T I2C_MSW_START(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_STOP(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_STOP(I2C_HandlerType *I2Cx)
 {
+	#ifndef USE_MCU_STM32
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---发送停止条件的数据信号
-	I2C_SDA_OUT_0(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	GPIO_OUT_0(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
-	I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#ifndef USE_MCU_STM32
+		GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
-
 	//---判断I2C启动信号是否成功，读取SDA的状态信号，成功SDA---1；失败SDA---0
-	if (I2C_SDA_STATE(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit) == OK_0)
+	if (GPIO_GET_STATE(I2Cx->msgSdaPort, I2Cx->msgSdaBit) == OK_0)
 	{
 		return ERROR_1;
 	}
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-
-	//I2C_SDA_OUT_0(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
 	return OK_0;
 }
 
@@ -164,17 +176,20 @@ UINT8_T I2C_MSW_STOP(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_ACK(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_ACK(I2C_HandlerType *I2Cx)
 {
-	I2C_SDA_OUT_0(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	#ifndef USE_MCU_STM32
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
+	GPIO_OUT_0(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
 
 	//---清时钟线,钳住I2C总线，准备发送或接收数据
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
 	return OK_0;
 }
 
@@ -185,17 +200,19 @@ UINT8_T I2C_MSW_ACK(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_NACK(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_NACK(I2C_HandlerType *I2Cx)
 {
-	I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	#ifndef USE_MCU_STM32
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
+	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
-
 	//---清时钟线,钳住I2C总线，准备发送或接收数据
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
 	return OK_0;
 }
 
@@ -206,28 +223,30 @@ UINT8_T I2C_MSW_NACK(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_ReadACK(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_ReadACK(I2C_HandlerType *I2Cx)
 {
 	UINT8_T _return = OK_0;
-
+	#ifndef USE_MCU_STM32
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---读取应答信号
-	I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-
+	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	#ifndef USE_MCU_STM32
+		GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---延时等待
-	if (I2CxHandlerType->msgDelay != NULL)
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
-
 	//---读取SDA的状态信号---ACK状态下SDA为低电平
-	if (I2C_SDA_STATE(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit) != OK_0)
+	if (GPIO_GET_STATE(I2Cx->msgSdaPort, I2Cx->msgSdaBit) != OK_0)
 	{
 		_return = ERROR_1;
 	}
-
 	//---清时钟线,钳住I2C总线，准备发送或接收数据
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
 	return _return;
 }
 
@@ -238,31 +257,35 @@ UINT8_T I2C_MSW_ReadACK(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_WaitACK(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_WaitACK(I2C_HandlerType *I2Cx)
 {
 	UINT8_T i = 0;
-
+	#ifndef USE_MCU_STM32
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---读取应答信号
-	I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-
+	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	#ifndef USE_MCU_STM32
+		GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---等待应答信号
 	for (i = 255; i > 0; i--)
 	{
 		//---读取SDA的状态
-		if (I2C_SDA_STATE(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit))
+		if (GPIO_GET_STATE(I2Cx->msgSdaPort, I2Cx->msgSdaBit))
 		{
 			break;
 		}
 	}
 	if (i == 0)
 	{
-		I2C_MSW_STOP(I2CxHandlerType);
+		I2C_MSW_STOP(I2Cx);
 		return ERROR_1;
 	}
 
 	//---清时钟线,钳住I2C总线，准备发送或接收数据
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
 	return OK_0;
 }
 
@@ -273,15 +296,15 @@ UINT8_T I2C_MSW_WaitACK(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_SendACK(I2C_HandlerType *I2CxHandlerType, UINT8_T isNACK)
+UINT8_T I2C_MSW_SendACK(I2C_HandlerType *I2Cx, UINT8_T isNACK)
 {
 	if (isNACK)
 	{
-		return I2C_MSW_NACK(I2CxHandlerType);
+		return I2C_MSW_NACK(I2Cx);
 	}
 	else
 	{
-		return I2C_MSW_ACK(I2CxHandlerType);
+		return I2C_MSW_ACK(I2Cx);
 	}
 }
 
@@ -292,27 +315,27 @@ UINT8_T I2C_MSW_SendACK(I2C_HandlerType *I2CxHandlerType, UINT8_T isNACK)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_SendBit(I2C_HandlerType *I2CxHandlerType, UINT8_T bitVal)
+UINT8_T I2C_MSW_SendBit(I2C_HandlerType *I2Cx, UINT8_T bitVal)
 {
 	if (bitVal & 0x80)
 	{
-		I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
+		GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	}
 	else
 	{
-		I2C_SDA_OUT_0(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
+		GPIO_OUT_0(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	}
 
 	//---一个时钟脉冲
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
 	return OK_0;
 }
@@ -324,18 +347,19 @@ UINT8_T I2C_MSW_SendBit(I2C_HandlerType *I2CxHandlerType, UINT8_T bitVal)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_SendByte(I2C_HandlerType *I2CxHandlerType, UINT8_T val)
+UINT8_T I2C_MSW_SendByte(I2C_HandlerType *I2Cx, UINT8_T val)
 {
 	UINT8_T i = 0;
-
 	//---清时钟线,钳住I2C总线，准备发送或接收数据
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	#ifndef USE_MCU_STM32
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---发送1字节的数据
 	for (i = 0; i < 8; i++)
 	{
 		//---读取1Bit的数据
-		I2C_MSW_SendBit(I2CxHandlerType, val);
+		I2C_MSW_SendBit(I2Cx, val);
 		val <<= 1;
 	}
 	return OK_0;
@@ -348,7 +372,7 @@ UINT8_T I2C_MSW_SendByte(I2C_HandlerType *I2CxHandlerType, UINT8_T val)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_SendBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT8_T bitNum)
+UINT8_T I2C_MSW_SendBits(I2C_HandlerType *I2Cx, UINT8_T *pVal, UINT8_T bitNum)
 {
 	//---计算字节个数
 	UINT8_T byteCount = (bitNum / 8);
@@ -360,16 +384,24 @@ UINT8_T I2C_MSW_SendBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT8_
 	//---发送整数字节的个数
 	for (i = 0; i < byteCount; i++)
 	{
-		I2C_MSW_SendByte(I2CxHandlerType, pVal[i]);
+		I2C_MSW_SendByte(I2Cx, pVal[i]);
 	}
 
 	//---数据左移---数据的发送，首先发送高位
 	pVal[byteCount] <<= (8 - bitCount);
-
+	//---判断发送数据是不是不满足1字节
+	if (byteCount==0)
+	{
+		//---清时钟线,钳住I2C总线，准备发送或接收数据
+		GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
+		#ifndef USE_MCU_STM32
+			GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+		#endif
+	}
 	//---发送指定个数的bit
 	for (i = 0; i < bitCount; i++)
 	{
-		I2C_MSW_SendBit(I2CxHandlerType, pVal[byteCount]);
+		I2C_MSW_SendBit(I2Cx, pVal[byteCount]);
 		pVal[byteCount] <<= 1;
 	}
 	return OK_0;
@@ -382,28 +414,28 @@ UINT8_T I2C_MSW_SendBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT8_
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_ReadBit(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_ReadBit(I2C_HandlerType *I2Cx)
 {
 	UINT8_T _return = OK_0;
 
 	//---时钟正脉冲
-	I2C_SCL_OUT_1(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
 
 	//---读取数据位
-	if (I2C_SDA_STATE(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit))
+	if (GPIO_GET_STATE(I2Cx->msgSdaPort, I2Cx->msgSdaBit))
 	{
 		_return = ERROR_1;
 	}
 
 	//---时钟负脉冲
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-	if (I2CxHandlerType->msgDelay != NULL)
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	if (I2Cx->msgDelay != NULL)
 	{
-		I2CxHandlerType->msgDelay(I2CxHandlerType->msgPluseWidth);
+		I2Cx->msgDelay(I2Cx->msgPluseWidth);
 	}
 	return  _return;
 }
@@ -415,22 +447,25 @@ UINT8_T I2C_MSW_ReadBit(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_ReadByte(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2C_MSW_ReadByte(I2C_HandlerType *I2Cx)
 {
 	UINT8_T i = 0;
 	UINT8_T _return = 0;
-
+	#ifndef USE_MCU_STM32
+		GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---准备数据的读取
-	I2C_SDA_OUT_1(I2CxHandlerType->msgSdaPort, I2CxHandlerType->msgSdaBit);
-
+	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	//---清时钟线,钳住I2C总线，准备发送或接收数据
-	I2C_SCL_OUT_0(I2CxHandlerType->msgSclPort, I2CxHandlerType->msgSclBit);
-
+	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	#ifndef USE_MCU_STM32
+		GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+	#endif
 	//---发送1字节的数据
 	for (i = 0; i < 8; i++)
 	{
 		_return <<= 1;
-		_return |= I2C_MSW_ReadBit(I2CxHandlerType);
+		_return |= I2C_MSW_ReadBit(I2Cx);
 	}
 	return _return;
 }
@@ -442,7 +477,7 @@ UINT8_T I2C_MSW_ReadByte(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_ReadBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT8_T bitNum)
+UINT8_T I2C_MSW_ReadBits(I2C_HandlerType *I2Cx, UINT8_T *pVal, UINT8_T bitNum)
 {
 	//---读取字节个数
 	UINT8_T byteCount = (bitNum / 8);
@@ -454,17 +489,30 @@ UINT8_T I2C_MSW_ReadBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT8_
 	//---读取整数字节的个数
 	for (i = 0; i < byteCount; i++)
 	{
-		pVal[i] = I2C_MSW_ReadByte(I2CxHandlerType);
+		pVal[i] = I2C_MSW_ReadByte(I2Cx);
 	}
 
 	//---清零处理
 	pVal[byteCount] = 0x00;
-
+	//---判断读取的Bit数据是不是不满足1字节
+	if (byteCount==0)
+	{
+		#ifndef USE_MCU_STM32
+			GPIO_SET_WRITE(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+		#endif
+		//---准备数据的读取
+		GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+		//---清时钟线,钳住I2C总线，准备发送或接收数据
+		GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
+		#ifndef USE_MCU_STM32
+			GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
+		#endif
+	}
 	//---读取指定个数的bit
 	for (i = 0; i < bitCount; i++)
 	{
 		pVal[byteCount] <<= 1;
-		pVal[byteCount] |= I2C_MSW_ReadBit(I2CxHandlerType);
+		pVal[byteCount] |= I2C_MSW_ReadBit(I2Cx);
 	}
 	return OK_0;
 }
@@ -476,30 +524,30 @@ UINT8_T I2C_MSW_ReadBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT8_
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2C_MSW_SendCMD(I2C_HandlerType *I2CxHandlerType, UINT8_T cmd, UINT8_T isStart, UINT8_T isStop)
+UINT8_T I2C_MSW_SendCMD(I2C_HandlerType *I2Cx, UINT8_T cmd, UINT8_T isStart, UINT8_T isStop)
 {
 	UINT8_T _return = OK_0;
 	if (isStart)
 	{
 		//---发送启动启动信号
-		_return = I2C_MSW_START(I2CxHandlerType);
+		_return = I2C_MSW_START(I2Cx);
 		if (_return)
 		{
-			I2C_MSW_STOP(I2CxHandlerType);
+			I2C_MSW_STOP(I2Cx);
 			return ERROR_1;
 		}
 	}
 
 	//---发送数据
-	_return = I2C_MSW_SendByte(I2CxHandlerType, cmd);
+	_return = I2C_MSW_SendByte(I2Cx, cmd);
 
 	//---读取应答
-	_return = I2C_MSW_ReadACK(I2CxHandlerType);
+	_return = I2C_MSW_ReadACK(I2Cx);
 
 	//---停止条件的满足
 	if ((isStop) || (_return))
 	{
-		I2C_MSW_STOP(I2CxHandlerType);
+		I2C_MSW_STOP(I2Cx);
 	}
 	return _return;
 }

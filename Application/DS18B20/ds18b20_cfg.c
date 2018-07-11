@@ -117,20 +117,20 @@ UINT8_T DS18B20_ReadByte(DS18B20_HandlerType *DS18B20x)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T DS18B20_ReadDeviceID(DS18B20_HandlerType *DS18B20x, UINT8_T *_id)
+UINT8_T DS18B20_ReadDeviceID(DS18B20_HandlerType *DS18B20x, UINT8_T *id)
 {
 	UINT8_T i;
 	//---总线复位
 	if (DS18B20_START(DS18B20x) == 0)
 	{
-		return 1;
+		return ERROR_1;
 	}
 	//---发命令
 	DS18B20_WriteByte(DS18B20x, 0x33);
 	//---读取设备的ID信息
 	for (i = 0; i < 8; i++)
 	{
-		_id[i] = DS18B20_ReadByte(DS18B20x);
+		id[i] = DS18B20_ReadByte(DS18B20x);
 	}
 	//----总线复位
 	DS18B20_START(DS18B20x);
@@ -148,6 +148,8 @@ UINT16_T DS18B20_ReadWenDu(DS18B20_HandlerType *DS18B20x)
 {
 	UINT16_T _return = 0, temH = 0;
 	UINT8_T temL;
+	//---读取数据之前首先设置为数据无效，避免其他设备使用
+	DS18B20x->msgIsPositive = 0;
 	//---启动温度传感器---总线复位
 	DS18B20_START(DS18B20x);
 	//---忽略地址
@@ -175,7 +177,7 @@ UINT16_T DS18B20_ReadWenDu(DS18B20_HandlerType *DS18B20x)
 	if ((temH & 0x80) == 0)
 	{
 		//---读取的温度是正值
-		DS18B20x->msgIsPositive = 0;
+		DS18B20x->msgIsPositive = 2;
 	}
 	else
 	{
@@ -187,13 +189,13 @@ UINT16_T DS18B20_ReadWenDu(DS18B20_HandlerType *DS18B20x)
 	//---保留有效位数据
 	temH &= 0x0FFF;
 	//---获取温度值对应的16进制的数据
-	if (DS18B20x->msgIsPositive == 0)
+	if (DS18B20x->msgIsPositive == 2)
 	{
 		DS18B20x->msgWenDuX10000 = temH;
 	}
 	else
 	{
-		DS18B20x->msgWenDuX10000 = 4096 - temH;
+		DS18B20x->msgWenDuX10000 = 0x1000 - temH;
 	}
 	//---将十六进制数转换成温度值
 	DS18B20x->msgWenDuX10000 *= 625;

@@ -10,7 +10,7 @@
 void GPIOLib_Clock(GPIO_TypeDef *GPIOx, UINT8_T isEnable)
 {
 	#ifdef USE_MCU_STM32
-	GPIO_Clock(GPIOx, isEnable);
+		GPIO_Clock(GPIOx, isEnable);
 	#endif
 }
 
@@ -24,6 +24,6 @@ void GPIOLib_Clock(GPIO_TypeDef *GPIOx, UINT8_T isEnable)
 void GPIOLib_Init(void)
 {
 	#ifdef USE_MCU_STM32
-	GPIO_Init();
+		GPIO_Init();
 	#endif
 }

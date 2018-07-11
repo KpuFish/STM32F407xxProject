@@ -118,27 +118,10 @@ void Sys_Init(void)
 	GPIOTask_Init();
 	SysTickTask_Init();
 	RandomTask_Init();
-
-	//---使能端口时钟
-	GPIOTask_Clock(GPIOB, 1);
-	LL_GPIO_InitTypeDef GPIO_InitStruct;
-
-	//---GPIO的初始化
-	GPIO_InitStruct.Pin = LL_GPIO_PIN_13;						//---对应的GPIO的引脚
-	GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;					//---配置状态为输出模式
-	GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;				//---GPIO的速度
-	GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;		//---输出模式---推完输出
-	GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;						//---上拉使能
-#ifndef USE_MCU_STM32F1
-	GPIO_InitStruct.Alternate = LL_GPIO_AF_0;				//---端口复用模式
-#endif
-															//---初始化端口
-	LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-	GPIO_OUT_1(GPIOB, LL_GPIO_PIN_13);
-
-	DHT11_Init(pDHT11Device0,DelayTask_us,DelayTask_ms);
-	DHT11_Read(pDHT11Device0);
+	DHT11Task_Init(pDHT11Device0,DelayTask_us,DelayTask_ms);
+	DHT11Task_Read(pDHT11Device0);
+	//PCF8563Task_Init(pPCF8563Device0, DelayTask_us);
+	//IWDGTask_Init(pIWDG);
 
 }
 
@@ -156,8 +139,10 @@ int main(void)
 	//---主循环
 	while (1)
 	{
-        DHT11_Read(pDHT11Device0);
+        //DHT11Lib_Read(pDHT11Device0);
 		DelayTask_ms(500);
 		DelayTask_ms(500);
+        
+		WDT_RESET();
 	}
 }

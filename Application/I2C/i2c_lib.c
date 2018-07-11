@@ -7,10 +7,9 @@
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_Init(I2C_HandlerType *I2CxHandlerType, void(*msgDelay)(UINT32_T delay))
+UINT8_T I2CLib_MSW_Init(I2C_HandlerType *I2Cx, void(*msgDelay)(UINT32_T delay))
 {
-	I2C_HandlerType_Init(I2CxHandlerType);
-	return I2C_MSW_Init(I2CxHandlerType, msgDelay);
+	return I2C_MSW_Init(I2Cx, msgDelay);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,9 +19,9 @@ UINT8_T I2CLib_MSW_Init(I2C_HandlerType *I2CxHandlerType, void(*msgDelay)(UINT32
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_DeInit(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2CLib_MSW_DeInit(I2C_HandlerType *I2Cx)
 {
-	return I2C_MSW_DeInit(I2CxHandlerType);
+	return I2C_MSW_DeInit(I2Cx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -32,23 +31,23 @@ UINT8_T I2CLib_MSW_DeInit(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明： 返回的是应答信号
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_START(I2C_HandlerType *I2CxHandlerType, UINT8_T isWrite)
+UINT8_T I2CLib_MSW_START(I2C_HandlerType *I2Cx, UINT8_T isWrite)
 {
 	//---发送启动信号
-	I2C_MSW_START(I2CxHandlerType);
+	I2C_MSW_START(I2Cx);
 	//---判断是读取操作还是写入操作
 	if (isWrite)
 	{
-		I2CxHandlerType->msgAddr &= 0xFE;
+		I2Cx->msgAddr &= 0xFE;
 	}
 	else
 	{
-		I2CxHandlerType->msgAddr |= 0x01;
+		I2Cx->msgAddr |= 0x01;
 	}
 	//---发送从机地址
-	I2C_MSW_SendByte(I2CxHandlerType, ( UINT8_T )I2CxHandlerType->msgAddr);
+	I2C_MSW_SendByte(I2Cx, ( UINT8_T )I2Cx->msgAddr);
 	//---读取应答信号
-	return I2C_MSW_ReadACK(I2CxHandlerType);
+	return I2C_MSW_ReadACK(I2Cx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,10 +57,10 @@ UINT8_T I2CLib_MSW_START(I2C_HandlerType *I2CxHandlerType, UINT8_T isWrite)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_STOP(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2CLib_MSW_STOP(I2C_HandlerType *I2Cx)
 {
 	//---发送启动信号
-	return	I2C_MSW_STOP(I2CxHandlerType);
+	return	I2C_MSW_STOP(I2Cx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -71,9 +70,9 @@ UINT8_T I2CLib_MSW_STOP(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_ACK(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2CLib_MSW_ACK(I2C_HandlerType *I2Cx)
 {
-	return I2C_MSW_ACK(I2CxHandlerType);
+	return I2C_MSW_ACK(I2Cx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -83,9 +82,9 @@ UINT8_T I2CLib_MSW_ACK(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_NACK(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2CLib_MSW_NACK(I2C_HandlerType *I2Cx)
 {
-	return I2C_MSW_NACK(I2CxHandlerType);
+	return I2C_MSW_NACK(I2Cx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -95,9 +94,9 @@ UINT8_T I2CLib_MSW_NACK(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_ReadACK(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2CLib_MSW_ReadACK(I2C_HandlerType *I2Cx)
 {
-	return I2C_MSW_ReadACK(I2CxHandlerType);
+	return I2C_MSW_ReadACK(I2Cx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -107,9 +106,9 @@ UINT8_T I2CLib_MSW_ReadACK(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_WaitACK(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2CLib_MSW_WaitACK(I2C_HandlerType *I2Cx)
 {
-	return I2C_MSW_WaitACK(I2CxHandlerType);
+	return I2C_MSW_WaitACK(I2Cx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -119,9 +118,9 @@ UINT8_T I2CLib_MSW_WaitACK(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_SendACK(I2C_HandlerType *I2CxHandlerType, UINT8_T isNACK)
+UINT8_T I2CLib_MSW_SendACK(I2C_HandlerType *I2Cx, UINT8_T isNACK)
 {
-	return I2C_MSW_SendACK(I2CxHandlerType, isNACK);
+	return I2C_MSW_SendACK(I2Cx, isNACK);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -131,9 +130,9 @@ UINT8_T I2CLib_MSW_SendACK(I2C_HandlerType *I2CxHandlerType, UINT8_T isNACK)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_SendByte(I2C_HandlerType *I2CxHandlerType, UINT8_T val)
+UINT8_T I2CLib_MSW_SendByte(I2C_HandlerType *I2Cx, UINT8_T val)
 {
-	return I2C_MSW_SendByte(I2CxHandlerType, val);
+	return I2C_MSW_SendByte(I2Cx, val);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,9 +142,9 @@ UINT8_T I2CLib_MSW_SendByte(I2C_HandlerType *I2CxHandlerType, UINT8_T val)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_SendBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT8_T bitNum)
+UINT8_T I2CLib_MSW_SendBits(I2C_HandlerType *I2Cx, UINT8_T *pVal, UINT8_T bitNum)
 {
-	return I2C_MSW_SendBits(I2CxHandlerType, pVal, bitNum);
+	return I2C_MSW_SendBits(I2Cx, pVal, bitNum);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -155,9 +154,9 @@ UINT8_T I2CLib_MSW_SendBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UIN
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_ReadByte(I2C_HandlerType *I2CxHandlerType)
+UINT8_T I2CLib_MSW_ReadByte(I2C_HandlerType *I2Cx)
 {
-	return I2C_MSW_ReadByte(I2CxHandlerType);
+	return I2C_MSW_ReadByte(I2Cx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -167,9 +166,9 @@ UINT8_T I2CLib_MSW_ReadByte(I2C_HandlerType *I2CxHandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_ReadBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT8_T bitNum)
+UINT8_T I2CLib_MSW_ReadBits(I2C_HandlerType *I2Cx, UINT8_T *pVal, UINT8_T bitNum)
 {
-	return I2C_MSW_ReadBits(I2CxHandlerType, pVal, bitNum);
+	return I2C_MSW_ReadBits(I2Cx, pVal, bitNum);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -179,9 +178,9 @@ UINT8_T I2CLib_MSW_ReadBits(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UIN
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_SendCMD(I2C_HandlerType *I2CxHandlerType, UINT8_T cmd, UINT8_T isStart, UINT8_T isStop)
+UINT8_T I2CLib_MSW_SendCMD(I2C_HandlerType *I2Cx, UINT8_T cmd, UINT8_T isStart, UINT8_T isStop)
 {
-	return I2C_MSW_SendCMD(I2CxHandlerType, cmd, isStart, isStop);
+	return I2C_MSW_SendCMD(I2Cx, cmd, isStart, isStop);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -191,21 +190,21 @@ UINT8_T I2CLib_MSW_SendCMD(I2C_HandlerType *I2CxHandlerType, UINT8_T cmd, UINT8_
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_Send(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT16_T length)
+UINT8_T I2CLib_MSW_Send(I2C_HandlerType *I2Cx, UINT8_T *pVal, UINT16_T length)
 {
 	UINT8_T _return = OK_0;
 	UINT16_T i = 0;
 	//---发送启动信号并发送从机地址---写地址
-	_return = I2CLib_MSW_START(I2CxHandlerType, 1);
+	_return = I2CLib_MSW_START(I2Cx, 1);
 	//---判断启动信号是否成功并同时决定是否发送数据
 	if (_return == 0)
 	{
 		for (i = 0; i < length; i++)
 		{
 			//---发送数据
-			I2CLib_MSW_SendByte(I2CxHandlerType, pVal[i]);
+			I2CLib_MSW_SendByte(I2Cx, pVal[i]);
 			//---读取应答信号
-			_return = I2CLib_MSW_ReadACK(I2CxHandlerType);
+			_return = I2CLib_MSW_ReadACK(I2Cx);
 			//---判断应答信号
 			if (_return)
 			{
@@ -224,19 +223,19 @@ UINT8_T I2CLib_MSW_Send(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT16_
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T I2CLib_MSW_Read(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT16_T length)
+UINT8_T I2CLib_MSW_Read(I2C_HandlerType *I2Cx, UINT8_T *pVal, UINT16_T length)
 {
 	UINT8_T _return = OK_0;
 	UINT16_T i = 0;
 	//---发送启动信号并发送从机地址---写地址
-	_return = I2CLib_MSW_START(I2CxHandlerType, 1);
+	_return = I2CLib_MSW_START(I2Cx, 1);
 	//---判断启动信号是否成功并同时决定是否发送数据
 	if (_return != OK_0)
 	{
 		goto GotoExit;
 	}
 	//---发送启动信号并发送从机地址---读取地址
-	_return = I2CLib_MSW_START(I2CxHandlerType, 0);
+	_return = I2CLib_MSW_START(I2Cx, 0);
 	//---判断启动信号是否成功并同时决定是否发送数据
 	if (_return != OK_0)
 	{
@@ -246,13 +245,13 @@ UINT8_T I2CLib_MSW_Read(I2C_HandlerType *I2CxHandlerType, UINT8_T *pVal, UINT16_
 	for (i = 0; i < length; i++)
 	{
 		//---读取数据
-		pVal[i] = I2CLib_MSW_ReadByte(I2CxHandlerType);
+		pVal[i] = I2CLib_MSW_ReadByte(I2Cx);
 		if ((length - 1) == i)
 		{
 			_return = ERROR_3;
 		}
 		//---发送应答信号或则不应答信号
-		I2CLib_MSW_SendACK(I2CxHandlerType, _return);
+		I2CLib_MSW_SendACK(I2Cx, _return);
 	}
 	_return = OK_0;
 GotoExit:

@@ -52,7 +52,7 @@ UINT32_T Random_GetVal(void)
 		//---读取产生的随机数
 		return LL_RNG_ReadRandData32(RNG);
 	#else
-		return 0;
+		return rand();
 	#endif 
 }
 
@@ -76,12 +76,14 @@ UINT32_T Random_GetRand(UINT32_T minVal,UINT32_T maxVal)
 		//---判断选取的随机数种子
 		if (minVal<maxVal)
 		{
-			srand(maxVal);
+			randomVal = maxVal;
 		}
 		else
 		{
-			srand(minVal);
+			randomVal = minVal;
 		}
+		//---随机数的种子范围
+		srand(randomVal);
 		//---获取随机数
 		randomVal = rand();
 	#endif

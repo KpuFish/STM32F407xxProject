@@ -47,7 +47,6 @@ UINT8_T OneWire_Init(OneWire_HandlerType *OneWirex, void(*Delayus)(UINT32_T dela
 	#ifndef USE_MCU_STM32
 		GPIO_SET_WRITE(OneWirex->msgPort, OneWirex->msgBit);
 	#endif 
-
 	//---端口输出高电平
 	GPIO_OUT_1(OneWirex->msgPort, OneWirex->msgBit);
 	//---延时函数

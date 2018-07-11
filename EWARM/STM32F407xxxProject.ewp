@@ -16,15 +16,15 @@
                 <debug>1</debug>
                 <option>
                     <name>ExePath</name>
-                    <state>STM32F407xxxProject/Exe</state>
+                    <state>STM32F407xxxProject\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>STM32F407xxxProject/Obj</state>
+                    <state>STM32F407xxxProject\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>STM32F407xxxProject/List</state>
+                    <state>STM32F407xxxProject\List</state>
                 </option>
                 <option>
                     <name>GEndianMode</name>
@@ -62,7 +62,7 @@
                 </option>
                 <option>
                     <name>OGProductVersion</name>
-                    <state>4.41A</state>
+                    <state>8.22.2.15993</state>
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
@@ -108,7 +108,7 @@
                 <option>
                     <name>GeneralMisraRules04</name>
                     <version>0</version>
-                    <state>011111111111111110111111111111111111111111111010110100111111111111110111111111111111111111111111111111110111111011111111111111111111111111111</state>
+                    <state>111101110010111111111000110111111111111111111111111110010111101111010101111111111111111111111111101111111011111001111011111011111111111111111</state>
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
@@ -121,11 +121,11 @@
                 </option>
                 <option>
                     <name>OGUseCmsis</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>OGUseCmsisDspLib</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>GRuntimeLibThreads</name>
@@ -224,16 +224,10 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
-                    <state>STM32F407xx</state>
-                    <state>HSE_VALUE=8000000</state>
                     <state>USE_FULL_LL_DRIVER</state>
                     <state>USE_HAL_DRIVER</state>
-                    <state>ARM_MATH_CM4</state>
-                    <state>ARM_MATH_MATRIX_CHECK</state>
-                    <state>ARM_MATH_ROUNDING</state>
-                    <state>__FPU_USED</state>
-                    <state>__ICCARM__</state>
-                    <state>__IASMARM__</state>
+                    <state>STM32F407xx</state>
+                    <state>HSE_VALUE=8000000</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -273,7 +267,7 @@
                 </option>
                 <option>
                     <name>CCDiagSuppress</name>
-                    <state>Pe177,Pa082,Pa182</state>
+                    <state>Pa182</state>
                 </option>
                 <option>
                     <name>CCDiagRemark</name>
@@ -359,29 +353,28 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\Drivers\CMSIS\Include</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Drivers\STM32F4xx_HAL_Driver\Inc</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Drivers\STM32F4xx_HAL_Driver\Src</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\STM32F4xx</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\STARTUP\EWARM</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Complier</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Doc</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\AD5593</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\APP</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\AT24Cxx</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\CRC</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\Delay</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\DHT11</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\DS18B20</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\GPIO</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\I2C</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\IWDG</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\OneWire</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\PCF8563</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\Random</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\SysTick</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\USART</state>
-                    <state>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\WM8510</state>
+                    <state>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy</state>
+                    <state>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
+                    <state>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src</state>
+					<state>$PROJ_DIR$\..\STARTUP\EWARM</state>
+                    <state>$PROJ_DIR$\..\Complier</state>
+                    <state>$PROJ_DIR$\..\Doc</state>
+                    <state>$PROJ_DIR$\..\STM32F4xx</state>
+					<state>$PROJ_DIR$\..\Application\AD5593</state>
+					<state>$PROJ_DIR$\..\Application\APP</state>
+					<state>$PROJ_DIR$\..\Application\CRC</state>
+                    <state>$PROJ_DIR$\..\Application\Delay</state>
+                    <state>$PROJ_DIR$\..\Application\DHT11</state>
+					<state>$PROJ_DIR$\..\Application\DS18B20</state>
+                    <state>$PROJ_DIR$\..\Application\GPIO</state>
+					<state>$PROJ_DIR$\..\Application\I2C</state>
+                    <state>$PROJ_DIR$\..\Application\IWDG</state>
+					<state>$PROJ_DIR$\..\Application\OneWire</state>
+					<state>$PROJ_DIR$\..\Application\PCF8563</state>
+					<state>$PROJ_DIR$\..\Application\Random</state>
+                    <state>$PROJ_DIR$\..\Application\SysTick</state>
+                    <state>$PROJ_DIR$\..\Application\USART</state>
+                    <state>$PROJ_DIR$\..\Application\WM8510</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -719,6 +712,10 @@
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
+                    <name>IlinkSuppressDiags</name>
+                    <state></state>
+                </option>
+                <option>
                     <name>IlinkLibIOConfig</name>
                     <state>1</state>
                 </option>
@@ -732,7 +729,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>Main.out</state>
+                    <state>STM32F407xxxProject.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
@@ -792,11 +789,11 @@
                 </option>
                 <option>
                     <name>IlinkIcfOverride</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$/stm32f407xx_flash.icf</state>
+                    <state>$TOOLKIT_DIR$\config\linker\ST\stm32f407xE.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -805,10 +802,6 @@
                 <option>
                     <name>IlinkEnableRemarks</name>
                     <state>0</state>
-                </option>
-                <option>
-                    <name>IlinkSuppressDiags</name>
-                    <state></state>
                 </option>
                 <option>
                     <name>IlinkTreatAsRem</name>
@@ -1093,27 +1086,6 @@
             </file>
         </group>
         <group>
-            <name>AT24Cxx</name>
-            <file>
-                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_cfg.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_cfg.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_lib.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_lib.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_task.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_task.h</name>
-            </file>
-        </group>
-        <group>
             <name>CRC</name>
             <file>
                 <name>$PROJ_DIR$\..\Application\CRC\crc_cfg.c</name>
@@ -1351,6 +1323,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Application\USART\usart_cfg.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\USART\usart_lib.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Application\USART\usart_lib.h</name>

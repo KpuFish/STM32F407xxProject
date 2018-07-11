@@ -46,7 +46,6 @@ UINT8_T PCF8563_Device0_Init(PCF8563_HandlerType *PCF8563HandlerType)
 	PCF8563HandlerType->msgI2C.msgDelay = NULL;
 	PCF8563HandlerType->msgI2C.msgAddr = 0xA2;//PCF8563_WRITE_ADDR;
 	PCF8563HandlerType->msgI2C.msgClockSpeed = 0;
-	PCF8563HandlerType->msgI2C.msgTask = NULL;
 	return OK_0;
 }
 

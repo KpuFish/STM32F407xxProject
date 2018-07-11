@@ -7,13 +7,13 @@
 	#include "gpio_task.h"
 #endif
 
-//---定义结构体
+//===定义结构体
 typedef struct _OneWire_HandlerType		OneWire_HandlerType;
 
-//---定义指针结构体
+//===定义指针结构体
 typedef struct _OneWire_HandlerType		*pOneWire_HandlerType;
 
-//---定义
+//===定义
 struct _OneWire_HandlerType
 {
 	UINT32_T		msgBit;						//---端口序号

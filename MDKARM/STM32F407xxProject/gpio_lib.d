@@ -22,20 +22,6 @@ stm32f407xxproject\gpio_lib.o: ../Drivers/CMSIS/Include/core_cmSimd.h
 stm32f407xxproject\gpio_lib.o: ..\STM32F4xx\system_stm32f4xx.h
 stm32f407xxproject\gpio_lib.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 stm32f407xxproject\gpio_lib.o: ..\STM32F4xx\stm32f4xx_hal_conf.h
-stm32f407xxproject\gpio_lib.o: ..\Application\APP\main.h
-stm32f407xxproject\gpio_lib.o: ..\Complier\complier_lib.h
-stm32f407xxproject\gpio_lib.o: ..\Application\GPIO\gpio_task.h
-stm32f407xxproject\gpio_lib.o: ..\Application\GPIO\gpio_lib.h
-stm32f407xxproject\gpio_lib.o: ..\Application\SysTick\systick_task.h
-stm32f407xxproject\gpio_lib.o: ..\Application\SysTick\systick_lib.h
-stm32f407xxproject\gpio_lib.o: ..\Application\SysTick\systick_cfg.h
-stm32f407xxproject\gpio_lib.o: ..\Application\Random\random_task.h
-stm32f407xxproject\gpio_lib.o: ..\Application\Random\random_lib.h
-stm32f407xxproject\gpio_lib.o: ..\Application\Random\random_cfg.h
-stm32f407xxproject\gpio_lib.o: ..\Application\Delay\delay_task.h
-stm32f407xxproject\gpio_lib.o: ..\Application\Delay\delay_lib.h
-stm32f407xxproject\gpio_lib.o: ..\Application\Delay\delay_cfg.h
-stm32f407xxproject\gpio_lib.o: ..\Application\DHT11\dht11_cfg.h
 stm32f407xxproject\gpio_lib.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
 stm32f407xxproject\gpio_lib.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 stm32f407xxproject\gpio_lib.o: ..\STM32F4xx\stm32f4xx.h
@@ -73,3 +59,4 @@ stm32f407xxproject\gpio_lib.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_
 stm32f407xxproject\gpio_lib.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_utils.h
 stm32f407xxproject\gpio_lib.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_wwdg.h
 stm32f407xxproject\gpio_lib.o: ..\Application\IWDG\iwdg_cfg.h
+stm32f407xxproject\gpio_lib.o: ..\Complier\complier_lib.h

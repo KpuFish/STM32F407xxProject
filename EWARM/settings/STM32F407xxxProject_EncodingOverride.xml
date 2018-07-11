@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userOverrides>
+    <override>
+        <path>J:\STM32_MCU\STM32F407\STM32F407xxProject\Application\SysTick\systick_cfg.h</path>
+        <encoding>UTF-8</encoding>
+    </override>
+</userOverrides>

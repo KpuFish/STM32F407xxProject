@@ -4,7 +4,7 @@
 //------------使用包含的头文件
 #include "i2c_task.h"
 #ifdef USE_MCU_STM32
-#include "delay_task.h"
+	#include "delay_task.h"
 #endif
 
 //---寄存器定义
@@ -35,9 +35,11 @@
 #define PCF8563_CLKOUT_32HZ						2
 #define PCF8563_CLKOUT_1HZ						3
 
-//---结构体定义
+//===结构体定义
 typedef struct _RTC_HandlerType					RTC_HandlerType;
-//---时钟结构体的定义
+//===定义指针结构体
+typedef struct _RTC_HandlerType					*pRTC_HandlerType;
+//===时钟结构体的定义
 struct _RTC_HandlerType
 {
 	UINT8_T second;								//---秒
@@ -49,11 +51,11 @@ struct _RTC_HandlerType
 	UINT8_T year;								//---年
 	UINT8_T century;							//---世纪
 };
-//---结构体定义
+//===结构体定义
 typedef struct _PCF8563_HandlerType				PCF8563_HandlerType;
-//---指针结构体定义
+//===指针结构体定义
 typedef struct _PCF8563_HandlerType				*pPCF8563_HandlerType;
-//---PCF853的数据结构体
+//==PCF853的数据结构体
 struct _PCF8563_HandlerType
 {
 	RTC_HandlerType	msgRTC;						//---实时时钟
@@ -61,13 +63,13 @@ struct _PCF8563_HandlerType
 };
 
 #define PCF8563_HandlerType_Device0
-//---外部调用的接口函数
+//===外部调用的接口函数
 #ifdef PCF8563_HandlerType_Device0
 	extern PCF8563_HandlerType g_PCF8563Device0;
 	extern pPCF8563_HandlerType pPCF8563Device0;
 #endif
 
-//---函数定义
+//===函数定义
 UINT8_T PCF8563_Init(PCF8563_HandlerType *PCF8563HandlerType, void(*msgDelay)(UINT32_T delay));
 UINT8_T PCF8563_DeInit(PCF8563_HandlerType *PCF8563HandlerType);
 UINT8_T PCF8563_Device0_Init(PCF8563_HandlerType *PCF8563HandlerType);
