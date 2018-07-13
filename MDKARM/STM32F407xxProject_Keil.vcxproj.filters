@@ -4,8 +4,14 @@
     <Filter Include="Application">
       <UniqueIdentifier>{D9DE78AF-4594-F1A4-CE88-EB7B3A3DE8A8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application\AD5593">
+      <UniqueIdentifier>{63845DB1-4F68-1E07-B8C8-185AA4CB0889}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Application\APP">
       <UniqueIdentifier>{4988296C-B513-9730-BE24-1A252A2FF330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\CRC">
+      <UniqueIdentifier>{0091296C-6C1C-9730-752D-1A25E137F330}</UniqueIdentifier>
     </Filter>
     <Filter Include="Application\DHT11">
       <UniqueIdentifier>{8ABCDE1C-F6D2-DCB2-3F4A-68D4AB9FAD3A}</UniqueIdentifier>
@@ -66,8 +72,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Application\AD5593\ad5593_cfg.h">
+      <Filter>Application\AD5593</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Application\AD5593\ad5593_lib.h">
+      <Filter>Application\AD5593</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Application\AD5593\ad5593_task.h">
+      <Filter>Application\AD5593</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Application\APP\header_files.h">
+      <Filter>Application\APP</Filter>
+    </ClInclude>
     <ClInclude Include="..\Application\APP\main.h">
       <Filter>Application\APP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Application\CRC\crc_cfg.h">
+      <Filter>Application\CRC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Application\CRC\crc_lib.h">
+      <Filter>Application\CRC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Application\CRC\crc_task.h">
+      <Filter>Application\CRC</Filter>
     </ClInclude>
     <ClInclude Include="..\Application\DHT11\dht11_cfg.h">
       <Filter>Application\DHT11</Filter>
@@ -269,8 +296,26 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Application\AD5593\ad5593_cfg.c">
+      <Filter>Application\AD5593</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Application\AD5593\ad5593_lib.c">
+      <Filter>Application\AD5593</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Application\AD5593\ad5593_task.c">
+      <Filter>Application\AD5593</Filter>
+    </ClCompile>
     <ClCompile Include="..\Application\APP\main.c">
       <Filter>Application\APP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Application\CRC\crc_cfg.c">
+      <Filter>Application\CRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Application\CRC\crc_lib.c">
+      <Filter>Application\CRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Application\CRC\crc_task.c">
+      <Filter>Application\CRC</Filter>
     </ClCompile>
     <ClCompile Include="..\Application\DHT11\dht11_cfg.c">
       <Filter>Application\DHT11</Filter>

@@ -17,8 +17,8 @@ struct _SysTick_HandlerType
 	UINT32_T				msgOVF;																					//---溢出计数
 	UINT32_T				msgTaskInc;																				//---任务函数递加计数器
 	UINT32_T				msgTaskMax;																				//---任务函数计数上限
-	void(*msgTaskHal)(void);																						//---Hal库用到的计数器
-	void(*msgTaskFunc)(void);																						//---任务函数
+	void(*msgFuncTaskHal)(void);																						//---Hal库用到的计数器
+	void(*msgFuncTaskFunc)(void);																						//---任务函数
 };
 
 //===外部调用接口

@@ -55,8 +55,8 @@ UINT8_T SysTick_StructInit(SysTick_HandlerType *sysTickx)
 	sysTickx->msgOVF = 0;
 	sysTickx->msgTaskInc = 0;
 	sysTickx->msgTaskMax = 0;
-	sysTickx->msgTaskHal = NULL;
-	sysTickx->msgTaskFunc = NULL;
+	sysTickx->msgFuncTaskHal = NULL;
+	sysTickx->msgFuncTaskFunc = NULL;
 	return OK_0;
 }
 
@@ -87,7 +87,7 @@ UINT8_T SysTick_Init(void)
 			//---Hal库用于延时计算
 			uwTickFreq = HAL_TICK_FREQ_DEFAULT;
 			//---注册Hal库计数器
-			pSysTick->msgTaskHal = HAL_IncTick;
+			pSysTick->msgFuncTaskHal = HAL_IncTick;
 		#endif
 	#endif
 	return OK_0;
@@ -120,7 +120,7 @@ UINT8_T SysTick_TickTask(UINT32_T tickFreq, void(*TickTask)(void))
 	if ((TickTask != NULL) && (pSysTick != NULL))
 	{
 		//---注册任务函数
-		pSysTick->msgTaskFunc = TickTask;
+		pSysTick->msgFuncTaskFunc = TickTask;
 		//---清零任务计数函数
 		pSysTick->msgTaskInc = 0;
 		//---设置任务函数的最大计数上限
@@ -188,15 +188,15 @@ UINT8_T SysTick_IRQTask(void)
 			pSysTick->msgOVF++;
 		}
 		//---注册hal延时函数
-		if (pSysTick->msgTaskHal != NULL)
+		if (pSysTick->msgFuncTaskHal != NULL)
 		{
-			pSysTick->msgTaskHal();
+			pSysTick->msgFuncTaskHal();
 		}
 		//---判断任务函数
-		if ((pSysTick->msgTaskMax != 0) && (pSysTick->msgTaskMax == pSysTick->msgTaskInc) && (pSysTick->msgTaskFunc != NULL))
+		if ((pSysTick->msgTaskMax != 0) && (pSysTick->msgTaskMax == pSysTick->msgTaskInc) && (pSysTick->msgFuncTaskFunc != NULL))
 		{
 			pSysTick->msgTaskInc = 0;
-			pSysTick->msgTaskFunc();
+			pSysTick->msgFuncTaskFunc();
 		}
 		//---递减计数
 		if (pSysTick->msgDec != 0)

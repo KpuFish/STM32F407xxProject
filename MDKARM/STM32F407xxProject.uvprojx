@@ -721,6 +721,11 @@
               <FileType>5</FileType>
               <FilePath>..\Application\APP\main.h</FilePath>
             </File>
+            <File>
+              <FileName>header_files.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\APP\header_files.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

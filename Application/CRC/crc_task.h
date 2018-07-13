@@ -3,8 +3,10 @@
 //////////////////////////////////////////////////////////////////////////////////////
 #include "crc_lib.h"
 //---º¯Êý¶¨Òå
-void	 CRC32Task_Init(UINT8_T isHW);
-UINT32_T CRC32Task_GetCalc8BitsData(UINT8_T *pVal, UINT32_T length);
-UINT32_T CRC32Task_GetCalc32BitsData(UINT32_T *pVal, UINT32_T length);
+void	 CRCTask_Init(void);
+UINT32_T CRCTask_CRC32(UINT8_T *pVal, UINT32_T length);
+UINT32_T CRCTask_CRC16(UINT8_T *pVal, UINT32_T length);
+UINT32_T CRCTask_CRC8(UINT8_T *pVal, UINT32_T length);
+UINT32_T CRCTask_CheckSum(UINT8_T *pVal, UINT32_T length);
 //////////////////////////////////////////////////////////////////////////////////////
 #endif /*CRC_TASK_H_ */

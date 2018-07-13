@@ -18,7 +18,7 @@ UINT8_T DS18B20_StructInit(DS18B20_HandlerType *DS18B20x)
 	DS18B20x->msgIsPositive = 0;
 	DS18B20x->msgWenDuX100 = 0;
 	DS18B20x->msgWenDuX10000 = 0;
-	DS18B20x->msgDelayms = NULL;
+	DS18B20x->msgFuncDelayms = NULL;
 	return OK_0;
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,11 +40,11 @@ UINT8_T DS18B20_Init(DS18B20_HandlerType *DS18B20x, void(*Delayus)(UINT32_T dela
 	//---注册延时函数
 	if (Delayms != NULL)
 	{
-		DS18B20x->msgDelayms = Delayms;
+		DS18B20x->msgFuncDelayms = Delayms;
 	}
 	else
 	{
-		DS18B20x->msgDelayms = DelayTask_ms;
+		DS18B20x->msgFuncDelayms = DelayTask_ms;
 	}
 	return OneWireTask_Init(&(DS18B20x->msgOneWire), Delayus);
 }
@@ -157,9 +157,9 @@ UINT16_T DS18B20_ReadWenDu(DS18B20_HandlerType *DS18B20x)
 	//---启动转换
 	DS18B20_WriteByte(DS18B20x, 0x44);
 	//---延时等待
-	if (DS18B20x->msgDelayms != NULL)
+	if (DS18B20x->msgFuncDelayms != NULL)
 	{
-		DS18B20x->msgDelayms(1);
+		DS18B20x->msgFuncDelayms(1);
 	}
 	//---初始化温度传感器---总线复位
 	DS18B20_START(DS18B20x);
@@ -228,9 +228,9 @@ UINT16_T DS18B20_ReadWenDuByID(DS18B20_HandlerType *DS18B20x, UINT8_T *id)
 	//---启动转换
 	DS18B20_WriteByte(DS18B20x, 0x44);
 	//---延时等待
-	if (DS18B20x->msgDelayms != NULL)
+	if (DS18B20x->msgFuncDelayms != NULL)
 	{
-		DS18B20x->msgDelayms(1);
+		DS18B20x->msgFuncDelayms(1);
 	}
 	//---初始化温度传感器---总线复位
 	DS18B20_START(DS18B20x);

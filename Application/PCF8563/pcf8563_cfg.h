@@ -1,7 +1,8 @@
 #ifndef PCF8563_CFG_H_
 #define PCF8563_CFG_H_
 //////////////////////////////////////////////////////////////////////////////////////
-//------------使用包含的头文件
+//===使用包含的头文件
+#include "complier_lib.h"
 #include "i2c_task.h"
 #ifdef USE_MCU_STM32
 	#include "delay_task.h"
@@ -58,8 +59,10 @@ typedef struct _PCF8563_HandlerType				*pPCF8563_HandlerType;
 //==PCF853的数据结构体
 struct _PCF8563_HandlerType
 {
-	RTC_HandlerType	msgRTC;						//---实时时钟
-	I2C_HandlerType msgI2C;						//---使用的I2C
+	RTC_HandlerType	msgRTC;															//---实时时钟
+	I2C_HandlerType msgI2C;															//---使用的I2C
+	UINT8_T(*msgFuncWriteReg)(PCF8563_HandlerType*, UINT8_T, UINT8_T);				//---写入寄存器操作
+	UINT8_T(*msgFuncReadReg)(PCF8563_HandlerType*, UINT8_T, UINT8_T *,UINT16_T);	//---读取寄存器操作
 };
 
 #define PCF8563_HandlerType_Device0
@@ -70,8 +73,12 @@ struct _PCF8563_HandlerType
 #endif
 
 //===函数定义
-UINT8_T PCF8563_Init(PCF8563_HandlerType *PCF8563HandlerType, void(*msgDelay)(UINT32_T delay));
-UINT8_T PCF8563_DeInit(PCF8563_HandlerType *PCF8563HandlerType);
+UINT8_T PCF8563_Init(PCF8563_HandlerType *PCF8563x, void(*msgDelay)(UINT32_T delay), UINT8_T isHWI2C);
+UINT8_T PCF8563_DeInit(PCF8563_HandlerType *PCF8563x,UINT8_T isHWI2C);
+UINT8_T PCF8563_SWI2C_WriteReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T val);
+UINT8_T PCF8563_HWI2C_WriteReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T val);
+UINT8_T PCF8563_SWI2C_ReadReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T *pVal, UINT16_T length);
+UINT8_T PCF8563_HWI2C_ReadReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T *pVal, UINT16_T length);
 UINT8_T PCF8563_Device0_Init(PCF8563_HandlerType *PCF8563HandlerType);
 UINT8_T PCF8563_Device1_Init(PCF8563_HandlerType *PCF8563HandlerType);
 UINT8_T PCF8563_ClockOut(PCF8563_HandlerType *PCF8563HandlerType, UINT8_T preVal);

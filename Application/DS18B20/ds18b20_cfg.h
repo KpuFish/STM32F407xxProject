@@ -19,7 +19,7 @@ struct _DS18B20_HandlerType
 	UINT16_T				msgWenDuX100;						//---温度的值，放大100倍的值
 	UINT32_T				msgWenDuX10000;						//---温度的值，放大1000倍的值
 	OneWire_HandlerType		msgOneWire;							//---一线通信
-	void(*msgDelayms)(UINT32_T delay);							//---ms延时函数
+	void(*msgFuncDelayms)(UINT32_T delay);						//---ms延时函数
 };
 
 //===选择使用的任务

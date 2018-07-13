@@ -6,9 +6,9 @@
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T PCF8563Lib_Init(PCF8563_HandlerType *PCF8563HandlerType, void(*msgDelay)(UINT32_T delay))
+UINT8_T PCF8563Lib_Init(PCF8563_HandlerType *PCF8563x, void(*msgDelay)(UINT32_T delay),UINT8_T isHWI2C)
 {
-	return PCF8563_Init(PCF8563HandlerType, msgDelay);
+	return PCF8563_Init(PCF8563x, msgDelay,isHWI2C);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,9 +18,9 @@ UINT8_T PCF8563Lib_Init(PCF8563_HandlerType *PCF8563HandlerType, void(*msgDelay)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T PCF8563Lib_DeInit(PCF8563_HandlerType *PCF8563HandlerType)
+UINT8_T PCF8563Lib_DeInit(PCF8563_HandlerType *PCF8563x)
 {
-	return PCF8563_DeInit(PCF8563HandlerType);
+	return PCF8563_DeInit(PCF8563x,0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -30,9 +30,9 @@ UINT8_T PCF8563Lib_DeInit(PCF8563_HandlerType *PCF8563HandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T PCF8563Lib_ClockOut(PCF8563_HandlerType *PCF8563HandlerType, UINT8_T preVal)
+UINT8_T PCF8563Lib_ClockOut(PCF8563_HandlerType *PCF8563x, UINT8_T preVal)
 {
-	return PCF8563_ClockOut(PCF8563HandlerType, preVal);
+	return PCF8563_ClockOut(PCF8563x, preVal);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -42,9 +42,9 @@ UINT8_T PCF8563Lib_ClockOut(PCF8563_HandlerType *PCF8563HandlerType, UINT8_T pre
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T PCF8563Lib_ReadRTC(PCF8563_HandlerType *PCF8563HandlerType)
+UINT8_T PCF8563Lib_ReadRTC(PCF8563_HandlerType *PCF8563x)
 {
-	return PCF8563_ReadRTC(PCF8563HandlerType);
+	return PCF8563_ReadRTC(PCF8563x);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ UINT8_T PCF8563Lib_ReadRTC(PCF8563_HandlerType *PCF8563HandlerType)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T PCF8563Lib_WriteRTC(PCF8563_HandlerType *PCF8563HandlerType, RTC_HandlerType rtc)
+UINT8_T PCF8563Lib_WriteRTC(PCF8563_HandlerType *PCF8563x, RTC_HandlerType rtc)
 {
-	return PCF8563_WriteRTC(PCF8563HandlerType, rtc);
+	return PCF8563_WriteRTC(PCF8563x, rtc);
 }

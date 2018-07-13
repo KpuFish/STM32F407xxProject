@@ -356,22 +356,22 @@
                     <state>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy</state>
                     <state>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src</state>
-					<state>$PROJ_DIR$\..\STARTUP\EWARM</state>
+                    <state>$PROJ_DIR$\..\STARTUP\EWARM</state>
                     <state>$PROJ_DIR$\..\Complier</state>
                     <state>$PROJ_DIR$\..\Doc</state>
                     <state>$PROJ_DIR$\..\STM32F4xx</state>
-					<state>$PROJ_DIR$\..\Application\AD5593</state>
-					<state>$PROJ_DIR$\..\Application\APP</state>
-					<state>$PROJ_DIR$\..\Application\CRC</state>
+                    <state>$PROJ_DIR$\..\Application\AD5593</state>
+                    <state>$PROJ_DIR$\..\Application\APP</state>
+                    <state>$PROJ_DIR$\..\Application\CRC</state>
                     <state>$PROJ_DIR$\..\Application\Delay</state>
                     <state>$PROJ_DIR$\..\Application\DHT11</state>
-					<state>$PROJ_DIR$\..\Application\DS18B20</state>
+                    <state>$PROJ_DIR$\..\Application\DS18B20</state>
                     <state>$PROJ_DIR$\..\Application\GPIO</state>
-					<state>$PROJ_DIR$\..\Application\I2C</state>
+                    <state>$PROJ_DIR$\..\Application\I2C</state>
                     <state>$PROJ_DIR$\..\Application\IWDG</state>
-					<state>$PROJ_DIR$\..\Application\OneWire</state>
-					<state>$PROJ_DIR$\..\Application\PCF8563</state>
-					<state>$PROJ_DIR$\..\Application\Random</state>
+                    <state>$PROJ_DIR$\..\Application\OneWire</state>
+                    <state>$PROJ_DIR$\..\Application\PCF8563</state>
+                    <state>$PROJ_DIR$\..\Application\Random</state>
                     <state>$PROJ_DIR$\..\Application\SysTick</state>
                     <state>$PROJ_DIR$\..\Application\USART</state>
                     <state>$PROJ_DIR$\..\Application\WM8510</state>
@@ -1078,6 +1078,9 @@
         </group>
         <group>
             <name>APP</name>
+            <file>
+                <name>$PROJ_DIR$\..\Application\APP\header_files.h</name>
+            </file>
             <file>
                 <name>$PROJ_DIR$\..\Application\APP\main.c</name>
             </file>

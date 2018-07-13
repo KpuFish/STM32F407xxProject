@@ -50,7 +50,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Application\AD5593\ad5593_cfg.h" />
+    <ClInclude Include="..\Application\AD5593\ad5593_lib.h" />
+    <ClInclude Include="..\Application\AD5593\ad5593_task.h" />
+    <ClInclude Include="..\Application\APP\header_files.h" />
     <ClInclude Include="..\Application\APP\main.h" />
+    <ClInclude Include="..\Application\CRC\crc_cfg.h" />
+    <ClInclude Include="..\Application\CRC\crc_lib.h" />
+    <ClInclude Include="..\Application\CRC\crc_task.h" />
     <ClInclude Include="..\Application\DHT11\dht11_cfg.h" />
     <ClInclude Include="..\Application\DHT11\dht11_lib.h" />
     <ClInclude Include="..\Application\DHT11\dht11_task.h" />
@@ -119,7 +126,13 @@
     <ClInclude Include="..\STM32F4xx\system_stm32f4xx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Application\AD5593\ad5593_cfg.c" />
+    <ClCompile Include="..\Application\AD5593\ad5593_lib.c" />
+    <ClCompile Include="..\Application\AD5593\ad5593_task.c" />
     <ClCompile Include="..\Application\APP\main.c" />
+    <ClCompile Include="..\Application\CRC\crc_cfg.c" />
+    <ClCompile Include="..\Application\CRC\crc_lib.c" />
+    <ClCompile Include="..\Application\CRC\crc_task.c" />
     <ClCompile Include="..\Application\DHT11\dht11_cfg.c" />
     <ClCompile Include="..\Application\DHT11\dht11_lib.c" />
     <ClCompile Include="..\Application\DHT11\dht11_task.c" />

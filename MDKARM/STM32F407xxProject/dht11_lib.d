@@ -1,5 +1,6 @@
 stm32f407xxproject\dht11_lib.o: ..\Application\DHT11\dht11_lib.c
 stm32f407xxproject\dht11_lib.o: ..\Application\DHT11\dht11_lib.h
+stm32f407xxproject\dht11_lib.o: ..\Application\DHT11\dht11_cfg.h
 stm32f407xxproject\dht11_lib.o: ..\Complier\complier_lib.h
 stm32f407xxproject\dht11_lib.o: ..\Complier\complier_cfg.h
 stm32f407xxproject\dht11_lib.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
@@ -59,7 +60,6 @@ stm32f407xxproject\dht11_lib.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll
 stm32f407xxproject\dht11_lib.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_wwdg.h
 stm32f407xxproject\dht11_lib.o: ..\Application\IWDG\iwdg_cfg.h
 stm32f407xxproject\dht11_lib.o: ..\Complier\complier_lib.h
-stm32f407xxproject\dht11_lib.o: ..\Application\DHT11\dht11_cfg.h
 stm32f407xxproject\dht11_lib.o: ..\Application\GPIO\gpio_task.h
 stm32f407xxproject\dht11_lib.o: ..\Application\GPIO\gpio_lib.h
 stm32f407xxproject\dht11_lib.o: ..\Application\GPIO\gpio_cfg.h
@@ -71,4 +71,3 @@ stm32f407xxproject\dht11_lib.o: ..\Application\SysTick\systick_lib.h
 stm32f407xxproject\dht11_lib.o: ..\Application\SysTick\systick_cfg.h
 stm32f407xxproject\dht11_lib.o: ..\Application\DHT11\dht11_lib.h
 stm32f407xxproject\dht11_lib.o: ..\Application\DHT11\dht11_task.h
-stm32f407xxproject\dht11_lib.o: ..\Application\DHT11\dht11_cfg.h

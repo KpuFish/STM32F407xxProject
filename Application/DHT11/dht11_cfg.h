@@ -22,8 +22,8 @@ struct _DHT11_HandlerType
 	UINT32_T		msgShiDuX1000;							//---湿度
 	UINT32_T		msgBit;									//---端口序号
 	GPIO_TypeDef	*msgPort;								//---端口号
-	void(*msgDelayus)(UINT32_T delay);						//---us延时函数
-	void(*msgDelayms)(UINT32_T delay);						//---ms延时函数
+	void(*msgFuncDelayus)(UINT32_T delay);					//---us延时函数
+	void(*msgFuncDelayms)(UINT32_T delay);					//---ms延时函数
 };
 
 #include "dht11_lib.h"

@@ -1211,6 +1211,9 @@
         <group>
             <name>APP</name>
             <file>
+                <name>$PROJ_DIR$\..\Application\APP\header_files.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Application\APP\main.c</name>
             </file>
             <file>

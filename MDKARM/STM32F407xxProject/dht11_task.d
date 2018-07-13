@@ -1,4 +1,6 @@
 stm32f407xxproject\dht11_task.o: ..\Application\DHT11\dht11_task.c
+stm32f407xxproject\dht11_task.o: ..\Application\DHT11\dht11_task.h
+stm32f407xxproject\dht11_task.o: ..\Application\DHT11\dht11_lib.h
 stm32f407xxproject\dht11_task.o: ..\Application\DHT11\dht11_cfg.h
 stm32f407xxproject\dht11_task.o: ..\Complier\complier_lib.h
 stm32f407xxproject\dht11_task.o: ..\Complier\complier_cfg.h
@@ -69,5 +71,4 @@ stm32f407xxproject\dht11_task.o: ..\Application\SysTick\systick_task.h
 stm32f407xxproject\dht11_task.o: ..\Application\SysTick\systick_lib.h
 stm32f407xxproject\dht11_task.o: ..\Application\SysTick\systick_cfg.h
 stm32f407xxproject\dht11_task.o: ..\Application\DHT11\dht11_lib.h
-stm32f407xxproject\dht11_task.o: ..\Application\DHT11\dht11_cfg.h
 stm32f407xxproject\dht11_task.o: ..\Application\DHT11\dht11_task.h

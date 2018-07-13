@@ -10,7 +10,7 @@
 UINT8_T I2C_StructInit(I2C_HandlerType *I2Cx)
 {
 	I2Cx->msgPluseWidth = 0;
-	I2Cx->msgDelay = NULL;
+	I2Cx->msgFuncDelay = NULL;
 	I2Cx->msgAddr = 0;
 	I2Cx->msgClockSpeed = 0;
 	return OK_0;
@@ -61,7 +61,7 @@ UINT8_T I2C_MSW_Init(I2C_HandlerType *I2Cx, void(*msgDelay)(UINT32_T delay))
 	//---注册延时函数
 	if (msgDelay != NULL)
 	{
-		I2Cx->msgDelay = msgDelay;
+		I2Cx->msgFuncDelay = msgDelay;
 	}
 	return OK_0;
 }
@@ -105,16 +105,16 @@ UINT8_T I2C_MSW_START(I2C_HandlerType *I2Cx)
 	//---发送起始条件的数据信号
 	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 
 	//---发送起始信号;
 	GPIO_OUT_0(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 	//---钳住I2C总线，准备发送或接收数据
 	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
@@ -148,17 +148,17 @@ UINT8_T I2C_MSW_STOP(I2C_HandlerType *I2Cx)
 	//---发送停止条件的数据信号
 	GPIO_OUT_0(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	#ifndef USE_MCU_STM32
 		GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	#endif
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 	//---判断I2C启动信号是否成功，读取SDA的状态信号，成功SDA---1；失败SDA---0
 	if (GPIO_GET_STATE(I2Cx->msgSdaPort, I2Cx->msgSdaBit) == OK_0)
@@ -183,9 +183,9 @@ UINT8_T I2C_MSW_ACK(I2C_HandlerType *I2Cx)
 	#endif
 	GPIO_OUT_0(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 
 	//---清时钟线,钳住I2C总线，准备发送或接收数据
@@ -207,9 +207,9 @@ UINT8_T I2C_MSW_NACK(I2C_HandlerType *I2Cx)
 	#endif
 	GPIO_OUT_1(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 	//---清时钟线,钳住I2C总线，准备发送或接收数据
 	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
@@ -236,9 +236,9 @@ UINT8_T I2C_MSW_ReadACK(I2C_HandlerType *I2Cx)
 		GPIO_SET_READ(I2Cx->msgSdaPort, I2Cx->msgSdaBit);
 	#endif
 	//---延时等待
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 	//---读取SDA的状态信号---ACK状态下SDA为低电平
 	if (GPIO_GET_STATE(I2Cx->msgSdaPort, I2Cx->msgSdaBit) != OK_0)
@@ -328,14 +328,14 @@ UINT8_T I2C_MSW_SendBit(I2C_HandlerType *I2Cx, UINT8_T bitVal)
 
 	//---一个时钟脉冲
 	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 	return OK_0;
 }
@@ -420,9 +420,9 @@ UINT8_T I2C_MSW_ReadBit(I2C_HandlerType *I2Cx)
 
 	//---时钟正脉冲
 	GPIO_OUT_1(I2Cx->msgSclPort, I2Cx->msgSclBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 
 	//---读取数据位
@@ -433,9 +433,9 @@ UINT8_T I2C_MSW_ReadBit(I2C_HandlerType *I2Cx)
 
 	//---时钟负脉冲
 	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
-	if (I2Cx->msgDelay != NULL)
+	if (I2Cx->msgFuncDelay != NULL)
 	{
-		I2Cx->msgDelay(I2Cx->msgPluseWidth);
+		I2Cx->msgFuncDelay(I2Cx->msgPluseWidth);
 	}
 	return  _return;
 }

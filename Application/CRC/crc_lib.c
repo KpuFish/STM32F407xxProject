@@ -7,31 +7,40 @@
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-void  CRC32Lib_Init(UINT8_T isHW)
+void CRCLib_Init(void)
 {
-	CRC32_Init(isHW);
-	//---自动选择使用CRC计算的方式---软件或者硬件
-	if (isHW)
+	CRC_Init();
+}
+///////////////////////////////////////////////////////////////////////////////
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
+//////////////////////////////////////////////////////////////////////////////
+UINT32_T CRCLib_CRC32(UINT8_T *pVal, UINT32_T length)
+{
+	if ((pCRC!=NULL)&&(pCRC->msgFuncCRC32!=NULL))
 	{
-		pCRC->msg8BitsTask = CRC32Lib_HWGetCalc8BitsData;
-		pCRC->msg32BitsTask = CRC32Lib_HWGetCalc32BitsData;
+		return pCRC->msgFuncCRC32(pVal, length);
 	}
-	else
+	return 0;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
+//////////////////////////////////////////////////////////////////////////////
+UINT32_T CRCLib_CRC16(UINT8_T *pVal, UINT32_T length)
+{
+	if ((pCRC != NULL) && (pCRC->msgFuncCRC16 != NULL))
 	{
-		pCRC->msg8BitsTask = CRC32Lib_SWGetCalc8BitsData;
-		pCRC->msg32BitsTask = CRC32Lib_SWGetCalc32BitsData;
+		return pCRC->msgFuncCRC16(pVal, length);
 	}
-}
-///////////////////////////////////////////////////////////////////////////////
-//////函		数：
-//////功		能：
-//////输入参数:
-//////输出参数:
-//////说		明：
-//////////////////////////////////////////////////////////////////////////////
-UINT32_T CRC32Lib_HWGetCalc8BitsData(UINT8_T *pVal, UINT32_T length)
-{
-	return CRC32_HWGetCalc8BitsData(pVal, length);
+	return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,9 +50,13 @@ UINT32_T CRC32Lib_HWGetCalc8BitsData(UINT8_T *pVal, UINT32_T length)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT32_T CRC32Lib_HWGetCalc32BitsData(UINT32_T *pVal, UINT32_T length)
+UINT32_T CRCLib_CRC8(UINT8_T *pVal, UINT32_T length)
 {
-	return CRC32_HWGetCalc323BitsData(pVal, length);
+	if ((pCRC != NULL) && (pCRC->msgFuncCRC8!= NULL))
+	{
+		return pCRC->msgFuncCRC8(pVal, length);
+	}
+	return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -53,19 +66,11 @@ UINT32_T CRC32Lib_HWGetCalc32BitsData(UINT32_T *pVal, UINT32_T length)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT32_T CRC32Lib_SWGetCalc8BitsData(UINT8_T *pVal, UINT32_T length)
+UINT32_T CRCLib_CheckSum(UINT8_T *pVal, UINT32_T length)
 {
-	return CRC32_SWGetCalc8BitsData(pVal, length);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//////函		数：
-//////功		能：
-//////输入参数:
-//////输出参数:
-//////说		明：
-//////////////////////////////////////////////////////////////////////////////
-UINT32_T CRC32Lib_SWGetCalc32BitsData(UINT32_T *pVal, UINT32_T length)
-{
-	return CRC32_SWGetCalc32BitsData(pVal, length);
+	if ((pCRC != NULL) && (pCRC->msgFuncCheckSum != NULL))
+	{
+		return pCRC->msgFuncCheckSum(pVal, length);
+	}
+	return 0;
 }

@@ -1,4 +1,10 @@
+#include "header_files.h"
 #include "main.h"
+
+UINT8_T crcTemp[16] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 };
+
+UINT32_T hwCRC = 0;
+UINT32_T tableCRC = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 //////º¯		Êý£º
@@ -118,6 +124,7 @@ void Sys_Init(void)
 	GPIOTask_Init();
 	SysTickTask_Init();
 	RandomTask_Init();
+	CRCTask_Init();
 	DHT11Task_Init(pDHT11Device0,DelayTask_us,DelayTask_ms);
 	DHT11Task_Read(pDHT11Device0);
 	//PCF8563Task_Init(pPCF8563Device0, DelayTask_us);
