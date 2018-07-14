@@ -9,10 +9,7 @@
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T I2C_StructInit(I2C_HandlerType *I2Cx)
 {
-	I2Cx->msgPluseWidth = 0;
 	I2Cx->msgFuncDelay = NULL;
-	I2Cx->msgAddr = 0;
-	I2Cx->msgClockSpeed = 0;
 	return OK_0;
 }
 
@@ -165,7 +162,7 @@ UINT8_T I2C_MSW_STOP(I2C_HandlerType *I2Cx)
 	{
 		return ERROR_1;
 	}
-	GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
+	//GPIO_OUT_0(I2Cx->msgSclPort, I2Cx->msgSclBit);
 	return OK_0;
 }
 

@@ -127,6 +127,9 @@ void Sys_Init(void)
 	CRCTask_Init();
 	DHT11Task_Init(pDHT11Device0,DelayTask_us,DelayTask_ms);
 	DHT11Task_Read(pDHT11Device0);
+	WM8510_Init(pWM8510Device0, DelayTask_us,0);
+	WM8510_SetFreqHz(pWM8510Device0,1000000);
+	WM8510_SetFreqHz(pWM8510Device0,2000000);
 	//PCF8563Task_Init(pPCF8563Device0, DelayTask_us);
 	//IWDGTask_Init(pIWDG);
 

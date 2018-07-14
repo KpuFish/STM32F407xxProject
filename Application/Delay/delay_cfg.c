@@ -66,17 +66,18 @@ void DelayN_us(UINT32_T us)
 	{
 		//---系统中断关闭
 		CLI();
-		if (us > 6)
-		{
-			//---等待时间的到达
-			SysTickTask_WaitTick(us);
-		}
-		else if (us > 1)
-		{
-			//---软件NOP延时
-			Delay_nop(((us - 1)*us + 1)*(SYS_CLOCK_MHZ - 1));
-		}
-
+		//if (us > 6)
+		//{
+		//	//---等待时间的到达
+		//	SysTickTask_WaitTick(us);
+		//}
+		//else
+		//{
+		//	//---软件NOP延时
+		//	Delay_nop(((us - 1)*us + 1)*(SYS_CLOCK_MHZ - 1));
+		//}
+		//---等待时间的到达
+		SysTickTask_WaitTick(us);
 		//---系统中断打开
 		SEI();
 	}

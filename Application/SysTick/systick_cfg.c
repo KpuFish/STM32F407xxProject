@@ -224,7 +224,7 @@ UINT8_T SysTick_WaitTick(UINT32_T usTimer)
 		//---关闭定时器，时钟选择为系统时钟，不进行8分频
 		SysTick->CTRL = 0x00000004;
 		//---计算装载值
-		SysTick->LOAD = usTimer*(SYS_CLOCK_MHZ - 1);
+		SysTick->LOAD = usTimer*SYS_CLOCK_MHZ-150;//usTimer*SYS_CLOCK_MHZ - 1;
 		//---清零计数器
 		SysTick->VAL = 0x00;
 		//---使能计数器计数

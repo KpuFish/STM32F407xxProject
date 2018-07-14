@@ -10,6 +10,7 @@
 #include "iwdg_task.h"
 #include "pcf8563_task.h"
 #include "crc_task.h"
+#include "wm8510_cfg.h"
 //#include "ad5593_task.h"
 //#include "crc_task.h"
 //#include "at24cxx_task.h"
