@@ -12,11 +12,9 @@
 #include "crc_task.h"
 #include "wm8510_cfg.h"
 //#include "ad5593_task.h"
-//#include "crc_task.h"
 //#include "at24cxx_task.h"
-//#include "usart_task.h"
-//#include "wm8510_task.h"
-//#include "one_wire_task.h"
+#include "usart_task.h"
+#include "one_wire_task.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 #endif /* HEADER_FILES_H_ */

@@ -182,6 +182,30 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 1 */
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//////函		数： 
+//////功		能： 
+//////输入参数: 
+//////输出参数: 
+//////说		明： 串口1的中断处理函数
+//////////////////////////////////////////////////////////////////////////////
+void USART1_IRQHandler(void)
+{
+	//---数据接收中断---接收寄存器不为空
+	if (LL_USART_IsActiveFlag_RXNE(pUSART1->msgUSART) && LL_USART_IsEnabledIT_RXNE(pUSART1->msgUSART))
+	{
+		if (pUSART1->msgRxModel==0)
+		{
+			USARTTask_Rece8BitsCount_Task(pUSART1, USARTTask_ReceiveData8Bits(pUSART1));
+		}
+		else
+		{
+			USARTTask_ReceiveData8Bits(pUSART1);
+		}
+		LL_USART_ClearFlag_RXNE(USART1);
+	}
+}
+
 /******************************************************************************/
 /* STM32F4xx Peripheral Interrupt Handlers                                    */
 /* Add here the Interrupt Handlers for the used peripherals.                  */

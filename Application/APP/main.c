@@ -1,8 +1,8 @@
 #include "header_files.h"
 #include "main.h"
 
-UINT8_T crcTemp[16] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 };
-
+UINT8_T crcTemp1[16] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 };
+UINT8_T crcTemp2[16] = 0;
 UINT32_T hwCRC = 0;
 UINT32_T tableCRC = 0;
 
@@ -130,6 +130,7 @@ void Sys_Init(void)
 	WM8510_Init(pWM8510Device0, DelayTask_us,0);
 	WM8510_SetFreqHz(pWM8510Device0,1000000);
 	WM8510_SetFreqHz(pWM8510Device0,2000000);
+	USARTTask_Init(pUSART1, 16, crcTemp1, 0, 16, crcTemp2, 0, SysTickTask_GetTick);
 	//PCF8563Task_Init(pPCF8563Device0, DelayTask_us);
 	//IWDGTask_Init(pIWDG);
 

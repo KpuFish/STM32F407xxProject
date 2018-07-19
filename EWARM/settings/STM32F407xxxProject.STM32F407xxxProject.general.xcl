@@ -2,7 +2,7 @@
 
 "D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\bin\armjlink2.dll" 
 
-"I:\STM32_MCU\STM32F407\STM32F407xxProject\EWARM\STM32F407xxxProject\Exe\STM32F407xxxProject.out" 
+"J:\STM32_MCU\STM32F407\STM32F407xxProject\EWARM\STM32F407xxxProject\Exe\STM32F407xxxProject.out" 
 
 --plugin="D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\bin\armbat.dll" 
 
