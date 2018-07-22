@@ -2,7 +2,7 @@
 #include "main.h"
 
 UINT8_T crcTemp1[16] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 };
-UINT8_T crcTemp2[16] = 0;
+UINT8_T crcTemp2[16] = {0};
 UINT32_T hwCRC = 0;
 UINT32_T tableCRC = 0;
 
@@ -123,14 +123,14 @@ void Sys_Init(void)
 	NVIC_Init();
 	GPIOTask_Init();
 	SysTickTask_Init();
-	RandomTask_Init();
-	CRCTask_Init();
-	DHT11Task_Init(pDHT11Device0,DelayTask_us,DelayTask_ms);
-	DHT11Task_Read(pDHT11Device0);
-	WM8510_Init(pWM8510Device0, DelayTask_us,0);
-	WM8510_SetFreqHz(pWM8510Device0,1000000);
-	WM8510_SetFreqHz(pWM8510Device0,2000000);
-	USARTTask_Init(pUSART1, 16, crcTemp1, 0, 16, crcTemp2, 0, SysTickTask_GetTick);
+	//RandomTask_Init();
+	//CRCTask_Init();
+	//DHT11Task_Init(pDHT11Device0,DelayTask_us,DelayTask_ms);
+	//DHT11Task_Read(pDHT11Device0);
+	//WM8510_Init(pWM8510Device0, DelayTask_us,0);
+	//WM8510_SetFreqHz(pWM8510Device0,1000000);
+	//WM8510_SetFreqHz(pWM8510Device0,2000000);
+	USARTTask_Init(pUSART1, 16, crcTemp1, USART_CRC_CHECKSUM, 16, crcTemp2, 0, SysTickTask_GetTick);
 	//PCF8563Task_Init(pPCF8563Device0, DelayTask_us);
 	//IWDGTask_Init(pIWDG);
 
@@ -151,9 +151,9 @@ int main(void)
 	while (1)
 	{
         //DHT11Lib_Read(pDHT11Device0);
-		DelayTask_ms(500);
-		DelayTask_ms(500);
-        
+		//DelayTask_ms(500);
+		//DelayTask_ms(500);
+		USARTTask_FuncTask(pUSART1, NULL);
 		WDT_RESET();
 	}
 }

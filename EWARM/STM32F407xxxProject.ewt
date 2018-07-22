@@ -1209,6 +1209,48 @@
             </file>
         </group>
         <group>
+            <name>ADC</name>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADC\adc_cfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADC\adc_cfg.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADC\adc_lib.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADC\adc_lib.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADC\adc_task.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADC\adc_task.h</name>
+            </file>
+        </group>
+        <group>
+            <name>ADS8688</name>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADS8688\ads8688_cfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADS8688\ads8688_cfg.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADS8688\ads8688_lib.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADS8688\ads8688_lib.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADS8688\ads8688_task.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ADS8688\ads8688_task.h</name>
+            </file>
+        </group>
+        <group>
             <name>APP</name>
             <file>
                 <name>$PROJ_DIR$\..\Application\APP\header_files.h</name>
@@ -1218,6 +1260,27 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Application\APP\main.h</name>
+            </file>
+        </group>
+        <group>
+            <name>AT24Cxx</name>
+            <file>
+                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_cfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_cfg.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_lib.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_lib.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_task.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\AT24Cxx\at24cxx_task.h</name>
             </file>
         </group>
         <group>
@@ -1347,6 +1410,27 @@
             </file>
         </group>
         <group>
+            <name>ISP</name>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ISP\isp_cfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ISP\isp_cfg.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ISP\isp_lib.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ISP\isp_lib.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ISP\isp_task.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\ISP\isp_task.h</name>
+            </file>
+        </group>
+        <group>
             <name>IWDG</name>
             <file>
                 <name>$PROJ_DIR$\..\Application\IWDG\iwdg_cfg.c</name>
@@ -1428,6 +1512,27 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Application\Random\random_task.h</name>
+            </file>
+        </group>
+        <group>
+            <name>SPI</name>
+            <file>
+                <name>$PROJ_DIR$\..\Application\SPI\spi_cfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\SPI\spi_cfg.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\SPI\spi_lib.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\SPI\spi_lib.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\SPI\spi_task.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Application\SPI\spi_task.h</name>
             </file>
         </group>
         <group>

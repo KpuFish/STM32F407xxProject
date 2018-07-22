@@ -39,7 +39,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>USE_FULL_LL_DRIVER;USE_HAL_DRIVER;STM32F407xx;HSE_VALUE=8000000;_IAR_;__ICCARM__;_Pragma(x)=;__interrupt=;__packed=;__weak=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Drivers\CMSIS\Include;..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\Drivers\STM32F4xx_HAL_Driver\Inc;..\Drivers\STM32F4xx_HAL_Driver\Src;..\STM32F4xx;..\STARTUP\EWARM;..\Complier;..\Doc;..\Application\Delay;..\Application\DHT11;..\Application\GPIO;..\Application\IWDG;..\Application\SysTick;..\Application\APP;..\Application\OneWire;..\Application\Random;..\Application\USART;..\Application\WM8510;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Drivers\CMSIS\Include;..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\Drivers\STM32F4xx_HAL_Driver\Inc;..\Drivers\STM32F4xx_HAL_Driver\Src;..\STARTUP\EWARM;..\Complier;..\Doc;..\STM32F4xx;..\Application\AD5593;..\Application\APP;..\Application\CRC;..\Application\Delay;..\Application\DHT11;..\Application\DS18B20;..\Application\GPIO;..\Application\I2C;..\Application\IWDG;..\Application\OneWire;..\Application\PCF8563;..\Application\Random;..\Application\SysTick;..\Application\USART;..\Application\WM8510;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
@@ -50,10 +50,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Application\AD5593\ad5593_cfg.h" />
+    <ClInclude Include="..\Application\AD5593\ad5593_lib.h" />
+    <ClInclude Include="..\Application\AD5593\ad5593_task.h" />
+    <ClInclude Include="..\Application\ADC\adc_cfg.h" />
+    <ClInclude Include="..\Application\ADC\adc_lib.h" />
+    <ClInclude Include="..\Application\ADC\adc_task.h" />
+    <ClInclude Include="..\Application\ADS8688\ads8688_cfg.h" />
+    <ClInclude Include="..\Application\ADS8688\ads8688_lib.h" />
+    <ClInclude Include="..\Application\ADS8688\ads8688_task.h" />
+    <ClInclude Include="..\Application\APP\header_files.h" />
     <ClInclude Include="..\Application\APP\main.h" />
+    <ClInclude Include="..\Application\AT24Cxx\at24cxx_cfg.h" />
+    <ClInclude Include="..\Application\AT24Cxx\at24cxx_lib.h" />
+    <ClInclude Include="..\Application\AT24Cxx\at24cxx_task.h" />
+    <ClInclude Include="..\Application\CRC\crc_cfg.h" />
+    <ClInclude Include="..\Application\CRC\crc_lib.h" />
+    <ClInclude Include="..\Application\CRC\crc_task.h" />
     <ClInclude Include="..\Application\DHT11\dht11_cfg.h" />
     <ClInclude Include="..\Application\DHT11\dht11_lib.h" />
     <ClInclude Include="..\Application\DHT11\dht11_task.h" />
+    <ClInclude Include="..\Application\DS18B20\ds18b20_cfg.h" />
+    <ClInclude Include="..\Application\DS18B20\ds18b20_lib.h" />
+    <ClInclude Include="..\Application\DS18B20\ds18b20_task.h" />
     <ClInclude Include="..\Application\Delay\delay_cfg.h" />
     <ClInclude Include="..\Application\Delay\delay_lib.h" />
     <ClInclude Include="..\Application\Delay\delay_task.h" />
@@ -63,15 +82,24 @@
     <ClInclude Include="..\Application\I2C\i2c_cfg.h" />
     <ClInclude Include="..\Application\I2C\i2c_lib.h" />
     <ClInclude Include="..\Application\I2C\i2c_task.h" />
+    <ClInclude Include="..\Application\ISP\isp_cfg.h" />
+    <ClInclude Include="..\Application\ISP\isp_lib.h" />
+    <ClInclude Include="..\Application\ISP\isp_task.h" />
     <ClInclude Include="..\Application\IWDG\iwdg_cfg.h" />
     <ClInclude Include="..\Application\IWDG\iwdg_lib.h" />
     <ClInclude Include="..\Application\IWDG\iwdg_task.h" />
     <ClInclude Include="..\Application\OneWire\one_wire_cfg.h" />
     <ClInclude Include="..\Application\OneWire\one_wire_lib.h" />
     <ClInclude Include="..\Application\OneWire\one_wire_task.h" />
+    <ClInclude Include="..\Application\PCF8563\pcf8563_cfg.h" />
+    <ClInclude Include="..\Application\PCF8563\pcf8563_lib.h" />
+    <ClInclude Include="..\Application\PCF8563\pcf8563_task.h" />
     <ClInclude Include="..\Application\Random\random_cfg.h" />
     <ClInclude Include="..\Application\Random\random_lib.h" />
     <ClInclude Include="..\Application\Random\random_task.h" />
+    <ClInclude Include="..\Application\SPI\spi_cfg.h" />
+    <ClInclude Include="..\Application\SPI\spi_lib.h" />
+    <ClInclude Include="..\Application\SPI\spi_task.h" />
     <ClInclude Include="..\Application\SysTick\systick_cfg.h" />
     <ClInclude Include="..\Application\SysTick\systick_lib.h" />
     <ClInclude Include="..\Application\SysTick\systick_task.h" />
@@ -115,10 +143,28 @@
     <ClInclude Include="..\STM32F4xx\system_stm32f4xx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Application\AD5593\ad5593_cfg.c" />
+    <ClCompile Include="..\Application\AD5593\ad5593_lib.c" />
+    <ClCompile Include="..\Application\AD5593\ad5593_task.c" />
+    <ClCompile Include="..\Application\ADC\adc_cfg.c" />
+    <ClCompile Include="..\Application\ADC\adc_lib.c" />
+    <ClCompile Include="..\Application\ADC\adc_task.c" />
+    <ClCompile Include="..\Application\ADS8688\ads8688_cfg.c" />
+    <ClCompile Include="..\Application\ADS8688\ads8688_lib.c" />
+    <ClCompile Include="..\Application\ADS8688\ads8688_task.c" />
     <ClCompile Include="..\Application\APP\main.c" />
+    <ClCompile Include="..\Application\AT24Cxx\at24cxx_cfg.c" />
+    <ClCompile Include="..\Application\AT24Cxx\at24cxx_lib.c" />
+    <ClCompile Include="..\Application\AT24Cxx\at24cxx_task.c" />
+    <ClCompile Include="..\Application\CRC\crc_cfg.c" />
+    <ClCompile Include="..\Application\CRC\crc_lib.c" />
+    <ClCompile Include="..\Application\CRC\crc_task.c" />
     <ClCompile Include="..\Application\DHT11\dht11_cfg.c" />
     <ClCompile Include="..\Application\DHT11\dht11_lib.c" />
     <ClCompile Include="..\Application\DHT11\dht11_task.c" />
+    <ClCompile Include="..\Application\DS18B20\ds18b20_cfg.c" />
+    <ClCompile Include="..\Application\DS18B20\ds18b20_lib.c" />
+    <ClCompile Include="..\Application\DS18B20\ds18b20_task.c" />
     <ClCompile Include="..\Application\Delay\delay_cfg.c" />
     <ClCompile Include="..\Application\Delay\delay_lib.c" />
     <ClCompile Include="..\Application\Delay\delay_task.c" />
@@ -128,15 +174,24 @@
     <ClCompile Include="..\Application\I2C\i2c_cfg.c" />
     <ClCompile Include="..\Application\I2C\i2c_lib.c" />
     <ClCompile Include="..\Application\I2C\i2c_task.c" />
+    <ClCompile Include="..\Application\ISP\isp_cfg.c" />
+    <ClCompile Include="..\Application\ISP\isp_lib.c" />
+    <ClCompile Include="..\Application\ISP\isp_task.c" />
     <ClCompile Include="..\Application\IWDG\iwdg_cfg.c" />
     <ClCompile Include="..\Application\IWDG\iwdg_lib.c" />
     <ClCompile Include="..\Application\IWDG\iwdg_task.c" />
     <ClCompile Include="..\Application\OneWire\one_wire_cfg.c" />
     <ClCompile Include="..\Application\OneWire\one_wire_lib.c" />
     <ClCompile Include="..\Application\OneWire\one_wire_task.c" />
+    <ClCompile Include="..\Application\PCF8563\pcf8563_cfg.c" />
+    <ClCompile Include="..\Application\PCF8563\pcf8563_lib.c" />
+    <ClCompile Include="..\Application\PCF8563\pcf8563_task.c" />
     <ClCompile Include="..\Application\Random\random_cfg.c" />
     <ClCompile Include="..\Application\Random\random_lib.c" />
     <ClCompile Include="..\Application\Random\random_task.c" />
+    <ClCompile Include="..\Application\SPI\spi_cfg.c" />
+    <ClCompile Include="..\Application\SPI\spi_lib.c" />
+    <ClCompile Include="..\Application\SPI\spi_task.c" />
     <ClCompile Include="..\Application\SysTick\systick_cfg.c" />
     <ClCompile Include="..\Application\SysTick\systick_lib.c" />
     <ClCompile Include="..\Application\SysTick\systick_task.c" />

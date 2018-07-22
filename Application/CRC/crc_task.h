@@ -4,6 +4,7 @@
 #include "crc_lib.h"
 //---º¯Êý¶¨Òå
 void	 CRCTask_Init(void);
+UINT8_T  CRCTask_Enable(void);
 UINT32_T CRCTask_CRC32(UINT8_T *pVal, UINT32_T length);
 UINT32_T CRCTask_CRC16(UINT8_T *pVal, UINT32_T length);
 UINT32_T CRCTask_CRC8(UINT8_T *pVal, UINT32_T length);

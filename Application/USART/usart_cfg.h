@@ -29,15 +29,12 @@ struct _USART_HandlerTypeDef
 	UINT16_T   msgIndexR;								//---读序号
 	UINT16_T   msgCount;								//---读写数据的长度
 	UINT16_T   msgSize;									//---数据缓存区的大小
-	UINT16_T   msgCRC16;								//---CRC16校验值
-	UINT32_T   msgCRC32;								//---CRC32校验值
 	UINT8_T*   pMsgVal;									//---缓存区(需要提前定义好数据的缓存区)
 };
 
 //===串口数据定义
 struct _USART_HandlerType
 {
-	UINT8_T					msgRxModel;					//---RX接收数据的方式，0---接收数据的长度最大是255，1---接收数据的长度最大是65535
 	VLTUINT8_T				msgIndex;					//---USART端口的索引号
 	VLTUINT8_T				msgRxID;					//---接收报头
 	VLTUINT8_T				msgTxID;					//---发送报头
@@ -84,22 +81,24 @@ UINT8_T  USART_ClearFlag_TC(USART_HandlerType*  USARTx);
 UINT8_T  USART_EnableIT_RX(USART_HandlerType*  USARTx, UINT8_T isEnable);
 UINT8_T  USART_EnableIT_IDLE(USART_HandlerType*  USARTx, UINT8_T isEnable);
 UINT8_T  USART_GPIOInit(USART_HandlerType*  USARTx, UINT8_T isInput);
-UINT8_T  USART_TransmitData8Bits(USART_HandlerType*USARTx, UINT8_T val);
-UINT8_T  USART_ReceiveData8Bits(USART_HandlerType*USARTx);
+UINT8_T  USART_WriteData8Bits(USART_HandlerType*USARTx, UINT8_T val);
+UINT8_T  USART_ReadData8Bits(USART_HandlerType*USARTx);
 UINT8_T  USART_EnableCRC_RX(USART_HandlerType*USARTx, UINT8_T crcFlag);
 UINT8_T  USART_GetCRC_RX(USART_HandlerType*USARTx);
 UINT8_T  USART_EnableCRC_TX(USART_HandlerType*USARTx, UINT8_T crcFlag);
 UINT8_T  USART_GetCRC_TX(USART_HandlerType*USARTx);
 UINT8_T  USART_TimeTick_Init(USART_HandlerType*USARTx);
 UINT8_T  USART_TimeTick_OVF(USART_HandlerType*USARTx, UINT32_T timeOut);
-UINT8_T  USART_SendByte(USART_HandlerType*USARTx, UINT8_T  val);
-UINT8_T  USART_SendString(USART_HandlerType*USARTxHandlerType, char *pVal);
 UINT8_T  USART_GetOVF(USART_HandlerType* USARTx);
 UINT8_T  USART_ClearOVF(USART_HandlerType* USARTx);
-UINT8_T  USART_GetReceState(USART_HandlerType* USARTx);
-UINT8_T  USART_ClearReceState(USART_HandlerType* USARTx);
-UINT8_T  USART_GetSendState(USART_HandlerType* USARTx);
-UINT8_T  USART_ClearSendState(USART_HandlerType* USARTx);
+UINT8_T  USART_SendByte(USART_HandlerType*USARTx, UINT8_T  val);
+UINT8_T  USART_SendString(USART_HandlerType*USARTx, char *pVal);
+UINT8_T  USART_GetOVF(USART_HandlerType* USARTx);
+UINT8_T  USART_ClearOVF(USART_HandlerType* USARTx);
+UINT8_T  USART_GetReadState(USART_HandlerType* USARTx);
+UINT8_T  USART_ClearReadState(USART_HandlerType* USARTx);
+UINT8_T  USART_GetWriteState(USART_HandlerType* USARTx);
+UINT8_T  USART_ClearWriteState(USART_HandlerType* USARTx);
 void     USART_Printf(USART_HandlerType*USARTx, char*fmt, ...);
 UINT8_T  USART_Clock(USART_TypeDef* USARTx, UINT8_T isEnable);
 UINT8_T  USART_DeInit(USART_HandlerType*USARTx);

@@ -101,7 +101,10 @@
 	};
 #endif // USE_CRC8
 //---全局变量定义
-CRC_HandlerType  g_CRC;
+CRC_HandlerType  g_CRC = 
+{
+	.msgCRCInit=1,
+};
 pCRC_HandlerType pCRC = &g_CRC;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -113,6 +116,7 @@ pCRC_HandlerType pCRC = &g_CRC;
 //////////////////////////////////////////////////////////////////////////////
 void CRC_StuctInit(CRC_HandlerType *CRCx)
 {
+	CRCx->msgCRCInit = 1;
 	CRCx->msgFuncCheckSum = NULL;
 	CRCx->msgFuncCRC8 = NULL;
 	CRCx->msgFuncCRC16 = NULL;

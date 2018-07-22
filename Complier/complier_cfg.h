@@ -360,6 +360,13 @@ typedef enum
 	ERROR_50 = 50,
 }FuncSTATE;
 
+//---常用宏定义
+typedef enum
+{
+	IDLE = 0,
+	BUSY = 1,
+}WorkSTATE;
+
 //#define USE_MCU_AVR
 #define USE_MCU_STM32
 

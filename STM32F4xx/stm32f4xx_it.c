@@ -191,19 +191,36 @@ void SysTick_Handler(void)
 //////////////////////////////////////////////////////////////////////////////
 void USART1_IRQHandler(void)
 {
-	//---数据接收中断---接收寄存器不为空
-	if (LL_USART_IsActiveFlag_RXNE(pUSART1->msgUSART) && LL_USART_IsEnabledIT_RXNE(pUSART1->msgUSART))
+	if ((pUSART1!=NULL)&&(pUSART1->msgUSART!=NULL))
 	{
-		if (pUSART1->msgRxModel==0)
+		//---数据接收中断处理函数---接收寄存器不为空
+		if (LL_USART_IsActiveFlag_RXNE(pUSART1->msgUSART) && LL_USART_IsEnabledIT_RXNE(pUSART1->msgUSART))
 		{
-			USARTTask_Rece8BitsCount_Task(pUSART1, USARTTask_ReceiveData8Bits(pUSART1));
+			if (pUSART1->msgRxHandler.msgSize< 250)
+			{
+				USARTTask_Read8BitsCount_Task(pUSART1, USARTTask_ReadData8Bits(pUSART1));
+			}
+			else 
+			{
+				USARTTask_Read16BitsCount_Task(pUSART1, USARTTask_ReadData8Bits(pUSART1));
+			}
+			//---清楚中断标志位
+			LL_USART_ClearFlag_RXNE(USART1);
 		}
-		else
+		//---数据发送寄存器空发送中断处理函数
+		if (LL_USART_IsActiveFlag_TXE(pUSART1->msgUSART) && LL_USART_IsEnabledIT_TXE(pUSART1->msgUSART))
 		{
-			USARTTask_ReceiveData8Bits(pUSART1);
+			USARTTask_ITWrite_TXETask(pUSART1);
 		}
-		LL_USART_ClearFlag_RXNE(USART1);
+		//---数据发送完成中断处理函数
+		if (LL_USART_IsActiveFlag_TC(pUSART1->msgUSART) && LL_USART_IsEnabledIT_TC(pUSART1->msgUSART))
+		{
+			USARTTask_ITWrite_TCTask(pUSART1);
+			//---清楚中断标志位
+			LL_USART_ClearFlag_TC(USART1);
+		}
 	}
+	
 }
 
 /******************************************************************************/

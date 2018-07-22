@@ -18,7 +18,6 @@ pUSART_HandlerType pUSART1=&g_USART1;
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T USART_StructInit(USART_HandlerType*  USARTx)
 {
-	USARTx->msgRxModel = 0;
 	USARTx->msgIndex = 0;
 	USARTx->msgRxID = 0;
 	USARTx->msgTxID = 0;
@@ -38,8 +37,7 @@ UINT8_T USART_StructInit(USART_HandlerType*  USARTx)
 	USARTx->msgRxHandler.msgIndexR = 0;
 	USARTx->msgRxHandler.msgCount = 0;
 	USARTx->msgRxHandler.msgSize = 0;
-	USARTx->msgRxHandler.msgCRC16 = 0;
-	USARTx->msgRxHandler.msgCRC32 = 0;
+	USARTx->msgTxHandler.msgTaskState = 0;
 	USARTx->msgRxHandler.pMsgVal = NULL;
 
 	//---发送缓存区
@@ -50,8 +48,7 @@ UINT8_T USART_StructInit(USART_HandlerType*  USARTx)
 	USARTx->msgTxHandler.msgIndexR = 0;
 	USARTx->msgTxHandler.msgCount = 0;
 	USARTx->msgTxHandler.msgSize = 0;
-	USARTx->msgTxHandler.msgCRC16 = 0;
-	USARTx->msgTxHandler.msgCRC32 = 0;
+	USARTx->msgTxHandler.msgTaskState = 1;
 	USARTx->msgTxHandler.pMsgVal = NULL;
 
 	//---计数器
@@ -75,12 +72,7 @@ UINT8_T USART_Init(USART_HandlerType*  USARTx, UINT16_T rxSize, UINT8_T* pRxVal,
 		USARTx->msgRxHandler.msgCRCFlag = rxCRCFlag;
 		USARTx->msgRxHandler.msgSize = rxSize;
 		USARTx->msgRxHandler.pMsgVal = pRxVal;
-
-		if (USARTx->msgRxHandler.msgSize>250)
-		{
-			USARTx->msgRxModel = 1;
-		}
-
+		
 		USARTx->msgTxHandler.msgCRCFlag = txCRCFlag;
 		USARTx->msgTxHandler.msgSize = txSize;
 		USARTx->msgTxHandler.pMsgVal = pTxVal;
@@ -324,12 +316,15 @@ UINT8_T  USART_GPIOInit(USART_HandlerType*  USARTx, UINT8_T isInput)
 		if (isInput==USART_TXGPIO_SET_OUTPUT)
 		{
 			#ifdef USE_MCU_STM32
+				/*
 				#ifdef USE_MCU_STM32F1
 					//---F1和F4的端口配置不太一样
 					LL_GPIO_SetPinMode(USARTx->msgTxPort, USARTx->msgTxBit, LL_GPIO_MODE_ALTERNATE);
 				#else
 					LL_GPIO_SetPinMode(USARTx->msgTxPort, USARTx->msgTxBit, LL_GPIO_MODE_OUTPUT);
 				#endif
+				*/
+				LL_GPIO_SetPinMode(USARTx->msgTxPort, USARTx->msgTxBit, LL_GPIO_MODE_ALTERNATE);
 			#else
 				USARTxHandlerType->msgUSART->UCSRB |= (1 << USART_TXEN);
 			#endif 
@@ -357,7 +352,7 @@ UINT8_T  USART_GPIOInit(USART_HandlerType*  USARTx, UINT8_T isInput)
 //////输出参数: 
 //////说		明： 
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USART_TransmitData8Bits(USART_HandlerType*USARTx, UINT8_T val)
+UINT8_T USART_WriteData8Bits(USART_HandlerType*USARTx, UINT8_T val)
 {
 	if ((USARTx != NULL) && (USARTx->msgUSART != NULL))
 	{
@@ -377,7 +372,7 @@ UINT8_T USART_TransmitData8Bits(USART_HandlerType*USARTx, UINT8_T val)
 //////输出参数: 
 //////说		明： 
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USART_ReceiveData8Bits(USART_HandlerType*USARTx)
+UINT8_T USART_ReadData8Bits(USART_HandlerType*USARTx)
 {
 	if ((USARTx != NULL) && (USARTx->msgUSART != NULL))
 	{
@@ -510,6 +505,7 @@ UINT8_T USART_TimeTick_OVF(USART_HandlerType*USARTx, UINT32_T timeOut)
 		//---判断是否发生超时错误
 		if ((USARTx->msgEndTime - USARTx->msgNowTime) > timeOut)
 		{
+			USARTx->msgOverFlow = 1;
 			return ERROR_1;
 		}
 	}
@@ -526,7 +522,7 @@ UINT8_T USART_TimeTick_OVF(USART_HandlerType*USARTx, UINT32_T timeOut)
 UINT8_T USART_SendByte(USART_HandlerType*USARTx, UINT8_T  val)
 {
 	//---发送数据
-	USART_TransmitData8Bits(USARTx, val);
+	USART_WriteData8Bits(USARTx, val);
 	//---等待发送完成
 	while (USART_IsActiveFlag_TC(USARTx) == RESET)
 	{
@@ -543,11 +539,11 @@ UINT8_T USART_SendByte(USART_HandlerType*USARTx, UINT8_T  val)
 //////输出参数: 
 //////说		明： 发送字符串
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USART_SendString(USART_HandlerType*USARTxHandlerType, char *pVal)
+UINT8_T USART_SendString(USART_HandlerType*USARTx, char *pVal)
 {
 	while (*pVal != '\0')
 	{
-		USART_SendByte(USARTxHandlerType, (UINT8_T)*pVal);
+		USART_SendByte(USARTx, (UINT8_T)*pVal);
 		pVal++;
 	}
 	return OK_0;
@@ -592,7 +588,7 @@ UINT8_T USART_ClearOVF(USART_HandlerType* USARTx)
 //////输出参数: 
 //////说		明： 
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USART_GetReceState(USART_HandlerType* USARTx)
+UINT8_T USART_GetReadState(USART_HandlerType* USARTx)
 {
 	if (USARTx != NULL)
 	{
@@ -608,7 +604,7 @@ UINT8_T USART_GetReceState(USART_HandlerType* USARTx)
 //////输出参数: 
 //////说		明： 
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USART_ClearReceState(USART_HandlerType* USARTx)
+UINT8_T USART_ClearReadState(USART_HandlerType* USARTx)
 {
 	if (USARTx != NULL)
 	{
@@ -624,7 +620,7 @@ UINT8_T USART_ClearReceState(USART_HandlerType* USARTx)
 //////输出参数: 
 //////说		明： 
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USART_GetSendState(USART_HandlerType* USARTx)
+UINT8_T USART_GetWriteState(USART_HandlerType* USARTx)
 {
 	if (USARTx != NULL)
 	{
@@ -640,7 +636,7 @@ UINT8_T USART_GetSendState(USART_HandlerType* USARTx)
 //////输出参数: 
 //////说		明： 
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USART_ClearSendState(USART_HandlerType* USARTx)
+UINT8_T USART_ClearWriteState(USART_HandlerType* USARTx)
 {
 	if (USARTx != NULL)
 	{
@@ -973,7 +969,15 @@ UINT8_T USART1_Init(USART_HandlerType*USARTx)
 		#error "串口初始化格式为不支持的MCU!"
 	#endif
 	USARTx->msgIndex = 1 + 1;
-	USARTx->msgMaxTime = 100;
+	//---校验是否需要超时函数
+	if (USARTx->msgFuncSysTick!=NULL)
+	{
+		USARTx->msgMaxTime = 100;
+	}
+	else
+	{
+		USARTx->msgMaxTime = 0;
+	}
 	//---配置报头和保尾
 	USARTx->msgRxID = 0x55;
 	USARTx->msgTxID = 0x5A;

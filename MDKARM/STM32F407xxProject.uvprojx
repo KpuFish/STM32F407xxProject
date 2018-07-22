@@ -709,6 +709,76 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Application/ADC</GroupName>
+          <Files>
+            <File>
+              <FileName>adc_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ADC\adc_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ADC\adc_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>adc_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ADC\adc_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ADC\adc_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>adc_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ADC\adc_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ADC\adc_task.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/ADS8688</GroupName>
+          <Files>
+            <File>
+              <FileName>ads8688_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ADS8688\ads8688_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>ads8688_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ADS8688\ads8688_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>ads8688_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ADS8688\ads8688_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>ads8688_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ADS8688\ads8688_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>ads8688_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ADS8688\ads8688_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>ads8688_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ADS8688\ads8688_task.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Application/APP</GroupName>
           <Files>
             <File>
@@ -725,6 +795,41 @@
               <FileName>header_files.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Application\APP\header_files.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/AT24Cxx</GroupName>
+          <Files>
+            <File>
+              <FileName>at24cxx_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\AT24Cxx\at24cxx_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>at24cxx_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\AT24Cxx\at24cxx_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>at24cxx_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\AT24Cxx\at24cxx_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>at24cxx_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\AT24Cxx\at24cxx_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>at24cxx_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\AT24Cxx\at24cxx_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>at24cxx_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\AT24Cxx\at24cxx_task.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -939,6 +1044,41 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Application/ISP</GroupName>
+          <Files>
+            <File>
+              <FileName>isp_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ISP\isp_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>isp_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ISP\isp_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>isp_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ISP\isp_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>isp_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ISP\isp_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>isp_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ISP\isp_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>isp_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ISP\isp_task.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Application/IWDG</GroupName>
           <Files>
             <File>
@@ -1075,6 +1215,41 @@
               <FileName>random_task.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Application\Random\random_task.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/SPI</GroupName>
+          <Files>
+            <File>
+              <FileName>spi_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\SPI\spi_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\SPI\spi_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>spi_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\SPI\spi_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\SPI\spi_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>spi_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\SPI\spi_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\SPI\spi_task.h</FilePath>
             </File>
           </Files>
         </Group>
