@@ -123,7 +123,7 @@ void Sys_Init(void)
 	NVIC_Init();
 	GPIOTask_Init();
 	SysTickTask_Init();
-	//RandomTask_Init();
+	RandomTask_Init();
 	//CRCTask_Init();
 	//DHT11Task_Init(pDHT11Device0,DelayTask_us,DelayTask_ms);
 	//DHT11Task_Read(pDHT11Device0);

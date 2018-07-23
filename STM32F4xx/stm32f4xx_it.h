@@ -43,6 +43,7 @@
 
  #include "systick_task.h"
  #include "usart_task.h"
+ #include "random_task.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -59,6 +60,7 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void USART1_IRQHandler(void);
+void HASH_RNG_IRQHandler(void);
 
 #ifdef __cplusplus
 }

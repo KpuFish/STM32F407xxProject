@@ -223,6 +223,38 @@ void USART1_IRQHandler(void)
 	
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//////函		数： 
+//////功		能： 
+//////输入参数: 
+//////输出参数: 
+//////说		明： 
+//////////////////////////////////////////////////////////////////////////////
+void HASH_RNG_IRQHandler(void)
+{
+	//===发生种子错误
+	if (LL_RNG_IsActiveFlag_SEIS(RNG))
+	{
+		//---清零种子错误标志
+		LL_RNG_ClearFlag_SEIS(RNG);
+		//---不会使能随机数
+		LL_RNG_Disable(RNG);
+		//---重新使能使能随机数
+		LL_RNG_Enable(RNG);
+	}
+	//===发生时钟错误
+	if (LL_RNG_IsActiveFlag_CEIS(RNG))
+	{
+		//---清零时钟错误标志
+		LL_RNG_ClearFlag_CEIS(RNG);
+	}
+	//===数据就绪
+	if (LL_RNG_IsActiveFlag_DRDY(RNG))
+	{
+		g_HASH_RNG_Val = LL_RNG_ReadRandData32(RNG);
+	}
+	
+}
 /******************************************************************************/
 /* STM32F4xx Peripheral Interrupt Handlers                                    */
 /* Add here the Interrupt Handlers for the used peripherals.                  */

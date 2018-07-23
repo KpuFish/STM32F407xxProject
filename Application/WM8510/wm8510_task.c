@@ -60,3 +60,20 @@ UINT8_T WM8510Task_SetFreqMHz(WM8510_HandlerType *WM8510x, float freq)
 {
 	return WM8510Lib_SetFreqMHz(WM8510x, freq);
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//////函		数： 
+//////功		能： 
+//////输入参数: 
+//////输出参数: 
+//////说		明： 
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T WM8510Task_Task(WM8510_HandlerType *WM8510x, UINT8_T *pMsgIn, UINT8_T *pMsgOut)
+{
+	UINT32_T freq = pMsgIn[0];
+	freq = freq << 8 + pMsgIn[1];
+	freq = freq << 8 + pMsgIn[2];
+	freq = freq << 8 + pMsgIn[3];
+	pMsgOut[1] = WM8510Task_SetFreqHz(WM8510x, freq);
+	return pMsgOut[1];
+}

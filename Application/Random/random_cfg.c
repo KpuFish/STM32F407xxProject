@@ -1,5 +1,8 @@
 #include "random_cfg.h"
-
+//---定义全局变量
+#ifdef RNG
+	volatile UINT32_T g_HASH_RNG_Val = 0;
+#endif
 ///////////////////////////////////////////////////////////////////////////////
 //////函	   数：void RandomCfg_Init(void)
 //////功	   能：随机数的初始化
@@ -13,10 +16,20 @@ void Random_Init(void)
 		#ifdef RNG
 			//---使能随机数总线时钟
 			LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_RNG);
+			//---HASH_RNG_IRQn中断配置---中断等级配置15,0(最低优先级)
+			NVIC_SetPriority(HASH_RNG_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 15, 0));
+			//---使能中断
+			NVIC_EnableIRQ(HASH_RNG_IRQn);
+			//---使能随机数中断
+			LL_RNG_EnableIT(RNG);
 			//---使能随机产生器
 			LL_RNG_Enable(RNG);
 			//---等待随机数就绪
-			while (LL_RNG_IsActiveFlag_DRDY(RNG) != 1);
+			while (LL_RNG_IsActiveFlag_DRDY(RNG) != 1)
+			{
+				WDT_RESET();
+			}
+			g_HASH_RNG_Val = 0;
 		#endif 
 	#endif 
 }
@@ -31,8 +44,12 @@ void Random_DeInit(void)
 {
 	#ifdef USE_MCU_STM32
 		#ifdef RNG
+			//---时钟总线不使能
 			LL_AHB2_GRP1_DisableClock( LL_AHB2_GRP1_PERIPH_RNG );
+			//---注销随机数的初始化
 			LL_RNG_DeInit( RNG );
+			//---不使能随机数中断
+			NVIC_DisableIRQ(HASH_RNG_IRQn);
 		#endif 
 	#endif 
 }
@@ -47,10 +64,18 @@ void Random_DeInit(void)
 UINT32_T Random_GetVal(void)
 {
 	#if defined(USE_MCU_STM32)&&defined(RNG)
-		//---等待随机数就绪
-		while (LL_RNG_IsActiveFlag_DRDY(RNG) != 1);
-		//---读取产生的随机数
-		return LL_RNG_ReadRandData32(RNG);
+		//---判断是否使能随机数中断
+		if (LL_RNG_IsEnabledIT(RNG))
+		{
+			return g_HASH_RNG_Val;
+		}
+		else
+		{
+			//---等待随机数就绪
+			while (LL_RNG_IsActiveFlag_DRDY(RNG) != 1);
+			//---读取产生的随机数
+			return LL_RNG_ReadRandData32(RNG);
+		}
 	#else
 		return rand();
 	#endif 

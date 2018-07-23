@@ -429,6 +429,7 @@ struct _WM8510_HandlerType
 	UINT8_T lastR39[2];			//---寄存器R39的配置值
 	UINT32_T pll_K;				//---pll的K值
 	UINT32_T oscFreq;			//---外部晶振频率
+	UINT32_T freqHz;			//---输出的频率
 	float pllRate;				//---pll的比值
 
 	I2C_HandlerType msgI2C;		//---使用的I2C设备

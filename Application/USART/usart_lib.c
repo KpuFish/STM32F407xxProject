@@ -131,7 +131,7 @@ UINT8_T  USARTLib_ReadInit(USART_HandlerType*  USARTx)
 	USARTx->msgRxHandler.msgStep = 0;
 	USARTx->msgRxHandler.msgIndexW = 0;
 	USARTx->msgRxHandler.msgIndexR = 0;
-
+	//---清零接收完成标志
 	USARTx->msgRxHandler.msgTaskState = 0;
 	//---清零超时计数
 	USARTx->msgNowTime = 0;
@@ -357,6 +357,8 @@ UINT8_T  USARTLib_Read16BitsCount_Task(USART_HandlerType*USARTx, UINT8_T val)
 						USARTx->msgRxHandler.msgStep = 1;
 						//---收到第一个符合格式的数据，启动超时计数器
 						USARTLib_TimeTick_Init(USARTx);
+						//---清零超时标志
+						USARTLib_ClearOVF(USARTx);
 					}
 				}
 				break;
@@ -393,7 +395,8 @@ UINT8_T  USARTLib_Read16BitsCount_Task(USART_HandlerType*USARTx, UINT8_T val)
 				{
 					USARTx->msgRxHandler.msgStep = 4;
 					USARTx->msgRxHandler.msgTaskState = 1;
-				}				//---复位超时计数器
+				}				
+				//---复位超时计数器
 				USARTLib_TimeTick_Init(USARTx);
 				break;
 			case 4:
@@ -439,28 +442,22 @@ UINT8_T  USARTLib_ITWrite_TXETask(USART_HandlerType*USARTx)
 {
 	if ((USARTx->msgTxHandler.msgIndexW != 0)&&(USARTx->msgTxHandler.pMsgVal!=NULL))
 	{
-		if ((USARTx->msgTxHandler.msgIndexW - 1) != USARTx->msgTxHandler.msgIndexR)
+		//---发送8Bit的数据
+		USARTLib_WriteData8Bits(USARTx, USARTx->msgTxHandler.pMsgVal[USARTx->msgTxHandler.msgIndexR]);
+		//---数据缓存区序号增加
+		USARTx->msgTxHandler.msgIndexR++;
+		//---校验缓存区是否溢出
+		if (USARTx->msgTxHandler.msgIndexR >= USARTx->msgTxHandler.msgSize)
 		{
-			//---发送8Bit的数据
-			USARTLib_WriteData8Bits(USARTx, USARTx->msgTxHandler.pMsgVal[USARTx->msgTxHandler.msgIndexR]);
-			//---数据缓存区序号增加
-			USARTx->msgTxHandler.msgIndexR++;
-			//---校验缓存区是否溢出
-			if (USARTx->msgTxHandler.msgIndexR > USARTx->msgTxHandler.msgSize)
-			{
-				USARTx->msgTxHandler.msgIndexR = 0;
-			}
+			USARTx->msgTxHandler.msgIndexR = 0;
 		}
-		else
+		//---校验数据是否都填入缓存区
+		if (USARTx->msgTxHandler.msgIndexR== USARTx->msgTxHandler.msgIndexW)
 		{
-			//===发送最后一组数据的处理---由于需要切换TX端口为输入状态，需要使用发送完成中断
 			//---发送完成,发送数据寄存器空中断不使能
 			USARTLib_EnableIT_TXE(USARTx, 0);
-			//---利用发送完成中断实现发送端口从输出模式配置为输入模式
-			//---使能发送完成中断---如果继续使用数据寄存器空中断，在步骤三的时候修改发送端口为输入状态，这样会导致最后一个数据的发送失败；这里采用使用发送完成中断
+			//---使能发送完成中断，用于切换TXD端口为输入状态
 			USARTLib_EnableIT_TC(USARTx, 1);
-			//---发送最后一组数据数据
-			USARTLib_WriteData8Bits(USARTx, USARTx->msgTxHandler.pMsgVal[USARTx->msgTxHandler.msgIndexR]);
 		}
 	}
 	else
@@ -482,7 +479,7 @@ UINT8_T  USARTLib_ITWrite_TXETask(USART_HandlerType*USARTx)
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_ITWrite_TCTask(USART_HandlerType*USARTx)
 {
-	USARTx->msgTxHandler.msgTaskState = 1;
+	//USARTx->msgTxHandler.msgTaskState = 1;
 	//---发送完成,发送数据发送完成中断不使能
 	USARTLib_EnableIT_TC(USARTx, 0);
 	//---清空数据发送缓存区
@@ -707,6 +704,8 @@ UINT8_T USARTLib_WriteSTART(USART_HandlerType*USARTx,UINT8_T isNeedID)
 	{
 		WDT_RESET();
 	}
+	//---设置发送状态为空闲中
+	USARTx->msgTxHandler.msgTaskState = 0;
 	//---校验CRC是否初始化
 	if (CRCTask_Enable()==OK_0)
 	{

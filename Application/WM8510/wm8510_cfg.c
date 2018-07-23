@@ -50,6 +50,7 @@ void WM8510_StructInit(WM8510_HandlerType *WM8510x)
 	
 	WM8510x->pll_K = 0;
 	WM8510x->oscFreq = WM8510_MCLK_HZ;
+	WM8510x->freqHz = WM8510_OUT_MIN_FREQ;
 	WM8510x->pllRate = 0;
 
 	WM8510x->msgFuncSendCMD = NULL;
@@ -230,7 +231,9 @@ void WM8510_Calc_PllRate(WM8510_HandlerType *WM8510x,UINT32_T freq)
 		//---最小输出频率
 		freq = WM8510_OUT_MIN_FREQ;
 	}
-	//===参数计算
+	//---设定输出的频率
+	WM8510x->freqHz = freq;
+	//===参数计算，如果过WM8510的时钟晶振不是12M，这些参数需要重新计算
 	if (freq > PDIV0_MDIV1_BDIV1_MIN)			//18000000
 	{
 		WM8510x->preDIV = 0;
@@ -428,6 +431,7 @@ UINT8_T WM8510_SetFreqHz(WM8510_HandlerType *WM8510x,UINT32_T freq)
 			goto GoToExit;
 		}
 	}
+	//---判断寄存器的值是否发生改变
 	if (memcmp(WM8510x->nowR36, WM8510x->lastR36, 2) != 0)
 	{
 		WM8510x->lastR36[0] = WM8510x->nowR36[0];
@@ -439,6 +443,7 @@ UINT8_T WM8510_SetFreqHz(WM8510_HandlerType *WM8510x,UINT32_T freq)
 			goto GoToExit;
 		}
 	}
+	//---判断寄存器的值是否发生改变
 	if (memcmp(WM8510x->nowR37, WM8510x->lastR37, 2) != 0)
 	{
 		WM8510x->lastR37[0] = WM8510x->nowR37[0];
@@ -450,6 +455,7 @@ UINT8_T WM8510_SetFreqHz(WM8510_HandlerType *WM8510x,UINT32_T freq)
 			goto GoToExit;
 		}
 	}
+	//---判断寄存器的值是否发生改变
 	if (memcmp(WM8510x->nowR38, WM8510x->lastR38, 2) != 0)
 	{
 		WM8510x->lastR38[0] = WM8510x->nowR38[0];
@@ -461,6 +467,7 @@ UINT8_T WM8510_SetFreqHz(WM8510_HandlerType *WM8510x,UINT32_T freq)
 			goto GoToExit;
 		}
 	}
+	//---判断寄存器的值是否发生改变
 	if (memcmp(WM8510x->nowR39, WM8510x->lastR39, 2) != 0)
 	{
 		WM8510x->lastR39[0] = WM8510x->nowR39[0];
