@@ -6,8 +6,8 @@
 /////////////////////////////////////////////////////////////////////////////////////
 #include "complier_lib.h"
 #ifdef USE_MCU_STM32
-	#include "gpio_task.h"
-	#include "delay_task.h"
+#include "gpio_task.h"
+#include "delay_task.h"
 #endif
 
 //===定义结构体
@@ -33,8 +33,8 @@ struct _DHT11_HandlerType
 #define DHT11_HandlerType_Device0
 //---外部调用接口
 #ifdef DHT11_HandlerType_Device0
-	extern DHT11_HandlerType	g_DHT11Device0;
-	extern pDHT11_HandlerType	pDHT11Device0;
+extern DHT11_HandlerType	g_DHT11Device0;
+extern pDHT11_HandlerType	pDHT11Device0;
 #endif
 
 //===函数定义

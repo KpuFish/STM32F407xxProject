@@ -187,25 +187,25 @@
 //===MCLK分频数
 enum WM8510_MCLKDIV_ENUM
 {
-	MCLK_DIV_1		= 0,
-	MCLK_DIV_1D5	= 1,
-	MCLK_DIV_2		= 2,
-	MCLK_DIV_3		= 3,
-	MCLK_DIV_4		= 4,
-	MCLK_DIV_6		= 5,
-	MCLK_DIV_8		= 6,
-	MCLK_DIV_12		= 7,
+	MCLK_DIV_1 = 0,
+	MCLK_DIV_1D5 = 1,
+	MCLK_DIV_2 = 2,
+	MCLK_DIV_3 = 3,
+	MCLK_DIV_4 = 4,
+	MCLK_DIV_6 = 5,
+	MCLK_DIV_8 = 6,
+	MCLK_DIV_12 = 7,
 };
 
 //===BCLK分频数
 enum WM8510_BCLKDIV_ENUM
 {
-	BCLK_DIV_1		= 0,
-	BCLK_DIV_2		= 1,
-	BCLK_DIV_4		= 2,
-	BCLK_DIV_8		= 3,
-	BCLK_DIV_16		= 4,
-	BCLK_DIV_32		= 5,
+	BCLK_DIV_1 = 0,
+	BCLK_DIV_2 = 1,
+	BCLK_DIV_4 = 2,
+	BCLK_DIV_8 = 3,
+	BCLK_DIV_16 = 4,
+	BCLK_DIV_32 = 5,
 };
 
 //===W8510寄存器地址
@@ -365,7 +365,6 @@ enum WM8510_BCLKDIV_ENUM
 #define WM8510_OPCLKDIV_3				(2 << 4)
 #define WM8510_OPCLKDIV_4				(3 << 4)
 
-
 //===R10
 #define WM8510_R10L_DACMU
 #define WM8510_R10L_DEEMPH_32kHz		(0x01<<4)
@@ -435,7 +434,6 @@ struct _WM8510_HandlerType
 	I2C_HandlerType msgI2C;		//---使用的I2C设备
 
 	UINT8_T(*msgFuncSendCMD)(WM8510_HandlerType*, UINT8_T *, UINT8_T);	//---任务传输函数
-
 };
 
 //===外部调用接口
@@ -444,6 +442,7 @@ extern pWM8510_HandlerType pWM8510Device0;
 
 //===函数定义
 UINT8_T WM8510_Init(WM8510_HandlerType *WM8510x, void(*msgDelay)(UINT32_T delay), UINT8_T isHWI2C);
+UINT8_T WM8510_START(WM8510_HandlerType *WM8510x);
 UINT8_T WM8510_DeInit(WM8510_HandlerType *WM8510x, UINT8_T isHWI2C);
 UINT8_T WM8510_SWI2C_WriteReg(WM8510_HandlerType *WM8510x, UINT8_T *pVal, UINT8_T length);
 UINT8_T WM8510_HWI2C_WriteReg(WM8510_HandlerType *WM8510x, UINT8_T *pVal, UINT8_T length);
@@ -451,5 +450,7 @@ UINT8_T WM8510_SendCMD(WM8510_HandlerType *WM8510x, UINT8_T *pVal);
 UINT8_T WM8510_SetFreqHz(WM8510_HandlerType *WM8510x, UINT32_T freq);
 UINT8_T WM8510_SetFreqKHz(WM8510_HandlerType *WM8510x, float freq);
 UINT8_T WM8510_SetFreqMHz(WM8510_HandlerType *WM8510x, float freq);
+void WM8510_Reset(WM8510_HandlerType *WM8510x);
+UINT8_T WM8510_SetFreqHzFun1(WM8510_HandlerType *WM8510x, UINT32_T freq);
 //////////////////////////////////////////////////////////////////////////////////////
 #endif /*WM8510_CFG_H_ */

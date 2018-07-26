@@ -84,5 +84,14 @@ stm32f407xxproject\main.o: ..\Application\PCF8563\pcf8563_cfg.h
 stm32f407xxproject\main.o: ..\Application\I2C\i2c_task.h
 stm32f407xxproject\main.o: ..\Application\I2C\i2c_lib.h
 stm32f407xxproject\main.o: ..\Application\I2C\i2c_cfg.h
+stm32f407xxproject\main.o: ..\Application\CRC\crc_task.h
+stm32f407xxproject\main.o: ..\Application\CRC\crc_lib.h
 stm32f407xxproject\main.o: ..\Application\CRC\crc_cfg.h
+stm32f407xxproject\main.o: ..\Application\WM8510\wm8510_cfg.h
+stm32f407xxproject\main.o: ..\Application\USART\usart_task.h
+stm32f407xxproject\main.o: ..\Application\USART\usart_lib.h
+stm32f407xxproject\main.o: ..\Application\USART\usart_cfg.h
+stm32f407xxproject\main.o: ..\Application\OneWire\one_wire_task.h
+stm32f407xxproject\main.o: ..\Application\OneWire\one_wire_lib.h
+stm32f407xxproject\main.o: ..\Application\OneWire\one_wire_cfg.h
 stm32f407xxproject\main.o: ..\Application\APP\main.h

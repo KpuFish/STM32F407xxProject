@@ -23,7 +23,7 @@ struct _SysTick_HandlerType
 
 //===外部调用接口
 extern SysTick_HandlerType		g_SysTick;
-extern pSysTick_HandlerType		pSysTick ;
+extern pSysTick_HandlerType		pSysTick;
 
 //===函数定义
 UINT8_T SysTick_Init(void);

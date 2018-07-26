@@ -2,10 +2,9 @@
 
 //---变量定义
 #ifdef DHT11_HandlerType_Device0
-	DHT11_HandlerType	g_DHT11Device0;
-	pDHT11_HandlerType	pDHT11Device0 = &g_DHT11Device0;
+DHT11_HandlerType	g_DHT11Device0;
+pDHT11_HandlerType	pDHT11Device0 = &g_DHT11Device0;
 #endif
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //////函		数：
@@ -31,31 +30,31 @@ UINT8_T DHT11_StructInit(DHT11_HandlerType *DHT11x)
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T DHT11_GPIO_Init(DHT11_HandlerType *DHT11x)
 {
-	#ifdef USE_MCU_STM32
-		if ((DHT11x == NULL) || (DHT11x->msgPort == NULL))
-		{
-			return ERROR_1;
-		}
+#ifdef USE_MCU_STM32
+	if ((DHT11x == NULL) || (DHT11x->msgPort == NULL))
+	{
+		return ERROR_1;
+	}
 
-		//---使能端口时钟
-		GPIOTask_Clock(DHT11x->msgPort, 1);
-		LL_GPIO_InitTypeDef GPIO_InitStruct;
+	//---使能端口时钟
+	GPIOTask_Clock(DHT11x->msgPort, 1);
+	LL_GPIO_InitTypeDef GPIO_InitStruct;
 
-		//---GPIO的初始化
-		GPIO_InitStruct.Pin = DHT11x->msgBit;						//---对应的GPIO的引脚
-		GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;					//---配置状态为输出模式
-		GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;			//---GPIO的速度
-		GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_OPENDRAIN;		//---输出模式---开漏输出
-		GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;						//---上拉使能
-		#ifndef USE_MCU_STM32F1
-			GPIO_InitStruct.Alternate = LL_GPIO_AF_0;				//---端口复用模式
-		#endif
-		//---初始化端口
-		LL_GPIO_Init(DHT11x->msgPort, &GPIO_InitStruct);
-	#endif
-	#ifndef USE_MCU_STM32
-		GPIO_SET_WRITE(DHT11x->msgPort, DHT11x->msgBit);
-	#endif // !USE_MCU_STM32
+	//---GPIO的初始化
+	GPIO_InitStruct.Pin = DHT11x->msgBit;						//---对应的GPIO的引脚
+	GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;					//---配置状态为输出模式
+	GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;			//---GPIO的速度
+	GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_OPENDRAIN;		//---输出模式---开漏输出
+	GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;						//---上拉使能
+#ifndef USE_MCU_STM32F1
+	GPIO_InitStruct.Alternate = LL_GPIO_AF_0;				//---端口复用模式
+#endif
+//---初始化端口
+	LL_GPIO_Init(DHT11x->msgPort, &GPIO_InitStruct);
+#endif
+#ifndef USE_MCU_STM32
+	GPIO_SET_WRITE(DHT11x->msgPort, DHT11x->msgBit);
+#endif // !USE_MCU_STM32
 	GPIO_OUT_1(DHT11x->msgPort, DHT11x->msgBit);
 	return 0;
 }
@@ -71,12 +70,12 @@ UINT8_T DHT11_Init(DHT11_HandlerType *DHT11x, void(*Delayus)(UINT32_T delay), vo
 {
 	DHT11_StructInit(DHT11x);
 	//---使用的DHT11的端口
-	#ifdef DHT11_HandlerType_Device0
-		if ((DHT11x != NULL) && (DHT11x == pDHT11Device0))
-		{
-			DHT11_Device0_Init(DHT11x);
-		}
-	#endif
+#ifdef DHT11_HandlerType_Device0
+	if ((DHT11x != NULL) && (DHT11x == pDHT11Device0))
+	{
+		DHT11_Device0_Init(DHT11x);
+	}
+#endif
 	//---GPIO的初始化
 	DHT11_GPIO_Init(DHT11x);
 	//===注册延时函数
@@ -124,12 +123,12 @@ UINT8_T DHT11_Device0_Init(DHT11_HandlerType *DHT11x)
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T DHT11_DeInit(DHT11_HandlerType *DHT11x)
 {
-	#ifdef USE_MCU_STM32
-		LL_GPIO_DeInit(DHT11x->msgPort);
-	#endif
-	#ifndef USE_MCU_STM32
-		GPIO_SET_READ(DHT11x->msgPort, DHT11x->msgBit);
-	#endif // !USE_MCU_STM32
+#ifdef USE_MCU_STM32
+	LL_GPIO_DeInit(DHT11x->msgPort);
+#endif
+#ifndef USE_MCU_STM32
+	GPIO_SET_READ(DHT11x->msgPort, DHT11x->msgBit);
+#endif // !USE_MCU_STM32
 
 	GPIO_OUT_1(DHT11x->msgPort, DHT11x->msgBit);
 
@@ -145,9 +144,9 @@ UINT8_T DHT11_DeInit(DHT11_HandlerType *DHT11x)
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T DHT11_RESET(DHT11_HandlerType *DHT11x)
 {
-	#ifndef USE_MCU_STM32
-		GPIO_SET_WRITE(DHT11x->msgPort, DHT11x->msgBit);
-	#endif // !USE_MCU_STM32
+#ifndef USE_MCU_STM32
+	GPIO_SET_WRITE(DHT11x->msgPort, DHT11x->msgBit);
+#endif // !USE_MCU_STM32
 	//---释放总线
 	GPIO_OUT_1(DHT11x->msgPort, DHT11x->msgBit);
 	//---主机拉高2us
@@ -181,9 +180,9 @@ UINT8_T DHT11_RESET(DHT11_HandlerType *DHT11x)
 UINT8_T DHT11_Check(DHT11_HandlerType *DHT11x)
 {
 	UINT8_T count = 0;
-	#ifndef USE_MCU_STM32
-		GPIO_SET_READ(DHT11x->msgPort, DHT11x->msgBit);
-	#endif // !USE_MCU_STM32
+#ifndef USE_MCU_STM32
+	GPIO_SET_READ(DHT11x->msgPort, DHT11x->msgBit);
+#endif // !USE_MCU_STM32
 	//---DHT11如果响应的话会拉低总线40~80us
 	while (GPIO_GET_STATE(DHT11x->msgPort, DHT11x->msgBit) != 0)
 	{
@@ -250,9 +249,9 @@ UINT8_T DHT11_START(DHT11_HandlerType *DHT11x)
 UINT8_T DHT11_ReadBit(DHT11_HandlerType *DHT11x)
 {
 	UINT8_T count = 0;
-	#ifndef USE_MCU_STM32
-		GPIO_SET_READ(DHT11x->msgPort, DHT11x->msgBit);
-	#endif // !USE_MCU_STM32
+#ifndef USE_MCU_STM32
+	GPIO_SET_READ(DHT11x->msgPort, DHT11x->msgBit);
+#endif // !USE_MCU_STM32
 	//---等待变为低电平---高电平保持的时间约为50us
 	while (GPIO_GET_STATE(DHT11x->msgPort, DHT11x->msgBit) != 0)
 	{
@@ -268,7 +267,7 @@ UINT8_T DHT11_ReadBit(DHT11_HandlerType *DHT11x)
 		}
 	}
 	//---读取高电平等待一下
-    if (DHT11x->msgFuncDelayus != NULL)
+	if (DHT11x->msgFuncDelayus != NULL)
 	{
 		DHT11x->msgFuncDelayus(10);
 	}
@@ -312,10 +311,10 @@ UINT8_T DHT11_ReadByte(DHT11_HandlerType *DHT11x)
 	UINT8_T i = 0, _return = 0;
 	for (i = 0; i < 8; i++)
 	{
-         _return <<= 1;
+		_return <<= 1;
 		_return |= DHT11_ReadBit(DHT11x);
 	}
-    
+
 	return _return;
 }
 
@@ -340,9 +339,9 @@ UINT8_T DHT11_Read(DHT11_HandlerType *DHT11x)
 	{
 		temp[i] = DHT11_ReadByte(DHT11x);
 	}
-	#ifndef USE_MCU_STM32
-		GPIO_SET_WRITE(DHT11x->msgPort, DHT11x->msgBit);
-	#endif // !USE_MCU_STM32
+#ifndef USE_MCU_STM32
+	GPIO_SET_WRITE(DHT11x->msgPort, DHT11x->msgBit);
+#endif // !USE_MCU_STM32
 	//---释放总线
 	GPIO_OUT_1(DHT11x->msgPort, DHT11x->msgBit);
 
@@ -354,10 +353,10 @@ UINT8_T DHT11_Read(DHT11_HandlerType *DHT11x)
 	//---湿度整数部分
 	DHT11x->msgShiDuX1000 = temp[0];
 	//---湿度小数部分
-	DHT11x->msgShiDuX1000 = (DHT11x->msgShiDuX1000 *1000) + temp[1];
+	DHT11x->msgShiDuX1000 = (DHT11x->msgShiDuX1000 * 1000) + temp[1];
 	//---温度整数部分
 	DHT11x->msgWenDuX1000 = temp[2];
 	//---温度小数部分
-	DHT11x->msgWenDuX1000 = (DHT11x->msgWenDuX1000 *1000) + temp[3];
+	DHT11x->msgWenDuX1000 = (DHT11x->msgWenDuX1000 * 1000) + temp[3];
 	return OK_0;
 }

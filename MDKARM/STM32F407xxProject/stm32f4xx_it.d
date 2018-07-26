@@ -62,3 +62,15 @@ stm32f407xxproject\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx
 stm32f407xxproject\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_wwdg.h
 stm32f407xxproject\stm32f4xx_it.o: ..\Application\IWDG\iwdg_cfg.h
 stm32f407xxproject\stm32f4xx_it.o: ..\Complier\complier_lib.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\USART\usart_task.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\USART\usart_lib.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\USART\usart_cfg.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\GPIO\gpio_task.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\GPIO\gpio_lib.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\GPIO\gpio_cfg.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\CRC\crc_task.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\CRC\crc_lib.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\CRC\crc_cfg.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\Random\random_task.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\Random\random_lib.h
+stm32f407xxproject\stm32f4xx_it.o: ..\Application\Random\random_cfg.h

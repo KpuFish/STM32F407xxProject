@@ -45,7 +45,7 @@ UINT8_T I2CLib_MSW_START(I2C_HandlerType *I2Cx, UINT8_T isWrite)
 		I2Cx->msgAddr |= 0x01;
 	}
 	//---发送从机地址
-	I2C_MSW_SendByte(I2Cx, ( UINT8_T )I2Cx->msgAddr);
+	I2C_MSW_SendByte(I2Cx, (UINT8_T)I2Cx->msgAddr);
 	//---读取应答信号
 	return I2C_MSW_ReadACK(I2Cx);
 }

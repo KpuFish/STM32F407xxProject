@@ -22,7 +22,7 @@ void Delay_ms(UINT32_T ms)
 {
 	if (ms != 0)
 	{
-		if (SysTickTask_1msTick()==OK_0)
+		if (SysTickTask_1msTick() == OK_0)
 		{
 			//---等待延时到达
 			SysTickTask_IRQDecTick(ms);

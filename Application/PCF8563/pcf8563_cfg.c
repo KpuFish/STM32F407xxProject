@@ -3,23 +3,23 @@
 //===变量的定义
 #ifdef PCF8563_HandlerType_Device0
 	//---全局变量定义
-	PCF8563_HandlerType g_PCF8563Device0;
-	//---全局指针变量
-	pPCF8563_HandlerType pPCF8563Device0 = &g_PCF8563Device0;
+PCF8563_HandlerType g_PCF8563Device0;
+//---全局指针变量
+pPCF8563_HandlerType pPCF8563Device0 = &g_PCF8563Device0;
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T PCF8563_StructInit(PCF8563_HandlerType *PCF8563x)
 {
 	PCF8563x->msgFuncWriteReg = NULL;
 	PCF8563x->msgFuncReadReg = NULL;
-    return 0;
+	return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -29,18 +29,18 @@ UINT8_T PCF8563_StructInit(PCF8563_HandlerType *PCF8563x)
 //////输出参数:
 //////说	   明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T PCF8563_Init(PCF8563_HandlerType *PCF8563x, void(*msgDelay)(UINT32_T delay),UINT8_T isHWI2C)
+UINT8_T PCF8563_Init(PCF8563_HandlerType *PCF8563x, void(*msgDelay)(UINT32_T delay), UINT8_T isHWI2C)
 {
 	UINT8_T _return = OK_0;
 	//---结构体的初始化
 	PCF8563_StructInit(PCF8563x);
 	//---指定设备的初始化
-	#ifdef PCF8563_HandlerType_Device0
-		if ((PCF8563x != NULL) && (PCF8563x == pPCF8563Device0))
-		{
-			PCF8563_Device0_Init(PCF8563x);
-		}
-	#endif
+#ifdef PCF8563_HandlerType_Device0
+	if ((PCF8563x != NULL) && (PCF8563x == pPCF8563Device0))
+	{
+		PCF8563_Device0_Init(PCF8563x);
+	}
+#endif
 	//---判断是硬件I2C还是软件I2C
 	if (isHWI2C)
 	{
@@ -48,7 +48,7 @@ UINT8_T PCF8563_Init(PCF8563_HandlerType *PCF8563x, void(*msgDelay)(UINT32_T del
 	}
 	else
 	{
-		_return= I2CTask_MSW_Init(&(PCF8563x->msgI2C), msgDelay);
+		_return = I2CTask_MSW_Init(&(PCF8563x->msgI2C), msgDelay);
 		//---注册写函数
 		PCF8563x->msgFuncWriteReg = PCF8563_SWI2C_WriteReg;
 		//---注册读函数
@@ -98,7 +98,7 @@ UINT8_T PCF8563_Device1_Init(PCF8563_HandlerType *PCF8563x)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T PCF8563_DeInit(PCF8563_HandlerType *PCF8563x,UINT8_T isHWI2C)
+UINT8_T PCF8563_DeInit(PCF8563_HandlerType *PCF8563x, UINT8_T isHWI2C)
 {
 	//---注销读写函数
 	PCF8563x->msgFuncReadReg = NULL;
@@ -115,11 +115,11 @@ UINT8_T PCF8563_DeInit(PCF8563_HandlerType *PCF8563x,UINT8_T isHWI2C)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T PCF8563_SWI2C_WriteReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T val)
 {
@@ -153,11 +153,11 @@ GoToExit:
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T PCF8563_HWI2C_WriteReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T val)
 {
@@ -173,7 +173,7 @@ UINT8_T PCF8563_HWI2C_WriteReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T PCF8563_WriteReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T val)
 {
-	if ((PCF8563x != NULL) && (PCF8563x->msgFuncWriteReg!=NULL))
+	if ((PCF8563x != NULL) && (PCF8563x->msgFuncWriteReg != NULL))
 	{
 		return PCF8563x->msgFuncWriteReg(PCF8563x, reg, val);
 	}
@@ -237,11 +237,11 @@ GoToExit:
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T PCF8563_HWI2C_ReadReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T *pVal, UINT16_T length)
 {
@@ -257,7 +257,7 @@ UINT8_T PCF8563_HWI2C_ReadReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T PCF8563_ReadReg(PCF8563_HandlerType *PCF8563x, UINT8_T reg, UINT8_T *pVal, UINT16_T length)
 {
-	if ((PCF8563x!=NULL)&&(PCF8563x->msgFuncReadReg!=NULL))
+	if ((PCF8563x != NULL) && (PCF8563x->msgFuncReadReg != NULL))
 	{
 		return PCF8563x->msgFuncReadReg(PCF8563x, reg, pVal, length);
 	}

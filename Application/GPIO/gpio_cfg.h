@@ -23,8 +23,8 @@
 #define GPIO_16BITS_OUT( name, val	)				( name->ODR=(val&0xFFFF) )
 //---º¯Êý¶¨Òå
 #ifdef USE_MCU_STM32
-	void GPIO_Clock(GPIO_TypeDef *GPIOx, UINT8_T isEnable);
-	void GPIO_Init(void);
+void GPIO_Clock(GPIO_TypeDef *GPIOx, UINT8_T isEnable);
+void GPIO_Init(void);
 #endif
 ///////////////////////////////////////////////////////////////////////////////
 #endif /* GPIO_CFG_H_ */

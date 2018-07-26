@@ -17,8 +17,8 @@ extern IWDG_HandlerType		g_IWDG;
 extern pIWDG_HandlerType	pIWDG;
 
 //---º¯Êý¶¨Òå
- UINT8_T IWDG_Init(IWDG_HandlerType *IWDGx);
- UINT8_T IWDG_DeInit(IWDG_HandlerType *IWDGx);
- UINT8_T IWDG_Reset(IWDG_HandlerType *IWDGx);
+UINT8_T IWDG_Init(IWDG_HandlerType *IWDGx);
+UINT8_T IWDG_DeInit(IWDG_HandlerType *IWDGx);
+UINT8_T IWDG_Reset(IWDG_HandlerType *IWDGx);
 //////////////////////////////////////////////////////////////////////////////////////
 #endif /*IWDG_CFG_H_ */

@@ -16,10 +16,10 @@ typedef struct  _CRC_HandlerType				*pCRC_HandlerType;
 struct _CRC_HandlerType
 {
 	UINT8_T msgCRCInit;									//---CRC函数是都初始化成功，0---初始化，1---未初始化
-	UINT32_T(*msgFuncCRC32)(UINT8_T *, UINT32_T );
-	UINT16_T(*msgFuncCRC16)(UINT8_T *, UINT32_T );
-	UINT8_T(*msgFuncCRC8)(UINT8_T *, UINT32_T );
-	UINT8_T(*msgFuncCheckSum)(UINT8_T *, UINT32_T );
+	UINT32_T(*msgFuncCRC32)(UINT8_T *, UINT32_T);
+	UINT16_T(*msgFuncCRC16)(UINT8_T *, UINT32_T);
+	UINT8_T(*msgFuncCRC8)(UINT8_T *, UINT32_T);
+	UINT8_T(*msgFuncCheckSum)(UINT8_T *, UINT32_T);
 };
 
 //===外部调用变量

@@ -2,8 +2,8 @@
 
 //---变量定义
 #ifdef DS18B20_HandlerType_Device0
-	DS18B20_HandlerType g_DS18B20Device0;
-	pDS18B20_HandlerType pDS18B20Device0 = &g_DS18B20Device0;
+DS18B20_HandlerType g_DS18B20Device0;
+pDS18B20_HandlerType pDS18B20Device0 = &g_DS18B20Device0;
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -31,12 +31,12 @@ UINT8_T DS18B20_StructInit(DS18B20_HandlerType *DS18B20x)
 UINT8_T DS18B20_Init(DS18B20_HandlerType *DS18B20x, void(*Delayus)(UINT32_T delay), void(*Delayms)(UINT32_T delay))
 {
 	DS18B20_StructInit(DS18B20x);
-	#ifdef DS18B20_HandlerType_Device0
-		if ((DS18B20x != NULL) && (DS18B20x == pDS18B20Device0))
-		{
-			DS18B20_Device0_Init(DS18B20x);
-		}
-	#endif
+#ifdef DS18B20_HandlerType_Device0
+	if ((DS18B20x != NULL) && (DS18B20x == pDS18B20Device0))
+	{
+		DS18B20_Device0_Init(DS18B20x);
+	}
+#endif
 	//---注册延时函数
 	if (Delayms != NULL)
 	{
@@ -200,7 +200,7 @@ UINT16_T DS18B20_ReadWenDu(DS18B20_HandlerType *DS18B20x)
 	//---将十六进制数转换成温度值
 	DS18B20x->msgWenDuX10000 *= 625;
 	//---获取实际温度值
-	DS18B20x->msgWenDuX100 = ( UINT16_T )(DS18B20x->msgWenDuX10000 / 100);
+	DS18B20x->msgWenDuX100 = (UINT16_T)(DS18B20x->msgWenDuX10000 / 100);
 	//---返回温度码的值
 	return _return;
 }
@@ -276,7 +276,7 @@ UINT16_T DS18B20_ReadWenDuByID(DS18B20_HandlerType *DS18B20x, UINT8_T *id)
 	//---将十六进制数转换成温度值
 	DS18B20x->msgWenDuX10000 *= 625;
 	//---获取实际温度值
-	DS18B20x->msgWenDuX100 = ( UINT16_T )(DS18B20x->msgWenDuX10000 / 100);
+	DS18B20x->msgWenDuX100 = (UINT16_T)(DS18B20x->msgWenDuX10000 / 100);
 	//---返回温度码的值
 	return _return;
 }

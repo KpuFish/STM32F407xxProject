@@ -10,6 +10,7 @@
       <TargetName>STM32F407xxProject</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pArmCC>5060750::V5.06 update 6 (build 750)::ARMCC</pArmCC>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
@@ -184,6 +185,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -311,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>0</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -320,14 +322,14 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>0</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>1</v6Lang>
-            <v6LangP>1</v6LangP>
+            <v6Lang>2</v6Lang>
+            <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -717,29 +719,14 @@
               <FilePath>..\Application\ADC\adc_cfg.c</FilePath>
             </File>
             <File>
-              <FileName>adc_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\ADC\adc_cfg.h</FilePath>
-            </File>
-            <File>
               <FileName>adc_lib.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\ADC\adc_lib.c</FilePath>
             </File>
             <File>
-              <FileName>adc_lib.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\ADC\adc_lib.h</FilePath>
-            </File>
-            <File>
               <FileName>adc_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\ADC\adc_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>adc_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\ADC\adc_task.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -752,24 +739,24 @@
               <FilePath>..\Application\ADS8688\ads8688_cfg.c</FilePath>
             </File>
             <File>
-              <FileName>ads8688_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\ADS8688\ads8688_cfg.h</FilePath>
-            </File>
-            <File>
               <FileName>ads8688_lib.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\ADS8688\ads8688_lib.c</FilePath>
             </File>
             <File>
-              <FileName>ads8688_lib.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\ADS8688\ads8688_lib.h</FilePath>
-            </File>
-            <File>
               <FileName>ads8688_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\ADS8688\ads8688_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>ads8688_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ADS8688\ads8688_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>ads8688_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\ADS8688\ads8688_lib.h</FilePath>
             </File>
             <File>
               <FileName>ads8688_task.h</FileName>
@@ -1375,7 +1362,20 @@
         </targetInfos>
       </component>
     </components>
-    <files/>
+    <files>
+      <file attr="config" category="source" condition="STM32F407xx_ARMCC" name="Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f407xx.s" version="2.6.2">
+        <instance index="0" removed="1">RTE\Device\STM32F407VETx\startup_stm32f407xx.s</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.6.2" condition="STM32F4 CMSIS"/>
+        <package name="STM32F4xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.13.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="source" name="Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c" version="2.6.2">
+        <instance index="0" removed="1">RTE\Device\STM32F407VETx\system_stm32f4xx.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.6.2" condition="STM32F4 CMSIS"/>
+        <package name="STM32F4xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.13.0"/>
+        <targetInfos/>
+      </file>
+    </files>
   </RTE>
 
 </Project>

@@ -4,7 +4,7 @@
 //===头文件定义
 #include "complier_lib.h"
 #ifdef USE_MCU_STM32
-	#include "gpio_task.h"
+#include "gpio_task.h"
 #endif
 
 typedef struct _USART_HandlerType						 USART_HandlerType;
@@ -62,7 +62,6 @@ struct _USART_HandlerType
 //===发送端口的配置
 #define USART_TXGPIO_SET_INPUT					0
 #define USART_TXGPIO_SET_OUTPUT					1
-
 
 //===外部调用接口
 extern USART_HandlerType  g_USART1;

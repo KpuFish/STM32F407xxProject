@@ -53,9 +53,6 @@
     <ClInclude Include="..\Application\AD5593\ad5593_cfg.h" />
     <ClInclude Include="..\Application\AD5593\ad5593_lib.h" />
     <ClInclude Include="..\Application\AD5593\ad5593_task.h" />
-    <ClInclude Include="..\Application\ADC\adc_cfg.h" />
-    <ClInclude Include="..\Application\ADC\adc_lib.h" />
-    <ClInclude Include="..\Application\ADC\adc_task.h" />
     <ClInclude Include="..\Application\ADS8688\ads8688_cfg.h" />
     <ClInclude Include="..\Application\ADS8688\ads8688_lib.h" />
     <ClInclude Include="..\Application\ADS8688\ads8688_task.h" />

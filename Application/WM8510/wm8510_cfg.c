@@ -1,13 +1,13 @@
 #include "wm8510_cfg.h"
 //===变量定义
 WM8510_HandlerType  g_WM8510Device0;
-pWM8510_HandlerType pWM8510Device0=&g_WM8510Device0;
+pWM8510_HandlerType pWM8510Device0 = &g_WM8510Device0;
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 void WM8510_StructInit(WM8510_HandlerType *WM8510x)
 {
@@ -22,14 +22,13 @@ void WM8510_StructInit(WM8510_HandlerType *WM8510x)
 	WM8510x->R1[0] = 0x02;
 	WM8510x->R1[1] = 0x23;
 
-	WM8510x->nowR6[0]  = 0x0D;
-	WM8510x->nowR6[1]  = 0x41;
+	WM8510x->nowR6[0] = 0x0D;
+	WM8510x->nowR6[1] = 0x41;
 	WM8510x->lastR6[0] = 0x0D;
 	WM8510x->lastR6[1] = 0x41;
 
-
-	WM8510x->nowR36[0]  = 0x00;
-	WM8510x->nowR36[1]  = 0x00;
+	WM8510x->nowR36[0] = 0x00;
+	WM8510x->nowR36[1] = 0x00;
 	WM8510x->lastR36[0] = 0x00;
 	WM8510x->lastR36[1] = 0x00;
 
@@ -47,7 +46,7 @@ void WM8510_StructInit(WM8510_HandlerType *WM8510x)
 	WM8510x->nowR39[1] = 0x00;
 	WM8510x->lastR39[0] = 0x00;
 	WM8510x->lastR39[1] = 0x00;
-	
+
 	WM8510x->pll_K = 0;
 	WM8510x->oscFreq = WM8510_MCLK_HZ;
 	WM8510x->freqHz = WM8510_OUT_MIN_FREQ;
@@ -57,11 +56,11 @@ void WM8510_StructInit(WM8510_HandlerType *WM8510x)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T WM8510_Device0_Init(WM8510_HandlerType *WM8510x)
 {
@@ -79,11 +78,11 @@ UINT8_T WM8510_Device0_Init(WM8510_HandlerType *WM8510x)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T WM8510_Device1_Init(WM8510_HandlerType *WM8510x)
 {
@@ -91,11 +90,11 @@ UINT8_T WM8510_Device1_Init(WM8510_HandlerType *WM8510x)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T WM8510_Init(WM8510_HandlerType *WM8510x, void(*msgDelay)(UINT32_T delay), UINT8_T isHWI2C)
 {
@@ -112,11 +111,8 @@ UINT8_T WM8510_Init(WM8510_HandlerType *WM8510x, void(*msgDelay)(UINT32_T delay)
 		_return = I2CTask_MSW_Init(&(WM8510x->msgI2C), msgDelay);
 		//---注册命令函数
 		WM8510x->msgFuncSendCMD = WM8510_SWI2C_WriteReg;
-		//---发送命令
-		WM8510_SendCMD(WM8510x, WM8510x->R0);
-		WM8510_SendCMD(WM8510x, WM8510x->R0);
-		WM8510_SendCMD(WM8510x, WM8510x->R1);
 	}
+	_return = WM8510_START(WM8510x);
 	return _return;
 }
 
@@ -125,7 +121,31 @@ UINT8_T WM8510_Init(WM8510_HandlerType *WM8510x, void(*msgDelay)(UINT32_T delay)
 //////功		能： 
 //////输入参数: 
 //////输出参数: 
-//////说		明： 
+//////说		明： 0---WM8510初始化成功，1---初始化失败
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T WM8510_START(WM8510_HandlerType *WM8510x)
+{
+	UINT8_T _return = OK_0;
+	//---发送命令
+	WM8510_SendCMD(WM8510x, WM8510x->R0);
+	//---配置R0寄存器
+	_return=WM8510_SendCMD(WM8510x, WM8510x->R0);
+	if (_return!=0)
+	{
+		goto GoToExit;
+	}
+	//---配置R0寄存器
+	_return = WM8510_SendCMD(WM8510x, WM8510x->R1);
+GoToExit:
+	return _return;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T WM8510_DeInit(WM8510_HandlerType *WM8510x, UINT8_T isHWI2C)
 {
@@ -143,10 +163,10 @@ UINT8_T WM8510_DeInit(WM8510_HandlerType *WM8510x, UINT8_T isHWI2C)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
 //////说		明： 软件模拟I2C传输命令
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T WM8510_SWI2C_WriteReg(WM8510_HandlerType *WM8510x, UINT8_T *pVal, UINT8_T length)
@@ -162,7 +182,7 @@ UINT8_T WM8510_SWI2C_WriteReg(WM8510_HandlerType *WM8510x, UINT8_T *pVal, UINT8_
 		goto GoToExit;
 	}
 	//---发送命令
-	for (i=0;i<length;i++)
+	for (i = 0; i < length; i++)
 	{
 		//---发送数据
 		I2CTask_MSW_SendByte(&(WM8510x->msgI2C), pVal[i]);
@@ -182,10 +202,10 @@ GoToExit:
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
 //////说		明： 硬件I2C传输命令
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T WM8510_HWI2C_WriteReg(WM8510_HandlerType *WM8510x, UINT8_T *pVal, UINT8_T length)
@@ -193,11 +213,11 @@ UINT8_T WM8510_HWI2C_WriteReg(WM8510_HandlerType *WM8510x, UINT8_T *pVal, UINT8_
 	return ERROR_1;
 }
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T WM8510_SendCMD(WM8510_HandlerType *WM8510x, UINT8_T *pVal)
 {
@@ -209,13 +229,13 @@ UINT8_T WM8510_SendCMD(WM8510_HandlerType *WM8510x, UINT8_T *pVal)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
-void WM8510_Calc_PllRate(WM8510_HandlerType *WM8510x,UINT32_T freq)
+void WM8510_Calc_PllRate(WM8510_HandlerType *WM8510x, UINT32_T freq)
 {
 	//---计算中，这个频率会发生改变，故每次使用的时候需要重新赋值
 	WM8510x->oscFreq = WM8510_MCLK_HZ;
@@ -240,19 +260,19 @@ void WM8510_Calc_PllRate(WM8510_HandlerType *WM8510x,UINT32_T freq)
 		WM8510x->mclkDIV = MCLK_DIV_1;
 		WM8510x->bclkDIV = BCLK_DIV_1;
 	}
-	else if (freq>PDIV0_MDIV1D5_BDIV1_MIN)		//12000000
+	else if (freq > PDIV0_MDIV1D5_BDIV1_MIN)		//12000000
 	{
 		WM8510x->preDIV = 0;
 		WM8510x->mclkDIV = MCLK_DIV_1D5;
 		WM8510x->bclkDIV = BCLK_DIV_1;
-		freq =(freq* 3)/2;	// 乘以1.5
+		freq = (freq * 3) / 2;	// 乘以1.5
 	}
 	else if (freq > PDIV0_MDIV2_BDIV1_MIN)		//9000000
 	{
 		WM8510x->preDIV = 0;
 		WM8510x->mclkDIV = MCLK_DIV_2;
 		WM8510x->bclkDIV = BCLK_DIV_1;
-		freq *=2;	// 乘以2
+		freq *= 2;	// 乘以2
 	}
 	else if (freq > PDIV0_MDIV3_BDIV1_MIN)		//6000000
 	{
@@ -408,24 +428,24 @@ void WM8510_Calc_PllRate(WM8510_HandlerType *WM8510x,UINT32_T freq)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T WM8510_SetFreqHz(WM8510_HandlerType *WM8510x,UINT32_T freq)
+UINT8_T WM8510_SetFreqHz(WM8510_HandlerType *WM8510x, UINT32_T freq)
 {
 	UINT8_T _return = OK_0;
 	//---计算各个寄存器的值
 	WM8510_Calc_PllRate(WM8510x, freq);
 	//===判断寄存器是否发生改变，不改变则不更新数据
-	if (memcmp(WM8510x->nowR6,WM8510x->lastR6,2)!=0)
+	if (memcmp(WM8510x->nowR6, WM8510x->lastR6, 2) != 0)
 	{
 		WM8510x->lastR6[0] = WM8510x->nowR6[0];
 		WM8510x->lastR6[1] = WM8510x->nowR6[1];
-		_return=WM8510_SendCMD(WM8510x, WM8510x->nowR6);
-		if (_return!=OK_0)
+		_return = WM8510_SendCMD(WM8510x, WM8510x->nowR6);
+		if (_return != OK_0)
 		{
 			_return = ERROR_1;
 			goto GoToExit;
@@ -436,7 +456,7 @@ UINT8_T WM8510_SetFreqHz(WM8510_HandlerType *WM8510x,UINT32_T freq)
 	{
 		WM8510x->lastR36[0] = WM8510x->nowR36[0];
 		WM8510x->lastR36[1] = WM8510x->nowR36[1];
-		_return=WM8510_SendCMD(WM8510x, WM8510x->nowR36);
+		_return = WM8510_SendCMD(WM8510x, WM8510x->nowR36);
 		if (_return != OK_0)
 		{
 			_return = ERROR_2;
@@ -483,27 +503,112 @@ GoToExit:
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  WM8510_SetFreqKHz(WM8510_HandlerType *WM8510x, float freq)
 {
 	UINT32_T temp = (UINT32_T)(freq * 1000);
-	return WM8510_SetFreqHz(WM8510x,temp);
+	return WM8510_SetFreqHz(WM8510x, temp);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  WM8510_SetFreqMHz(WM8510_HandlerType *WM8510x, float freq)
 {
 	UINT32_T temp = (UINT32_T)(freq * 1000000);
 	return WM8510_SetFreqHz(WM8510x, temp);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函	   数： 
+//////功	   能： 
+//////输入参数: 
+//////输出参数: 
+//////说	   明： 获取WM8510要输出的频率
+//////////////////////////////////////////////////////////////////////////////
+UINT32_T WM8510_GetFreqHz(WM8510_HandlerType *WM8510x)
+{
+	return WM8510x->freqHz;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函	   数： 
+//////功	   能： 
+//////输入参数: 
+//////输出参数: 
+//////说	   明： 复位WM8510的设置
+//////////////////////////////////////////////////////////////////////////////
+void WM8510_Reset(WM8510_HandlerType *WM8510x)
+{
+	//---等待初始化成功
+	while (WM8510_START(WM8510x) != 0);
+	//---寄存器值设置为零
+	memset(WM8510x->lastR6, 0, 2);
+	memset(WM8510x->lastR36, 0, 2);
+	memset(WM8510x->lastR37, 0, 2);
+	memset(WM8510x->lastR38, 0, 2);
+	memset(WM8510x->lastR39, 0, 2);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//////函	   数： 
+//////功	   能： 
+//////输入参数: 
+//////输出参数: 
+//////说	   明： 
+//////////////////////////////////////////////////////////////////////////////
+UINT8_T WM8510_SetFreqHzFun1(WM8510_HandlerType *WM8510x,UINT32_T freq)
+{
+	UINT8_T _return = OK_0;
+	//---判断是否需要更新寄存器的值
+	if (freq != WM8510x->freqHz)
+	{
+		//---计算各个寄存器的值
+		WM8510_Calc_PllRate(WM8510x,freq);
+	}
+	//---设置寄存器R6
+	_return = WM8510_SendCMD(WM8510x, WM8510x->nowR6);
+	if (_return != OK_0)
+	{
+		_return = ERROR_1;
+		goto GoToExit;
+	}
+	//---设置寄存器R36
+	_return = WM8510_SendCMD(WM8510x, WM8510x->nowR36);
+	if (_return != OK_0)
+	{
+		_return = ERROR_2;
+		goto GoToExit;
+	}
+	//---设置寄存器R37
+	_return = WM8510_SendCMD(WM8510x, WM8510x->nowR37);
+	if (_return != OK_0)
+	{
+		_return = ERROR_3;
+		goto GoToExit;
+	}
+	//---设置寄存器38
+	_return = WM8510_SendCMD(WM8510x, WM8510x->nowR38);
+	if (_return != OK_0)
+	{
+		_return = ERROR_4;
+		goto GoToExit;
+	}
+	//---设置寄存器R39
+	_return = WM8510_SendCMD(WM8510x, WM8510x->nowR39);
+	if (_return != OK_0)
+	{
+		_return = ERROR_5;
+	}
+GoToExit:
+	return _return;
 }

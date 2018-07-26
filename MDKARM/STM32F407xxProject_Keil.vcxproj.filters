@@ -96,15 +96,6 @@
     <ClInclude Include="..\Application\AD5593\ad5593_task.h">
       <Filter>Application\AD5593</Filter>
     </ClInclude>
-    <ClInclude Include="..\Application\ADC\adc_cfg.h">
-      <Filter>Application\ADC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\ADC\adc_lib.h">
-      <Filter>Application\ADC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Application\ADC\adc_task.h">
-      <Filter>Application\ADC</Filter>
-    </ClInclude>
     <ClInclude Include="..\Application\ADS8688\ads8688_cfg.h">
       <Filter>Application\ADS8688</Filter>
     </ClInclude>

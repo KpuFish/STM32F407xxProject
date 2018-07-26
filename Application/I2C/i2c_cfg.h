@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////////////////////
 #include "complier_lib.h"
 #ifdef USE_MCU_STM32
-	#include "gpio_task.h"
+#include "gpio_task.h"
 #endif
 
 //===定义结构体
@@ -27,7 +27,6 @@ struct _I2C_HandlerType
 	UINT16_T		msgAddr;																				//---设备的地址
 	UINT32_T		msgClockSpeed;																			//---硬件I2C的时钟速度
 	void(*msgFuncDelay)(UINT32_T delay);															            //---延时参数
-	
 };
 //===函数定义
 UINT8_T I2C_MSW_Init(I2C_HandlerType *I2Cx, void(*msgDelay)(UINT32_T delay));

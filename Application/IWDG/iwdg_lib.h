@@ -4,8 +4,8 @@
 //---定义使用的头文件
 #include "iwdg_cfg.h"
 //---函数定义
-  UINT8_T IWDGLib_Init(IWDG_HandlerType *IWDGx);
-  UINT8_T IWDGLib_DeInit(IWDG_HandlerType *IWDGx);
-  UINT8_T IWDGLib_Reset(IWDG_HandlerType *IWDGx);
+UINT8_T IWDGLib_Init(IWDG_HandlerType *IWDGx);
+UINT8_T IWDGLib_DeInit(IWDG_HandlerType *IWDGx);
+UINT8_T IWDGLib_Reset(IWDG_HandlerType *IWDGx);
 //////////////////////////////////////////////////////////////////////////////////////
 #endif /*IWDG_LIB_H_ */

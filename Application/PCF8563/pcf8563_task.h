@@ -5,7 +5,7 @@
 #include "pcf8563_lib.h"
 
 //---º¯Êý¶¨Òå
-UINT8_T PCF8563Task_Init(PCF8563_HandlerType *PCF8563x, void(*msgDelay)(UINT32_T delay),UINT8_T isHWI2C);
+UINT8_T PCF8563Task_Init(PCF8563_HandlerType *PCF8563x, void(*msgDelay)(UINT32_T delay), UINT8_T isHWI2C);
 UINT8_T PCF8563Task_DeInit(PCF8563_HandlerType *PCF8563x);
 UINT8_T PCF8563Task_ClockOut(PCF8563_HandlerType *PCF8563x, UINT8_T preVal);
 UINT8_T PCF8563Task_ReadRTC(PCF8563_HandlerType *PCF8563x);

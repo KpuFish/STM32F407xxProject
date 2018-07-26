@@ -4,7 +4,7 @@
 
 #include "complier_lib.h"
 #ifdef USE_MCU_STM32
-	#include "delay_task.h"
+#include "delay_task.h"
 #endif
 #include "one_wire_task.h"
 
@@ -26,8 +26,8 @@ struct _DS18B20_HandlerType
 #define DS18B20_HandlerType_Device0
 //===外部调用
 #ifdef DS18B20_HandlerType_Device0
-	extern DS18B20_HandlerType g_DS18B20Device0;
-	extern pDS18B20_HandlerType pDS18B20Device0;
+extern DS18B20_HandlerType g_DS18B20Device0;
+extern pDS18B20_HandlerType pDS18B20Device0;
 #endif
 
 //===函数的定义

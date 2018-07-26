@@ -1,19 +1,19 @@
 #include "usart_lib.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_Init(USART_HandlerType*  USARTx, UINT16_T rxSize, UINT8_T* pRxVal, UINT8_T rxCRCFlag, UINT16_T txSize, UINT8_T* pTxVal, UINT8_T txCRCFlag, UINT32_T(*sysTickFunc)(void))
 {
 	UINT8_T _return = OK_0;
-	_return= USART_Init(USARTx, rxSize, pRxVal, rxCRCFlag, txSize, pTxVal, txCRCFlag, sysTickFunc);
-	if (_return==OK_0)
+	_return = USART_Init(USARTx, rxSize, pRxVal, rxCRCFlag, txSize, pTxVal, txCRCFlag, sysTickFunc);
+	if (_return == OK_0)
 	{
-		if (CRCTask_Enable()!=OK_0)
+		if (CRCTask_Enable() != OK_0)
 		{
 			//===CRC校验函数调用失败,之后的CRC标志设置为无校验位
 			USARTx->msgRxHandler.msgCRCFlag = 0;
@@ -24,11 +24,11 @@ UINT8_T  USARTLib_Init(USART_HandlerType*  USARTx, UINT16_T rxSize, UINT8_T* pRx
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_DeInit(USART_HandlerType*  USARTx)
 {
@@ -36,11 +36,11 @@ UINT8_T  USARTLib_DeInit(USART_HandlerType*  USARTx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_EnableIT_TXE(USART_HandlerType*  USARTx, UINT8_T isEnable)
 {
@@ -48,11 +48,11 @@ UINT8_T  USARTLib_EnableIT_TXE(USART_HandlerType*  USARTx, UINT8_T isEnable)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_EnableIT_TC(USART_HandlerType*  USARTx, UINT8_T isEnable)
 {
@@ -60,11 +60,11 @@ UINT8_T  USARTLib_EnableIT_TC(USART_HandlerType*  USARTx, UINT8_T isEnable)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_EnableIT_RX(USART_HandlerType*  USARTx, UINT8_T isEnable)
 {
@@ -72,11 +72,11 @@ UINT8_T  USARTLib_EnableIT_RX(USART_HandlerType*  USARTx, UINT8_T isEnable)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_EnableIT_IDLE(USART_HandlerType*  USARTx, UINT8_T isEnable)
 {
@@ -84,11 +84,11 @@ UINT8_T  USARTLib_EnableIT_IDLE(USART_HandlerType*  USARTx, UINT8_T isEnable)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_GPIOInit(USART_HandlerType*  USARTx, UINT8_T isInput)
 {
@@ -96,11 +96,11 @@ UINT8_T  USARTLib_GPIOInit(USART_HandlerType*  USARTx, UINT8_T isInput)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_WriteData8Bits(USART_HandlerType*USARTx, UINT8_T val)
 {
@@ -108,11 +108,11 @@ UINT8_T  USARTLib_WriteData8Bits(USART_HandlerType*USARTx, UINT8_T val)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_ReadData8Bits(USART_HandlerType*USARTx)
 {
@@ -120,11 +120,11 @@ UINT8_T  USARTLib_ReadData8Bits(USART_HandlerType*USARTx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_ReadInit(USART_HandlerType*  USARTx)
 {
@@ -135,16 +135,16 @@ UINT8_T  USARTLib_ReadInit(USART_HandlerType*  USARTx)
 	USARTx->msgRxHandler.msgTaskState = 0;
 	//---清零超时计数
 	USARTx->msgNowTime = 0;
-    
-    return OK_0;
+
+	return OK_0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_GetReadState(USART_HandlerType* USARTx)
 {
@@ -152,11 +152,11 @@ UINT8_T  USARTLib_GetReadState(USART_HandlerType* USARTx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_ClearReadState(USART_HandlerType* USARTx)
 {
@@ -164,11 +164,11 @@ UINT8_T  USARTLib_ClearReadState(USART_HandlerType* USARTx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_GetWriteState(USART_HandlerType* USARTx)
 {
@@ -176,11 +176,11 @@ UINT8_T  USARTLib_GetWriteState(USART_HandlerType* USARTx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_ClearWriteState(USART_HandlerType* USARTx)
 {
@@ -188,48 +188,47 @@ UINT8_T  USARTLib_ClearWriteState(USART_HandlerType* USARTx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T  USARTLib_TimeTick_Init(USART_HandlerType*USARTx) 
+UINT8_T  USARTLib_TimeTick_Init(USART_HandlerType*USARTx)
 {
 	return USART_TimeTick_Init(USARTx);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_TimeTick_OVF(USART_HandlerType*USARTx, UINT32_T timeOut)
 {
-	return USART_TimeTick_OVF(USARTx,timeOut);
+	return USART_TimeTick_OVF(USARTx, timeOut);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_GetOVF(USART_HandlerType* USARTx)
 {
 	return USART_GetOVF(USARTx);
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_ClearOVF(USART_HandlerType* USARTx)
 {
@@ -237,20 +236,20 @@ UINT8_T  USARTLib_ClearOVF(USART_HandlerType* USARTx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_TimeOVFTask(USART_HandlerType*USARTx)
 {
 	UINT8_T _return = OK_0;
-	if ((USARTx->msgNowTime!=0)&&(USARTx->msgMaxTime!=0))
+	if ((USARTx->msgNowTime != 0) && (USARTx->msgMaxTime != 0))
 	{
 		//---获取超时值
 		_return = USARTLib_TimeTick_OVF(USARTx, USARTx->msgMaxTime);
-		if (_return!=OK_0)
+		if (_return != OK_0)
 		{
 			//---打印超时的串口信息
 			USART_Printf(USARTx, "=>>接收串口%d发生超时错误!<<=\r\n", (USARTx->msgIndex - 1));
@@ -262,80 +261,80 @@ UINT8_T  USARTLib_TimeOVFTask(USART_HandlerType*USARTx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T  USARTLib_Read8BitsCount_Task(USART_HandlerType*USARTx,UINT8_T val )
+UINT8_T  USARTLib_Read8BitsCount_Task(USART_HandlerType*USARTx, UINT8_T val)
 {
 	//---保存数到的数据
 	static UINT8_T tempVal;
 	tempVal = val;
 	//---检查合法性
-	if ((USARTx!=NULL)&&(USARTx->msgUSART!=NULL)&&(USARTx->msgRxHandler.pMsgVal!=NULL))
+	if ((USARTx != NULL) && (USARTx->msgUSART != NULL) && (USARTx->msgRxHandler.pMsgVal != NULL))
 	{
 		switch (USARTx->msgRxHandler.msgStep)
 		{
 			//---接收数据的报头
-			case 0:
-				if (USARTx->msgRxHandler.msgIndexW==0)
+		case 0:
+			if (USARTx->msgRxHandler.msgIndexW == 0)
+			{
+				if (USARTx->msgRxID == tempVal)
 				{
-					if (USARTx->msgRxID==tempVal)
-					{
-						USARTx->msgRxHandler.pMsgVal[0] = tempVal;
-						USARTx->msgRxHandler.msgStep = 1;
-						//---收到第一个符合格式的数据，启动超时计数器
-						USARTLib_TimeTick_Init(USARTx);
-						//---清零超时标志
-						USARTLib_ClearOVF(USARTx);
-					}
+					USARTx->msgRxHandler.pMsgVal[0] = tempVal;
+					USARTx->msgRxHandler.msgStep = 1;
+					//---收到第一个符合格式的数据，启动超时计数器
+					USARTLib_TimeTick_Init(USARTx);
+					//---清零超时标志
+					USARTLib_ClearOVF(USARTx);
 				}
-				break;
+			}
+			break;
 			//---接收数据的长度
-			case 1:
-				if ((tempVal>0)&&(tempVal<(UINT8_T)(USARTx->msgRxHandler.msgSize&0xFF)))
-				{
-					USARTx->msgRxHandler.pMsgVal[1] = tempVal;
-					USARTx->msgRxHandler.msgIndexR = tempVal;
-					USARTx->msgRxHandler.msgStep = 2;
-				}
-				else
-				{
-					USARTx->msgRxHandler.msgStep = 0;
-				}
-				//---复位超时计数器
-				USARTLib_TimeTick_Init(USARTx);
-				break;
-			case 2:
-				USARTx->msgRxHandler.pMsgVal[USARTx->msgRxHandler.msgIndexW +2] = tempVal;
-				USARTx->msgRxHandler.msgIndexW++;
-				//---判断是否接收完成
-				if (USARTx->msgRxHandler.msgIndexW>=USARTx->msgRxHandler.msgIndexR)
-				{
-					USARTx->msgRxHandler.msgStep = 3;
-					USARTx->msgRxHandler.msgTaskState = 1;
-				}
-				//---复位超时计数器
-				USARTLib_TimeTick_Init(USARTx);
-				break;
-			case 3:
-			case 4:
-			default:
-				USARTx->msgNowTime = 0;
-				break;
+		case 1:
+			if ((tempVal > 0) && (tempVal < (UINT8_T)(USARTx->msgRxHandler.msgSize & 0xFF)))
+			{
+				USARTx->msgRxHandler.pMsgVal[1] = tempVal;
+				USARTx->msgRxHandler.msgIndexR = tempVal;
+				USARTx->msgRxHandler.msgStep = 2;
+			}
+			else
+			{
+				USARTx->msgRxHandler.msgStep = 0;
+			}
+			//---复位超时计数器
+			USARTLib_TimeTick_Init(USARTx);
+			break;
+		case 2:
+			USARTx->msgRxHandler.pMsgVal[USARTx->msgRxHandler.msgIndexW + 2] = tempVal;
+			USARTx->msgRxHandler.msgIndexW++;
+			//---判断是否接收完成
+			if (USARTx->msgRxHandler.msgIndexW >= USARTx->msgRxHandler.msgIndexR)
+			{
+				USARTx->msgRxHandler.msgStep = 3;
+				USARTx->msgRxHandler.msgTaskState = 1;
+			}
+			//---复位超时计数器
+			USARTLib_TimeTick_Init(USARTx);
+			break;
+		case 3:
+		case 4:
+		default:
+			USARTx->msgNowTime = 0;
+			break;
 		}
 	}
 	return OK_0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_Read16BitsCount_Task(USART_HandlerType*USARTx, UINT8_T val)
 {
@@ -348,62 +347,62 @@ UINT8_T  USARTLib_Read16BitsCount_Task(USART_HandlerType*USARTx, UINT8_T val)
 		switch (USARTx->msgRxHandler.msgStep)
 		{
 			//---接收数据的报头
-			case 0:
-				if (USARTx->msgRxHandler.msgIndexW == 0)
+		case 0:
+			if (USARTx->msgRxHandler.msgIndexW == 0)
+			{
+				if (USARTx->msgRxID == tempVal)
 				{
-					if (USARTx->msgRxID == tempVal)
-					{
-						USARTx->msgRxHandler.pMsgVal[0] = tempVal;
-						USARTx->msgRxHandler.msgStep = 1;
-						//---收到第一个符合格式的数据，启动超时计数器
-						USARTLib_TimeTick_Init(USARTx);
-						//---清零超时标志
-						USARTLib_ClearOVF(USARTx);
-					}
+					USARTx->msgRxHandler.pMsgVal[0] = tempVal;
+					USARTx->msgRxHandler.msgStep = 1;
+					//---收到第一个符合格式的数据，启动超时计数器
+					USARTLib_TimeTick_Init(USARTx);
+					//---清零超时标志
+					USARTLib_ClearOVF(USARTx);
 				}
-				break;
-				//---接收数据的长度高位
-			case 1:
-				USARTx->msgRxHandler.pMsgVal[1] = tempVal;
-				USARTx->msgRxHandler.msgIndexR = tempVal;
-				USARTx->msgRxHandler.msgIndexR <<= 8;
-				USARTx->msgRxHandler.msgStep = 2;
-				//---复位超时计数器
-				USARTLib_TimeTick_Init(USARTx);
-				break;
-				//---接收数据的长度低位
-			case 2:
-				USARTx->msgRxHandler.pMsgVal[2] = tempVal;
-				USARTx->msgRxHandler.msgIndexR += tempVal;
-				//---判断数据是否合法
-				if ((USARTx->msgRxHandler.msgIndexR > 0) && (USARTx->msgRxHandler.msgIndexR < USARTx->msgRxHandler.msgSize ))
-				{
-					USARTx->msgRxHandler.msgStep = 3;
-				}
-				else
-				{
-					USARTx->msgRxHandler.msgStep = 0;
-				}
-				//---复位超时计数器
-				USARTLib_TimeTick_Init(USARTx);
-				break;
-			case 3:
-				USARTx->msgRxHandler.pMsgVal[USARTx->msgRxHandler.msgIndexW + 3] = tempVal;
-				USARTx->msgRxHandler.msgIndexW++;
-				//---判断是否接收完成
-				if (USARTx->msgRxHandler.msgIndexW >= USARTx->msgRxHandler.msgIndexR)
-				{
-					USARTx->msgRxHandler.msgStep = 4;
-					USARTx->msgRxHandler.msgTaskState = 1;
-				}				
-				//---复位超时计数器
-				USARTLib_TimeTick_Init(USARTx);
-				break;
-			case 4:
-			case 5:
-			default:
-				USARTx->msgNowTime = 0;
-				break;
+			}
+			break;
+			//---接收数据的长度高位
+		case 1:
+			USARTx->msgRxHandler.pMsgVal[1] = tempVal;
+			USARTx->msgRxHandler.msgIndexR = tempVal;
+			USARTx->msgRxHandler.msgIndexR <<= 8;
+			USARTx->msgRxHandler.msgStep = 2;
+			//---复位超时计数器
+			USARTLib_TimeTick_Init(USARTx);
+			break;
+			//---接收数据的长度低位
+		case 2:
+			USARTx->msgRxHandler.pMsgVal[2] = tempVal;
+			USARTx->msgRxHandler.msgIndexR += tempVal;
+			//---判断数据是否合法
+			if ((USARTx->msgRxHandler.msgIndexR > 0) && (USARTx->msgRxHandler.msgIndexR < USARTx->msgRxHandler.msgSize))
+			{
+				USARTx->msgRxHandler.msgStep = 3;
+			}
+			else
+			{
+				USARTx->msgRxHandler.msgStep = 0;
+			}
+			//---复位超时计数器
+			USARTLib_TimeTick_Init(USARTx);
+			break;
+		case 3:
+			USARTx->msgRxHandler.pMsgVal[USARTx->msgRxHandler.msgIndexW + 3] = tempVal;
+			USARTx->msgRxHandler.msgIndexW++;
+			//---判断是否接收完成
+			if (USARTx->msgRxHandler.msgIndexW >= USARTx->msgRxHandler.msgIndexR)
+			{
+				USARTx->msgRxHandler.msgStep = 4;
+				USARTx->msgRxHandler.msgTaskState = 1;
+			}
+			//---复位超时计数器
+			USARTLib_TimeTick_Init(USARTx);
+			break;
+		case 4:
+		case 5:
+		default:
+			USARTx->msgNowTime = 0;
+			break;
 		}
 	}
 	return OK_0;
@@ -440,7 +439,7 @@ UINT8_T USARTLib_WriteInit(USART_HandlerType*USARTx)
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T  USARTLib_ITWrite_TXETask(USART_HandlerType*USARTx)
 {
-	if ((USARTx->msgTxHandler.msgIndexW != 0)&&(USARTx->msgTxHandler.pMsgVal!=NULL))
+	if ((USARTx->msgTxHandler.msgIndexW != 0) && (USARTx->msgTxHandler.pMsgVal != NULL))
 	{
 		//---发送8Bit的数据
 		USARTLib_WriteData8Bits(USARTx, USARTx->msgTxHandler.pMsgVal[USARTx->msgTxHandler.msgIndexR]);
@@ -452,7 +451,7 @@ UINT8_T  USARTLib_ITWrite_TXETask(USART_HandlerType*USARTx)
 			USARTx->msgTxHandler.msgIndexR = 0;
 		}
 		//---校验数据是否都填入缓存区
-		if (USARTx->msgTxHandler.msgIndexR== USARTx->msgTxHandler.msgIndexW)
+		if (USARTx->msgTxHandler.msgIndexR == USARTx->msgTxHandler.msgIndexW)
 		{
 			//---发送完成,发送数据寄存器空中断不使能
 			USARTLib_EnableIT_TXE(USARTx, 0);
@@ -494,16 +493,15 @@ UINT8_T  USARTLib_ITWrite_TCTask(USART_HandlerType*USARTx)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USARTLib_AddWriteByte(USART_HandlerType*USARTx, UINT8_T val,UINT8_T isNeedID)
+UINT8_T USARTLib_AddWriteByte(USART_HandlerType*USARTx, UINT8_T val, UINT8_T isNeedID)
 {
 	if (USARTx->msgTxHandler.pMsgVal != NULL)
 	{
-
-		if (USARTx->msgTxHandler.msgIndexW>=USARTx->msgTxHandler.msgSize)
+		if (USARTx->msgTxHandler.msgIndexW >= USARTx->msgTxHandler.msgSize)
 		{
-			USARTx->msgTxHandler.msgIndexW=0;
+			USARTx->msgTxHandler.msgIndexW = 0;
 		}
-		if ((USARTx->msgTxHandler.msgIndexW==0)&&(isNeedID==1))
+		if ((USARTx->msgTxHandler.msgIndexW == 0) && (isNeedID == 1))
 		{
 			if (USARTx->msgTxHandler.msgSize < 0xFF)
 			{
@@ -514,7 +512,7 @@ UINT8_T USARTLib_AddWriteByte(USART_HandlerType*USARTx, UINT8_T val,UINT8_T isNe
 				USARTx->msgTxHandler.msgIndexW += 3;
 			}
 		}
-		
+
 		USARTx->msgTxHandler.pMsgVal[USARTx->msgTxHandler.msgIndexW] = val;
 		USARTx->msgTxHandler.msgIndexW++;
 
@@ -524,21 +522,21 @@ UINT8_T USARTLib_AddWriteByte(USART_HandlerType*USARTx, UINT8_T val,UINT8_T isNe
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USARTLib_AddWriteData(USART_HandlerType*USARTx,UINT8_T *pVal ,UINT16_T length, UINT8_T isNeedID)
+UINT8_T USARTLib_AddWriteData(USART_HandlerType*USARTx, UINT8_T *pVal, UINT16_T length, UINT8_T isNeedID)
 {
 	UINT16_T i = 0;
 	UINT8_T _return = OK_0;
-	for (i=0;i<length;i++)
+	for (i = 0; i < length; i++)
 	{
 		_return = USARTLib_AddWriteByte(USARTx, pVal[i], isNeedID);
 		//---判断数据是否填充正确
-		if (_return!=OK_0)
+		if (_return != OK_0)
 		{
 			break;
 		}
@@ -547,20 +545,20 @@ UINT8_T USARTLib_AddWriteData(USART_HandlerType*USARTx,UINT8_T *pVal ,UINT16_T l
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
 //////说		明： 接收的数据进行处理，主要是校验信息
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USARTLib_CRCTask(USART_HandlerType*USARTx,UINT16_T *pCount)
+UINT8_T USARTLib_CRCTask(USART_HandlerType*USARTx, UINT16_T *pCount)
 {
 	UINT32_T crcVal = 0;
 	UINT32_T crcTemp = 0;
 	//---接收数据的个数
 	UINT16_T length = USARTx->msgRxHandler.msgIndexW;
 	//---校验CRC是否初始化
-	if (CRCTask_Enable()==OK_0)
+	if (CRCTask_Enable() == OK_0)
 	{
 		//---判断数据校验模式
 		if (USARTx->msgRxHandler.msgCRCFlag == USART_CRC_CHECKSUM)
@@ -618,7 +616,7 @@ UINT8_T USARTLib_CRCTask(USART_HandlerType*USARTx,UINT16_T *pCount)
 				//---获取CRC16的高位值
 				crcTemp = USARTx->msgRxHandler.pMsgVal[length + 1];
 				//---获取CRC16的低位值
-				crcTemp = crcTemp << 8 + USARTx->msgRxHandler.pMsgVal[length + 2];
+				crcTemp = (crcTemp << 8) + USARTx->msgRxHandler.pMsgVal[length + 2];
 				//---参与校验和计算的数据总长度
 				length += 2;
 			}
@@ -629,7 +627,7 @@ UINT8_T USARTLib_CRCTask(USART_HandlerType*USARTx,UINT16_T *pCount)
 				//---获取CRC16的高位值
 				crcTemp = USARTx->msgRxHandler.pMsgVal[length + 2];
 				//---获取CRC16的低位值
-				crcTemp = crcTemp << 8 + USARTx->msgRxHandler.pMsgVal[length + 3];
+				crcTemp = (crcTemp << 8) + USARTx->msgRxHandler.pMsgVal[length + 3];
 				//---参与校验和计算的数据总长度
 				length += 3;
 			}
@@ -645,11 +643,11 @@ UINT8_T USARTLib_CRCTask(USART_HandlerType*USARTx,UINT16_T *pCount)
 				//---获取CRC32的最高位值
 				crcTemp = USARTx->msgRxHandler.pMsgVal[length - 1];
 				//---获取CRC32的次高位值
-				crcTemp = crcTemp << 8 + USARTx->msgRxHandler.pMsgVal[length];
+				crcTemp = (crcTemp << 8) + USARTx->msgRxHandler.pMsgVal[length];
 				//---获取CRC32的次低位值
-				crcTemp = crcTemp << 8 + USARTx->msgRxHandler.pMsgVal[length + 1];
+				crcTemp = (crcTemp << 8) + USARTx->msgRxHandler.pMsgVal[length + 1];
 				//---获取CRC32的低位值
-				crcTemp = crcTemp << 8 + USARTx->msgRxHandler.pMsgVal[length + 2];
+				crcTemp = (crcTemp << 8) + USARTx->msgRxHandler.pMsgVal[length + 2];
 				//---参与校验和计算的数据总长度
 				length += 2;
 			}
@@ -660,11 +658,11 @@ UINT8_T USARTLib_CRCTask(USART_HandlerType*USARTx,UINT16_T *pCount)
 				//---获取CRC32的最高位值
 				crcTemp = USARTx->msgRxHandler.pMsgVal[length];
 				//---获取CRC32的次高位值
-				crcTemp = crcTemp << 8 + USARTx->msgRxHandler.pMsgVal[length + 1];
+				crcTemp = (crcTemp << 8) + USARTx->msgRxHandler.pMsgVal[length + 1];
 				//---获取CRC32的次低位值
-				crcTemp = crcTemp << 8 + USARTx->msgRxHandler.pMsgVal[length + 2];
+				crcTemp = (crcTemp << 8) + USARTx->msgRxHandler.pMsgVal[length + 2];
 				//---获取CRC32的低位值
-				crcTemp = crcTemp << 8 + USARTx->msgRxHandler.pMsgVal[length + 3];
+				crcTemp = (crcTemp << 8) + USARTx->msgRxHandler.pMsgVal[length + 3];
 				length += 3;
 			}
 			crcVal = CRCTask_CRC32(USARTx->msgRxHandler.pMsgVal, length);
@@ -697,17 +695,17 @@ UINT8_T USARTLib_CRCTask(USART_HandlerType*USARTx,UINT16_T *pCount)
 //////输出参数:
 //////说		明：
 //////////////////////////////////////////////////////////////////////////////
-UINT8_T USARTLib_WriteSTART(USART_HandlerType*USARTx,UINT8_T isNeedID)
+UINT8_T USARTLib_WriteSTART(USART_HandlerType*USARTx, UINT8_T isNeedID)
 {
 	//---等待传输完成
-	while (USARTx->msgTxHandler.msgTaskState ==0)
+	while (USARTx->msgTxHandler.msgTaskState == 0)
 	{
 		WDT_RESET();
 	}
 	//---设置发送状态为空闲中
 	USARTx->msgTxHandler.msgTaskState = 0;
 	//---校验CRC是否初始化
-	if (CRCTask_Enable()==OK_0)
+	if (CRCTask_Enable() == OK_0)
 	{
 		UINT32_T crcVal = 0;
 		//---判断数据校验模式
@@ -737,7 +735,7 @@ UINT8_T USARTLib_WriteSTART(USART_HandlerType*USARTx,UINT8_T isNeedID)
 		}
 	}
 	//---判断填充的数据是否需要整理
-	if (isNeedID==1)
+	if (isNeedID == 1)
 	{
 		//---填充报头和数据长度
 		USARTx->msgTxHandler.pMsgVal[0] = USARTx->msgTxID;
@@ -759,11 +757,11 @@ UINT8_T USARTLib_WriteSTART(USART_HandlerType*USARTx,UINT8_T isNeedID)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T USARTLib_SendByte(USART_HandlerType*USARTx, UINT8_T  val)
 {
@@ -771,11 +769,11 @@ UINT8_T USARTLib_SendByte(USART_HandlerType*USARTx, UINT8_T  val)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//////函		数： 
-//////功		能： 
-//////输入参数: 
-//////输出参数: 
-//////说		明： 
+//////函		数：
+//////功		能：
+//////输入参数:
+//////输出参数:
+//////说		明：
 //////////////////////////////////////////////////////////////////////////////
 UINT8_T USARTLib_SendString(USART_HandlerType*USARTx, char *pVal)
 {
